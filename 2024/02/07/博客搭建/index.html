@@ -157,7 +157,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 10:44:13
+          2024-02-07 11:20:25
         </span>
         
               <span class="post-categories">
@@ -185,7 +185,7 @@
       </div>
       <div class="markdown-body">
         <p>hexo + <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a>主题 + Github Pages + 自定义域名<br><a name="rKYtK"></a></p>
-<h1 id="hexo-环境搭建"><a href="#hexo-环境搭建" class="headerlink" title="hexo 环境搭建"></a>hexo 环境搭建</h1><ol>
+<h1 id="Hexo-环境搭建"><a href="#Hexo-环境搭建" class="headerlink" title="Hexo 环境搭建"></a>Hexo 环境搭建</h1><ol>
 <li>安装 hexo 并初始化，仓库名为 <strong>weilun0510.github.io</strong></li>
 <li>更换主题：<a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a></li>
 <li>修改_config.yml</li>
@@ -210,8 +210,8 @@
 <ul>
 <li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Passerby_Wang/article/details/121209799">https://blog.csdn.net/Passerby_Wang&#x2F;article&#x2F;details&#x2F;121209799</a><br><a name="sQ0As"></a></li>
 </ul>
-<h1 id="图片存储"><a href="#图片存储" class="headerlink" title="图片存储"></a>图片存储</h1><p><a name="UPBK0"></a></p>
-<h2 id="github-picGo"><a href="#github-picGo" class="headerlink" title="github + picGo"></a>github + picGo</h2><p>github 做图床(免费，上限 100G) + picGo 上传图片</p>
+<h1 id="图片存储-Github-Pages-PicGo"><a href="#图片存储-Github-Pages-PicGo" class="headerlink" title="图片存储(Github Pages + PicGo )"></a>图片存储(Github Pages + PicGo )</h1><p>github 做图床(免费，上限 100G) + picGo 上传图片</p>
+<p>缺点：想使用 Github Pages ,仓库不能设置为 private，必须为 Public</p>
 <p>实现：</p>
 <ol>
 <li>设置图床<ol>
@@ -224,13 +224,14 @@
 </ol>
 </li>
 </ol>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.current&quot;</span><span class="punctuation">:</span> <span class="string">&quot;github&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.branch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;master&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;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&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.repo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;weilun0510/blog-images&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.customUploadName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileName&#125;-$&#123;dateTime&#125;$&#123;extName&#125;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.current&quot;</span><span class="punctuation">:</span> <span class="string">&quot;github&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.branch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;master&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;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&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.repo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;weilun0510/blog-images&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.customUploadName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pic.$&#123;Date.now()&#125;$&#123;extName&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-02-07/&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>github 作为图床：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138012354">https://zhuanlan.zhihu.com/p/138012354</a><br />上传失败：<a target="_blank" rel="noopener" href="https://blog.csdn.net/TalesOV/article/details/104450037">https://blog.csdn.net/TalesOV/article/details/104450037</a></p>
-<p>上传成功后的链接： <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/weilun0510/blog-images/master/images/index-2024-02-06-10-03-19.png">https://raw.githubusercontent.com/weilun0510/blog-images/master/images/index-2024-02-06-10-03-19.png</a></p>
+<p>写作时，<code>picgo.picBed.github.path</code>根据写作日期进行更改，如<code>2424-02-27/</code>，这样图片就会保存在这个目录下。这样做的好处是图片保存路径与写作日期一致，到时想查找这张图片会很方便。</p>
 <p>使用：<br />Uploading an image from clipboard</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Windows/Unix:</span><br><span class="line">ctrl + alt + u</span><br><span class="line"></span><br><span class="line">OsX:</span><br><span class="line">Cmd + Opt + u</span><br></pre></td></tr></table></figure>
 
+<p>上传成功后的链接格式： <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273493092.png">https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273493092.png</a></p>
+<p>上传失败参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/TalesOV/article/details/104450037">https://blog.csdn.net/TalesOV/article/details/104450037</a></p>
 <p>参考:</p>
 <ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/yansheng836/yansheng836.github.io/blob/blog/docs/1hexo+yilia%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA.md">https://github.com/yansheng836/yansheng836.github.io/blob/blog/docs/1hexo+yilia%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA.md</a></li>
@@ -245,7 +246,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 10:44:13
+              2024-02-07 11:20:25
             </span>
             
                   <span class="post-categories">
@@ -285,7 +286,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">hexo 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gitalk-%E8%AF%84%E8%AE%BA"><span class="toc-text">gitalk 评论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD"><span class="toc-text">hexo 源码备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pages-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">Pages 自定义域名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8"><span class="toc-text">图片存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#github-picGo"><span class="toc-text">github + picGo</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">Hexo 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gitalk-%E8%AF%84%E8%AE%BA"><span class="toc-text">gitalk 评论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD"><span class="toc-text">hexo 源码备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pages-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">Pages 自定义域名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8-Github-Pages-PicGo"><span class="toc-text">图片存储(Github Pages + PicGo )</span></a></li></ol>
       
     </div>
   </div>
@@ -596,12 +597,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F05%2F%25E5%258D%259A%25E5%25AE%25A2%25E6%2590%25AD%25E5%25BB%25BA%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E5%258D%259A%25E5%25AE%25A2%25E6%2590%25AD%25E5%25BB%25BA%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/05/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         
