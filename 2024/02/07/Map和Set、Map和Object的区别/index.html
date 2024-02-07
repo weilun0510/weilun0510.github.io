@@ -13,7 +13,7 @@
   
   <title>
     
-      博客搭建 
+      Map和Set、Map和Object的区别 
       
       
       |
@@ -149,19 +149,19 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">博客搭建</div>
+      <div class="post-title">Map和Set、Map和Object的区别</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 15:46:26
+          2024-02-07 16:15:18
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/" title="项目搭建">
-                    #项目搭建
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
                   </a>
                 </span>
                 
@@ -169,65 +169,57 @@
           
       </div>
       <div class="markdown-body">
-        <p>hexo + <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a>主题 + Github Pages + 自定义域名<br><a name="rKYtK"></a></p>
-<h1 id="Hexo-环境搭建"><a href="#Hexo-环境搭建" class="headerlink" title="Hexo 环境搭建"></a>Hexo 环境搭建</h1><ol>
-<li>安装 hexo 并初始化，仓库名为 <strong>weilun0510.github.io</strong></li>
-<li>更换主题：<a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a></li>
-<li>修改_config.yml</li>
-<li>添加项目说明</li>
-<li>部署：安装 hexo-deployer-git<br><a name="irCGk"></a></li>
-</ol>
-<h2 id="gitalk-评论"><a href="#gitalk-评论" class="headerlink" title="gitalk 评论"></a>gitalk 评论</h2><ol>
-<li>新建一个仓库 <strong>blog-comments</strong></li>
-<li>新建开放认证应用 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/qisi007/p/13731562.html">https://www.cnblogs.com/qisi007/p/13731562.html</a></li>
-<li>博客配置</li>
-</ol>
-<p>注意：配置后，需要手动新建一个 issues 才能使用</p>
-<p>效果图：<br /><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273451889.png#id=aylXj&originHeight=297&originWidth=934&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
-<p><a name="XdxYY"></a></p>
-<h1 id="hexo-源码备份"><a href="#hexo-源码备份" class="headerlink" title="hexo 源码备份"></a>hexo 源码备份</h1><p>hexo 发布<code>hexo d</code>后，github 仓库上的 hexo 源代码会消失，只保留构建后的代码，如图所示：<br /><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273493092.png#id=oXpJK&originHeight=413&originWidth=650&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br />万一 **username.github.io **本地仓库的代码丢失，后面就无法进行写作。<br />所以新建一个仓库，用于专门写作，如 **blog **。后面 **username.github.io **项目不动，在 **blog **上写作即可。<br><a name="JPz1u"></a></p>
-<h1 id="Pages-自定义域名"><a href="#Pages-自定义域名" class="headerlink" title="Pages 自定义域名"></a>Pages 自定义域名</h1><ol>
-<li>买个域名，如华为云</li>
-<li>域名解析 -&gt; 添加记录集</li>
-</ol>
-<p>华为云提供了一种 CNAME 记录的设置方式，这样可以更好地适应服务器 IP 地址的变化。通过使用 CNAME 记录，你的域名将指向 GitHub Pages 的域名，而不是直接指向 IP 地址。这样，GitHub 在 IP 地址变更时会更新其域名的 DNS 记录，而你无需手动调整。</p>
-<p>每次部署后自定义域名失效？</p>
+        <h1 id="Map-和-Object-的区别"><a href="#Map-和-Object-的区别" class="headerlink" title="Map 和 Object 的区别"></a>Map 和 Object 的区别</h1><p><strong>特性上的区别：</strong></p>
+<p>Map 更适合”键值对”这种数据结构。Object 的键只能是 string、整数、Symbol 类型，Map 的键可以是任意类型。</p>
+<p>Map 实现了迭代协议，可用 for…of 遍历，而 Object 不行, Object 是不可迭代的。</p>
+<p>Map 可用 size 属性获取长度，而 Object 没有获取长度的属性。</p>
+<p>Map 遍历顺序可以保证，按插入时输出。<br>而 Object 无法保证，Object 的遍历顺序为：</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Passerby_Wang/article/details/121209799">https://blog.csdn.net/Passerby_Wang&#x2F;article&#x2F;details&#x2F;121209799</a><br><a name="sQ0As"></a></li>
+<li>当 key 类型为<code>Number</code>，按 key 从小到大排序</li>
+<li>当 key 类型为<code>String</code>，会被转为<code>Number</code>类型，按 key 从小到大排序</li>
+<li>当 key 类型为<code>Symbol</code>，按创建的时间升序排序</li>
 </ul>
-<h1 id="图片存储-Github-Pages-PicGo"><a href="#图片存储-Github-Pages-PicGo" class="headerlink" title="图片存储(Github Pages + PicGo )"></a>图片存储(Github Pages + PicGo )</h1><p>github 做图床(免费，上限 100G) + picGo 上传图片</p>
-<p>缺点：想使用 Github Pages ,仓库不能设置为 private，必须为 Public</p>
-<p>实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">obj[<span class="string">&quot;jack&quot;</span>] = <span class="number">1</span>;</span><br><span class="line">obj[<span class="number">0</span>] = <span class="number">2</span>;</span><br><span class="line">obj[<span class="string">&quot;4&quot;</span>] = <span class="number">3</span>;</span><br><span class="line">obj[<span class="number">5</span>] = <span class="number">3</span>;</span><br><span class="line">obj[<span class="string">&quot;2&quot;</span>] = <span class="number">3</span>;</span><br><span class="line">obj[<span class="number">1</span>] = <span class="number">3</span>;</span><br><span class="line">obj[<span class="string">&quot;tom&quot;</span>] = <span class="number">4</span>;</span><br><span class="line">obj[<span class="string">&quot;toni&quot;</span>] = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//填入Object的元素key是自动按照字符串排序的，数字排在前面，且升序拍戏，字符串在后</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> k <span class="keyword">in</span> obj) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(k); <span class="comment">// 0 1 2 5 jack tom toni</span></span><br><span class="line">  <span class="comment">// console.log(typeof k); // 都是string，因为都会调用对象的toString()方法, key.toString()</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>当数据量大（长度为十几万以上）的时候，Map 的读入、写入、删除会比 Object 更快，数据量小的时候差别不多，object 稍微好一点点点</strong></p>
+<p><strong>Map 的使用场景：</strong></p>
+<ul>
+<li>聊天内容与聊天列表<ul>
+<li>数据量大、频繁的写入、更新、对写入顺序有要求</li>
+</ul>
+</li>
+<li>策略模式<ul>
+<li>用于储存多个键值对应一个规则的情况</li>
+</ul>
+</li>
+</ul>
+<h1 id="Map-和-Set-的应用"><a href="#Map-和-Set-的应用" class="headerlink" title="Map 和 Set 的应用"></a>Map 和 Set 的应用</h1><p>set:</p>
 <ol>
-<li>设置图床<ol>
-<li>新建一个仓库 <strong>blog-images</strong></li>
-<li>添加 index.html 文件，内容随意</li>
+<li>去重</li>
 </ol>
-</li>
-<li>设置 picGo。我用的 vscode，<strong>注意</strong>：repo 值得格式为 <strong>username&#x2F;仓库名</strong><ol>
-<li>配置参考： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138012354">https://zhuanlan.zhihu.com/p/138012354</a></li>
-</ol>
-</li>
-</ol>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.current&quot;</span><span class="punctuation">:</span> <span class="string">&quot;github&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.branch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;master&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;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&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.repo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;weilun0510/blog-images&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.customUploadName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;pic.$&#123;Date.now()&#125;$&#123;extName&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2024-02-07/&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 写法一</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>]))	<span class="comment">// [1,2,3,4]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 写法二</span></span><br><span class="line">[...<span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">4</span>])] 	<span class="comment">// [1,2,3,4]</span></span><br></pre></td></tr></table></figure>
 
-<p>写作时，<code>picgo.picBed.github.path</code>根据写作日期进行更改，如<code>2424-02-27/</code>，这样图片就会保存在这个目录下。这样做的好处是图片保存路径与写作日期一致，到时想查找这张图片会很方便。</p>
-<p>使用：<br />Uploading an image from clipboard</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Windows/Unix:</span><br><span class="line">ctrl + alt + u</span><br><span class="line"></span><br><span class="line">OsX:</span><br><span class="line">Cmd + Opt + u</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>取并集、交集、差集</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> arr1 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]);</span><br><span class="line"><span class="keyword">const</span> arr2 = <span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">5</span>, <span class="number">6</span>]);</span><br><span class="line"></span><br><span class="line"><span class="comment">//并集</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Set</span>([...arr1, ...arr2]);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 交集</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Set</span>([...arr1].<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> arr2.<span class="title function_">has</span>(item)));</span><br><span class="line"></span><br><span class="line"><span class="comment">// 差集</span></span><br><span class="line"><span class="keyword">new</span> <span class="title class_">Set</span>([...arr1].<span class="title function_">filter</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> !arr2.<span class="title function_">has</span>(item)));</span><br></pre></td></tr></table></figure>
 
-<p>上传成功后的链接格式： <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273493092.png">https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273493092.png</a></p>
-<p>上传失败参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/TalesOV/article/details/104450037">https://blog.csdn.net/TalesOV/article/details/104450037</a></p>
-<p>参考:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/yansheng836/yansheng836.github.io/blob/blog/docs/1hexo+yilia%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA.md">https://github.com/yansheng836/yansheng836.github.io/blob/blog/docs/1hexo+yilia%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA.md</a></li>
-</ul>
+<p>map:<br>可以使用任意的数据类型作为键，比对象更合适</p>
+<h1 id="Array-from"><a href="#Array-from" class="headerlink" title="Array.from"></a>Array.from</h1><p>可以将类数组和可遍历（iterator）对象转换为真正的数组。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="keyword">new</span> <span class="title class_">Set</span>([<span class="number">1</span>, <span class="number">2</span>])); <span class="comment">// [1, 2]</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Map-和-Set-的区别"><a href="#Map-和-Set-的区别" class="headerlink" title="Map 和 Set 的区别"></a>Map 和 Set 的区别</h1><h2 id="不同点"><a href="#不同点" class="headerlink" title="不同点"></a>不同点</h2><p>Set 结构类似于数组，成员唯一，没有排序的概念。Map 结构它保存的是键值对的集合。</p>
+<p>添加成员的方法不同：<br>Set 使用 add 方法 ，如：set.add(6)，Map 使用 set 方法，如 map.set(‘key’, ‘value’)</p>
+<p>获取成员的方法不同：<br>Set 结构没有排序的概念，无法获取单个成员。Map 结构使用 map.get(‘key’) 获取成员的值。</p>
+<h2 id="相同点"><a href="#相同点" class="headerlink" title="相同点"></a>相同点</h2><p>Map 和 Set 都是 es 的新增的数据结构。</p>
+<p>拥有同样的遍历方法：<br>keys()、values()、entries()、forEach()</p>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
+              <a href="/2024/02/07/Promise/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -236,15 +228,15 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 15:46:26
+              2024-02-07 16:15:18
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags mr-10" title="Tags"></i>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/" title="项目搭建">
-                        #项目搭建
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
                       </a>
                     </span>
                     
@@ -253,7 +245,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" target="_self">
+              <a href="/2024/02/07/K%E7%BA%BF%E5%9B%BE/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -270,7 +262,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">Hexo 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gitalk-%E8%AF%84%E8%AE%BA"><span class="toc-text">gitalk 评论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD"><span class="toc-text">hexo 源码备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pages-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">Pages 自定义域名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8-Github-Pages-PicGo"><span class="toc-text">图片存储(Github Pages + PicGo )</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Map-%E5%92%8C-Object-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Map 和 Object 的区别</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map-%E5%92%8C-Set-%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">Map 和 Set 的应用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Array-from"><span class="toc-text">Array.from</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Map-%E5%92%8C-Set-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">Map 和 Set 的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%82%B9"><span class="toc-text">不同点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%90%8C%E7%82%B9"><span class="toc-text">相同点</span></a></li></ol></li></ol>
       
     </div>
   </div>
@@ -581,12 +573,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E5%258D%259A%25E5%25AE%25A2%25E6%2590%25AD%25E5%25BB%25BA%2F + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + Map%E5%92%8CSet%E3%80%81Map%E5%92%8CObject%E7%9A%84%E5%8C%BA%E5%88%AB + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2FMap%25E5%2592%258CSet%25E3%2580%2581Map%25E5%2592%258CObject%25E7%259A%2584%25E5%258C%25BA%25E5%2588%25AB%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/Map%E5%92%8CSet%E3%80%81Map%E5%92%8CObject%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

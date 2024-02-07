@@ -13,6 +13,11 @@
   
   <title>
     
+      开发环境和线上环境 
+      
+      
+      |
+    
      维论
   </title>
 
@@ -99,149 +104,182 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="umijs/max 设计师指南">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/umijs-max-%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%8C%87%E5%8D%97/">
-            
-              
-                <span>umijs/max 设计师指南</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">开发环境和线上环境</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-07 16:34:49
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                    #项目
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="视频合成流程图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%9B%BE/">
-            
-              
-                <span>视频合成流程图</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <ul>
+<li>开发环境：表示本地开发时的环境，便于开发人员调试。代码中可能会包含测试代码，调试工具等，这些东西没必要放到线上环境中</li>
+<li>线上环境：追求快速化、最小化。包括测试、生产等非开发环境</li>
+</ul>
+<p>在 node.js 中约定了一个环境变量 <code>NODE_ENV</code>，用于环境区分。</p>
+<p>未定义任何环境变量时，<code>production</code>表示线上环境，<code>development</code>表示开发环境。</p>
+<p>:::info<br>线上环境：<strong>线上环境不等于生产环境</strong>。在未定义其他环境时，线上环境表示生产环境；定义了其他环境（比如测试环境）时，线上环境表示除开发环境的其他环境。<br>:::</p>
+<p>一般我们还会有一个测试环境，通常情况下都是把线上接口改为测试接口，但是这样容易出错。<br>为了避免手动修改接口，我们可以定义一个测试环境<code>test</code>。</p>
+<h1 id="umi-环境变量配置"><a href="#umi-环境变量配置" class="headerlink" title="umi 环境变量配置"></a>umi 环境变量配置</h1><h2 id="UMI-ENV"><a href="#UMI-ENV" class="headerlink" title="UMI_ENV"></a>UMI_ENV</h2><p>当指定 UMI_ENV 时，会<strong>额外加载</strong>指定值的配置文件。参考: <a target="_blank" rel="noopener" href="https://umijs.org/docs/guides/env-variables#umi_env">https://umijs.org/docs/guides/env-variables#umi_env</a></p>
+<p>多了测试环境，这时候的<code>production</code>可能会包含<code>test</code>，所以我们再定义一个 online，用<code>online</code>表示生产。<br>:::info<br>注意：umi4.x 版本里，自定义变量时不能用 prod 表示生产环境，所以这里使用 online .<br>:::</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;umi dev&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;build:test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cross-env UMI_ENV=test umi build&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;build:online&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cross-env UMI_ENV=online umi build&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br></pre></td></tr></table></figure>
+
+<p>打包时，除了加载<code>.umirc.tc</code>，还会额外加载<code>.umirc.$&#123;UMI_ENV&#125;.ts</code>文件。</p>
+<h2 id="区分本地开发和线上"><a href="#区分本地开发和线上" class="headerlink" title="区分本地开发和线上"></a>区分本地开发和线上</h2><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> isDev = process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&quot;development&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> notDev = process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&quot;production&quot;</span>;</span><br></pre></td></tr></table></figure>
+
       </div>
-    
-      <div class="post-item" title="code review">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/code-review/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>code review</span>
-              
+              <a href="/2024/02/07/%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-07 16:34:49
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                        #项目
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E5%B0%81%E8%A3%85%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="音标">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E9%9F%B3%E6%A0%87/">
-            
-              
-                <span>音标</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#umi-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E9%85%8D%E7%BD%AE"><span class="toc-text">umi 环境变量配置</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UMI-ENV"><span class="toc-text">UMI_ENV</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%BA%E5%88%86%E6%9C%AC%E5%9C%B0%E5%BC%80%E5%8F%91%E5%92%8C%E7%BA%BF%E4%B8%8A"><span class="toc-text">区分本地开发和线上</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="BEM规范">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">
-            
-              
-                <span>BEM规范</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC-共识协议">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">
-            
-              
-                <span>BTC-共识协议</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC密码学原理">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">
-            
-              
-                <span>BTC密码学原理</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="ETH-以太坊概述">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">
-            
-              
-                <span>ETH-以太坊概述</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC数据结构">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-            
-              
-                <span>BTC数据结构</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="K线图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/K%E7%BA%BF%E5%9B%BE/">
-            
-              
-                <span>K线图</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 5</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -498,6 +536,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%92%8C%E7%BA%BF%E4%B8%8A%E7%8E%AF%E5%A2%83 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E5%25BC%2580%25E5%258F%2591%25E7%258E%25AF%25E5%25A2%2583%25E5%2592%258C%25E7%25BA%25BF%25E4%25B8%258A%25E7%258E%25AF%25E5%25A2%2583%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%92%8C%E7%BA%BF%E4%B8%8A%E7%8E%AF%E5%A2%83/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

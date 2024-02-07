@@ -13,7 +13,7 @@
   
   <title>
     
-      Category 
+      BTC密码学原理 
       
       
       |
@@ -86,10 +86,6 @@
           <a href="/archives/">归档</a>
         </li>
       
-        <li class="nav-item" data-path="/categories/">
-          <a href="/categories/">分类</a>
-        </li>
-      
         <li class="nav-item" data-path="/tags/">
           <a href="/tags/">标签</a>
         </li>
@@ -144,19 +140,149 @@
 
 
   
-  <!-- 分类页 url形式：https://yoursite/categories/ -->
-  <div class="container category-index">
-    <div>
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a><span class="category-list-count">1</span></li></ul>
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">BTC密码学原理</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-07 16:45:48
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/web3/" title="web3">
+                    #web3
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>比特币(bitcion)：基于去中心化，以区块链作为底层技术的加密货币。</p>
+<h1 id="hash-哈希"><a href="#hash-哈希" class="headerlink" title="hash(哈希)"></a>hash(哈希)</h1><p>hash，可以简单理解为对某一事物的投影操作，即<code>A--&gt;Hash(A)</code>。<br>哈希函数(cryptographic hash function)主要有三个特性：</p>
+<ul>
+<li>collision resistance（碰撞反抗）</li>
+<li>hiding（隐秘性）</li>
+<li>puzzle friendly（谜题友好）</li>
+</ul>
+<p><strong>哈希碰撞：</strong><br>给定一个哈希函数，不同的输入，得到相同的输出，则称为 hash 碰撞。<br>如：给定 x 和 y，且 x!&#x3D;y，可以得到 Hash(x)&#x3D;Hash(y)。</p>
+<h2 id="collision-resistance"><a href="#collision-resistance" class="headerlink" title="collision resistance"></a>collision resistance</h2><p>collision resistance(碰撞反抗)：表示对哈希碰撞具有<strong>抗碰撞性</strong>。<br>在实际应用中，哈希碰撞基本上难以避免，我们只要保证给定 x，很难找到一个 y，能够在 x!&#x3D;y 的前提下，使得 Hash(x)&#x3D;Hash(y)，就认为其是 collision resistance 的。</p>
+<p>用处：如果我们自己有一条信息 x，我们希望别人知道我有 x 但不想让别人知道 x 具体是什么，就可以通过告诉其 Hash(x)，由于该性质，保证了 x!&#x3D;y 时，Hash(x)和 Hash(y)是不相等的。我们只需要告诉别人 Hash(x)即可，对方可以通过 Hash(x)知道你确实知道 x 这个信息，但他无法（很难）通过 Hash(x)反推出 x。</p>
+<h2 id="hiding"><a href="#hiding" class="headerlink" title="hiding"></a>hiding</h2><p>我们认为，给定 x 和 Hash(),可以很容易得到 Hash(x),但没有办法在已知 Hash(x)和 Hash()的情况下，反推出 x 的具体取值，当然这也是一个理想的情况。</p>
+<p><strong>digital commitment(数据保证)：collision resistance + hiding</strong><br>在视频中，肖老师提到关于股市预 测的案例，某个人对某个股票进行涨停预测，我们如何保证能够知晓其预测是否准确？最简单的是提前公布， 等待实际结果出现后验证。但实际中，当提前发布预测后，可能会由于预测者本身对股市实际结果造成影响。 所以，应该将提前将其写于纸上并密封，交给第三方机构保管，等到实际结果出现后开启密封与实际对比，这 就是 digital commitment。而第三方机构需要能够使人信服，在实际生活中，有很多场景并不存在一个这样的 第三方机构，而区块链技术正为此提供了一个很好的解决方法。 我们把预测结果看作 x，提前公布 Hash(x)，等 到预测结果发生时间来临后，公布 x，如果根据 x 可以得到公布的 Hash(x)，则说明公布的 x 确实为所预先预测的 内容。从而，我们可以实际进行判断预测是否准确。实际使用中，为了 x 足够大，会对 x 进行“加盐”，对 x 拼接一 个 nonce，对其整体取 Hash## puzzle friendly<br>在比特币系统中，还需要第三个性质 Puzzle friendly。该性质要求哈希值计算事先不可预测， 仅仅根据输入很难预测出输出。例如：我们需要一个哈希值，存在于某一个范围内，只能通过不停运算查找出来。<br>该性质保证了比特币系统中，只能通过“挖矿”获得比特币。<br>:::info<br>挖矿：试图通过暴力手段不断尝试，直到得到一个符合约定规则的 hash 值。这也是为什么挖矿是一个非常消耗算力的过程。<br>:::<br>也就是说，该性质保证了工作量证明(POW)机制 可以运行下去【“挖矿难，但验证易”】。</p>
+<p><strong>SHA-256：</strong><br>在比特币系统中采用 SHA-256 哈希函数。该函数具备以上三个特性。<br>sha256 具有极强的抗碰撞性。目前为止，世界上最强的超级计算机也不具备人为制作碰撞的能力。</p>
+<h1 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h1><p>比特币中账户管理 在第三方中心化系统中，账户开通依赖于第三方。但去中心化的比特币系统中，很明显不能 进行“申请账户”。<br>在比特币系统中，申请账户是用户自己来处理的，即自己创建一个公钥-私钥对（来自于非对称加密体系 asymmetric encryption algorithm）。公钥和私钥的应用保证了“签名”的应用。<br>:::info<br>对称加密体系：提前商量好一个秘钥，加密和解密采用同一个秘钥。<br>存在问题：秘钥显然不能以明文的方式在网络上传输，容易被盗取。<br>:::<br><strong>非对称加密体系：</strong><br><strong>用接收方的公钥加密，接收方的私钥解密</strong>。这就解决了对称加密体系中<strong>秘钥分发的问题</strong>。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/12749457/1703127937250-c5446682-1401-4678-9f98-85520b4e28c7.png#averageHue=%23f9faf8&clientId=ucdc4c7e0-c408-4&from=paste&height=113&id=u69441ab5&originHeight=113&originWidth=702&originalType=binary&ratio=1&rotation=0&showTitle=false&size=24286&status=done&style=none&taskId=u362b1b67-7f6a-4f51-8a93-4b500c5b8eb&title=&width=702" alt="image.png"></p>
+<p>当在比特币网络中进行转账时，通过<strong>“签名”可以明确是由哪个账户转出的，从而防止不良分子对其他账户比特币的盗取</strong>。<br>:::info<br>加密，解决的是秘钥分发的问题；签名，解决的是明确由哪个账户转出的问题<br>:::</p>
+<p>在发布交易时，<strong>通过发起方私钥签名</strong>，其他人可以<strong>根据发起方公钥进行验证</strong>，从而<strong>保证该交易由发起方发起</strong>。</p>
+<p>也就是说，只有拥有私钥，才能将该账户中的比特币转走。 【注意：比特币系统中，很难通过生成大量公私钥对来获取他人私钥】</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-07 16:45:48
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/web3/" title="web3">
+                        #web3
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hash-%E5%93%88%E5%B8%8C"><span class="toc-text">hash(哈希)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#collision-resistance"><span class="toc-text">collision resistance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#hiding"><span class="toc-text">hiding</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AD%BE%E5%90%8D"><span class="toc-text">签名</span></a></li></ol>
+      
     </div>
   </div>
-  
 
   
+<script src="/js/catalog.js"></script>
 
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
   
 
-  
+
+
+      </div>
+    
+  </div>
+
 
         
 <div class="footer">
@@ -420,12 +546,12 @@
       </a>
       <div class="share-content hidden">
         
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + categories + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2Fcategories%2Findex.html + '" target="_blank" title="Twitter">
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2FBTC%25E5%25AF%2586%25E7%25A0%2581%25E5%25AD%25A6%25E5%258E%259F%25E7%2590%2586%2F + '" target="_blank" title="Twitter">
             <i class="iconfont icon-twitter"></i>
           </a>
         
         
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/categories/index.html" target="_blank" title="Facebook">
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/" target="_blank" title="Facebook">
             <i class="iconfont icon-facebooksquare"></i>
           </a>
         

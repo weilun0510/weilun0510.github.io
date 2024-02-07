@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      code review 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">code review</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-07 17:04:10
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="小程序">
+                    #小程序
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>一直觉得我主管浩哥是个很强的技术大佬，正好他让我接手了一个小程序项目，那么就来学习一下他写的代码吧！</p>
+<h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><p>data 应只包括渲染相关的数据，所以这里如果只是为了保存定时器 ID，没必要使用 setData</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706164805210-5c973a8b-facf-43c6-a413-0e7862d74b0d.png#averageHue=%23353331&clientId=uf5ba3496-b92b-4&from=paste&height=336&id=Ynuzo&originHeight=336&originWidth=520&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21323&status=done&style=none&taskId=uebad0b93-489a-4f1c-8ff8-72ee29e4915&title=&width=520" alt="image.png"><br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706164680664-77d16777-0bd8-49b2-8244-ff777c9da327.png#averageHue=%2332302f&clientId=uf5ba3496-b92b-4&from=paste&height=365&id=u6d87e24f&originHeight=365&originWidth=505&originalType=binary&ratio=1&rotation=0&showTitle=false&size=22670&status=done&style=none&taskId=ub9afde2f-2f7f-4eac-bce5-47e764e47f4&title=&width=505" alt="image.png"></p>
+<p>建议将定时器 ID 保存在 this 上即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">timerId</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">onLoad</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 初始化定时器</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timerId</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;定时器在运行&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">onUnload</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; timerId &#125; = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">if</span> (timerId) &#123;</span><br><span class="line">      <span class="comment">// 清除定时器</span></span><br><span class="line">      <span class="built_in">clearInterval</span>(timerId);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 将定时器ID设置为null</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">timerId</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>wx.request 封装</p>
+<p>为什么执行<code>reject()</code>之后，还要执行 <code>resolve()</code>？<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706235440985-a81cf1f7-0b94-46c1-890a-ee501ff8330e.png#averageHue=%2332302f&clientId=uf5ba3496-b92b-4&from=paste&height=870&id=uda27cb8f&originHeight=870&originWidth=771&originalType=binary&ratio=1&rotation=0&showTitle=false&size=63897&status=done&style=none&taskId=u1a8f5a52-0e88-41c9-bcf9-688969b9a37&title=&width=771" alt="image.png"></p>
+<p>看到这里时，我有点疑惑，为什么执行<code>reject()</code>之后，还要执行 <code>resolve()</code>？<br>执行<code>reject()</code>之后，Promise 状态已经被固定了，再执行<code>resolve()</code>也没有意义。打了个断点（**f11 **step into next function call ）看下，发现<code>resolve(res)</code>并没有执行。</p>
+<p>为了不造成混淆，建议在<code>res.data.code !== 0</code>代码块末尾加个<code>return</code>，或者在<code>reject()</code>前面加个<code>return</code><br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706237563773-5e5207b2-d5ee-4179-85a7-bdaecaa8d237.png#averageHue=%23313030&clientId=uf5ba3496-b92b-4&from=paste&height=518&id=uf6cac57d&originHeight=518&originWidth=804&originalType=binary&ratio=1&rotation=0&showTitle=false&size=41037&status=done&style=none&taskId=u0c84a634-a00a-424e-854c-80a0e152d71&title=&width=804" alt="image.png"></p>
+<p>错误处理：通过自定义的错误类 <strong>ErrorRequest</strong>、<strong>ErrorBiz</strong> 和 <strong>ErrorAuth</strong> 对不同类型的错误进行了分类<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706248706337-92787077-9f35-4243-9b9d-25bde0208d60.png#averageHue=%2332302f&clientId=uf5ba3496-b92b-4&from=paste&height=880&id=ua72dbcd7&originHeight=880&originWidth=737&originalType=binary&ratio=1&rotation=0&showTitle=false&size=78344&status=done&style=none&taskId=ud643cbfc-c40d-4da9-883a-d420d630d95&title=&width=737" alt="image.png"></p>
+<p>看下控制台：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706248891011-24c5937b-8278-46d6-8cd4-357715f07131.png#averageHue=%23371919&clientId=uf5ba3496-b92b-4&from=paste&height=223&id=uc2ae6e37&originHeight=223&originWidth=493&originalType=binary&ratio=1&rotation=0&showTitle=false&size=27608&status=done&style=none&taskId=ubf111f7e-81da-4a73-8334-0714e39333b&title=&width=493" alt="image.png"></p>
+<p>并没有提示错误信息输出。父类构造函数<code>Error</code>起到了什么作用？</p>
+<p>点击 Error，如图所示：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706249278606-5d8ce277-ed30-47c3-920a-0f40e0916caa.png#averageHue=%23092135&clientId=uf5ba3496-b92b-4&from=paste&height=453&id=ub3c26df0&originHeight=453&originWidth=521&originalType=binary&ratio=1&rotation=0&showTitle=false&size=37622&status=done&style=none&taskId=uf7edd82a-7ae7-4412-9bd3-7d8162dc49e&title=&width=521" alt="image.png"></p>
+<p>可以看到构造函数<code>ErrorConstructor</code>接收一个 message 参数，那我们把接口的错误消息传递进去看下，修改下代码<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706249438329-f1eaa492-281d-4bed-9cdd-1326fbf99210.png#averageHue=%2330302f&clientId=uf5ba3496-b92b-4&from=paste&height=168&id=u17036b6a&originHeight=168&originWidth=397&originalType=binary&ratio=1&rotation=0&showTitle=false&size=9899&status=done&style=none&taskId=u5e39193d-f9bf-4496-a403-4140f618c38&title=&width=397" alt="image.png"></p>
+<p>效果如下：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706249479023-658da873-5aff-41dd-92d4-b79c77e4c1ee.png#averageHue=%233f1717&clientId=uf5ba3496-b92b-4&from=paste&height=174&id=u6c91d059&originHeight=174&originWidth=461&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26224&status=done&style=none&taskId=u93b7b800-788f-4a50-b004-fd3529d03c4&title=&width=461" alt="image.png"></p>
+<p>修改过后在控制台展示了更详细的错误信息。</p>
+<p>将后端的数据复制给 this.data <code>this.data = data</code>这点挺好的，这样，在捕获到错误之后，可以通过<code>error.data</code>来获取后端给的信息。</p>
+<p>但是我没看到他是怎么使用的，所以我在错误类上加了个获取 this.data 的方法，方便在业务层面获取到：如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ErrorBiz</span> <span class="keyword">extends</span> <span class="title class_ inherited__">ErrorRequest</span> &#123;</span><br><span class="line">  <span class="comment">// 添加一个方法，用于获取业务错误信息</span></span><br><span class="line">  <span class="title function_">getBizErrorData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">data</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>业务中使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> age = <span class="keyword">await</span> api.<span class="title function_">getPhotoCheckAge</span>(phoneUrl);</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="keyword">const</span> bizErrorData = err.<span class="title function_">getBizErrorData</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><p>指向特定元素，通过附加类的预选元素的选择器，中间没有空格。如<code>.title.active</code><br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706152699898-340e1a64-0f60-4548-ba8e-c0b3090107f6.png#averageHue=%2331302f&clientId=u344d1b7a-61b8-4&from=paste&height=212&id=u8a034a71&originHeight=212&originWidth=961&originalType=binary&ratio=1&rotation=0&showTitle=false&size=32578&status=done&style=none&taskId=udb49d629-e896-4201-a877-ecf4e42952e&title=&width=961" alt="image.png"></p>
+<p>适配刘海屏设备安全区域，保证内容不被遮挡。</p>
+<ol>
+<li><strong>padding-bottom: env(safe-area-inset-bottom);：</strong><ul>
+<li><strong>env()</strong> 函数是 CSS 中的一个环境变量函数，用于获取设备环境变量的值。</li>
+<li><strong>safe-area-inset-bottom</strong> 表示底部安全区域的大小。</li>
+<li>这行样式代码的作用是设置底部内边距为底部安全区域的大小。</li>
+</ul>
+</li>
+<li><strong>padding-bottom: constant(safe-area-inset-bottom);：</strong><ul>
+<li><strong>constant()</strong> 函数是 CSS 中的一个函数，用于获取一个常量的值。</li>
+<li><strong>safe-area-inset-bottom</strong> 同样表示底部安全区域的大小。</li>
+<li>这行样式代码的作用也是设置底部内边距为底部安全区域的大小，但使用了 <strong>constant</strong> 函数。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706159375355-02225b25-4a14-4d84-ad01-9c895746d968.png#averageHue=%2336312f&clientId=uf5ba3496-b92b-4&from=paste&height=235&id=u10f4474a&originHeight=235&originWidth=1154&originalType=binary&ratio=1&rotation=0&showTitle=false&size=43049&status=done&style=none&taskId=u30d690a1-1c2e-4565-82eb-f8746e3741c&title=&width=1154" alt="image.png"></p>
+<p>任务进度条<br>后端提供任务总时长，过了多少时间除以总时间就可以算出当前进度，<code>Math.round((Date.now() - startTime) / totalTime * 100)</code><br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706163884826-317340c4-850e-4924-8bdc-b8404203d8cf.png#averageHue=%23342f2e&clientId=uf5ba3496-b92b-4&from=paste&height=812&id=u70946ed3&originHeight=812&originWidth=821&originalType=binary&ratio=1&rotation=0&showTitle=false&size=74305&status=done&style=none&taskId=u465f8600-c89c-4f98-bafc-348f592f0ff&title=&width=821" alt="image.png"></p>
+<h3 id="Js"><a href="#Js" class="headerlink" title="Js"></a>Js</h3><p>列表滚动加载，判断是否已全部加载结束<br><code>const isLoadEnd = respList.length &lt; this.data.pageSize</code>，也就说，如果本次请求响应的条数小于本次请求的条数，就可以表示已全部加载结束<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1706160317876-fb501740-fd15-4fbd-a3ae-26b7a40093cf.png#averageHue=%23343130&clientId=uf5ba3496-b92b-4&from=paste&height=437&id=u24eb6fb6&originHeight=437&originWidth=797&originalType=binary&ratio=1&rotation=0&showTitle=false&size=30423&status=done&style=none&taskId=u52c0abc6-1ad9-439a-bada-e17c01067c6&title=&width=797" alt="image.png"><br>不需要后端给你总页数<code>pages/total</code>，再根据<code>const isLoadEnd = current &lt; pages </code>或者 <code>const isLoadEnd = showList.length &lt; total</code>判断是否已全部加载结束</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E9%9F%B3%E6%A0%87/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-07 17:04:10
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/" title="小程序">
+                        #小程序
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%9B%BE/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%A8%8B%E5%BA%8F"><span class="toc-text">小程序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#css"><span class="toc-text">css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Js"><span class="toc-text">Js</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="Search...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + code%20review + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2Fcode-review%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/code-review/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
+  
+  
+<script src="/js/shares.js"></script>
+
+
+
+      </div>
+    </div>
+  </body>
+</html>

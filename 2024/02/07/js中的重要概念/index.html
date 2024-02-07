@@ -13,6 +13,11 @@
   
   <title>
     
+      js中的重要概念 
+      
+      
+      |
+    
      维论
   </title>
 
@@ -99,149 +104,167 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="umijs/max 设计师指南">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/umijs-max-%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%8C%87%E5%8D%97/">
-            
-              
-                <span>umijs/max 设计师指南</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">js中的重要概念</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-07 16:14:42
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="视频合成流程图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%9B%BE/">
-            
-              
-                <span>视频合成流程图</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <p><strong>在当前函数中，要寻找到变量的值是从哪里来的，就首先会从当前执行上下文中查找，如果没有找到，则会去作用域链中查找。这里需要注意的是，作用域链本身就是存在于函数对象中的一个属性 [[Scopes]]，因此不是一层一层的往上查找「这里经常理解有误」，该属性是在代码预解析阶段就已经确认好的。</strong></p>
+<p>作用域：作用域是规定变量与函数可访问范围的一套规则。</p>
+<p>作用域的范围信息，是在预解析阶段就已经确定的</p>
+<p>执行上下文：执行上下文包含了跟踪对应可执行代码执行进度所需要的所有状态，每个执行上下文中都有特定的实体对象用于记录这些特定状态。</p>
+<p>函数调用栈：管理所有的执行上下文</p>
+<p>运行时上下文：只能有一个，且处于栈顶。当代码执行过程中，有新的函数调用，新的执行上下文会被创建，入栈，并且成为新的运行时上下文</p>
+<p><strong>完整的作用域链：</strong></p>
+<p>都具备一个属性 [[Scopes]]，该属性中存储了当前函数可访问的所有变量对象</p>
+<ul>
+<li><strong>Global 全局对象</strong>：不会做任何优化，会包含全局对象中的所有属性与方法</li>
+<li><strong>Script 对象</strong>：在全局环境下，由 let 和 const 声明的变量对象</li>
+<li><strong>Closure 对象</strong>：我们讨论比较多的闭包对象，嵌套函数生成，仅会保存当前作用域能够访问的变量属性</li>
+<li><strong>Local 对象</strong>：以上的几种变量对象，都会存在于函数的 [[Scopes]]属性之中，因为他们都能够在函数解析时确认，而 Local 对象则不行，需要在函数的<strong>执行过程中才能确定</strong>，并且在执行过程中，该对象中的属性是随时会发生变化的，该对象除了会存储当前函数上下文中所有的变量与函数声明，还会额外记录 this 的指向。</li>
+</ul>
+<p>Local: 活动对象</p>
+<p>由 <strong>函数参数，var 声明的变量，let&#x2F;const 声明的变量，function 声明的变量，class 声明的变量，this 指向等</strong>共同组成。<br>仅仅只有处于栈顶的执行上下文，才会生成 Local 对象。并且 Local 对象的具体内容会在执行上下文的生命周期中不断变化。也就意味着，在执行上下文的创建阶段，只有函数参数、function 声明的变量、this 指向 能够明确具体的值，其他变量的初始值都为 undefined，然后在代码执行过程中逐步明确赋值。</p>
+
       </div>
-    
-      <div class="post-item" title="code review">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/code-review/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>code review</span>
-              
+              <a href="/2024/02/07/html%E5%92%8Ccss%E7%9A%84%E5%B8%83%E5%B1%80%E8%A7%84%E5%88%99/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-07 16:14:42
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/es6%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="音标">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E9%9F%B3%E6%A0%87/">
-            
-              
-                <span>音标</span>
-              
-            
-          </a>
-        </div>
-      </div>
+
     
-      <div class="post-item" title="BEM规范">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">
-            
-              
-                <span>BEM规范</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC-共识协议">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">
-            
-              
-                <span>BTC-共识协议</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC密码学原理">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">
-            
-              
-                <span>BTC密码学原理</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="ETH-以太坊概述">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">
-            
-              
-                <span>ETH-以太坊概述</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC数据结构">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-            
-              
-                <span>BTC数据结构</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="K线图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/K%E7%BA%BF%E5%9B%BE/">
-            
-              
-                <span>K线图</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 5</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -498,6 +521,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + js%E4%B8%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2Fjs%25E4%25B8%25AD%25E7%259A%2584%25E9%2587%258D%25E8%25A6%2581%25E6%25A6%2582%25E5%25BF%25B5%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/js%E4%B8%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>

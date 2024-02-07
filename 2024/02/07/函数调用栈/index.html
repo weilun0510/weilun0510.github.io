@@ -13,6 +13,11 @@
   
   <title>
     
+      函数调用栈 
+      
+      
+      |
+    
      维论
   </title>
 
@@ -99,149 +104,188 @@
 
 
       <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="umijs/max 设计师指南">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/umijs-max-%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%8C%87%E5%8D%97/">
-            
-              
-                <span>umijs/max 设计师指南</span>
-              
-            
-          </a>
-        </div>
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">函数调用栈</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-07 16:00:51
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
+                  </a>
+                </span>
+                
+              </span>
+          
       </div>
-    
-      <div class="post-item" title="视频合成流程图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%9B%BE/">
-            
-              
-                <span>视频合成流程图</span>
-              
-            
-          </a>
-        </div>
+      <div class="markdown-body">
+        <h1 id="函数体"><a href="#函数体" class="headerlink" title="函数体"></a>函数体</h1><p>函数声明或函数表达式，都能够创建一个函数体。函数体也是数据，在代码解析阶段，被持久的存在于堆内存中。</p>
+<h1 id="执行上下文"><a href="#执行上下文" class="headerlink" title="执行上下文"></a>执行上下文</h1><p>执行函数会创建执行上下文，执行上下文会占用新的内存空间。执行上下文会按函数体内编辑好的代码逻辑，实时的记录函数体在执行过程中的所有状态与数据。</p>
+<p>JS 的运行环境：</p>
+<ul>
+<li>全局环境：代码运行时首先会进入全局环境，生成全局上下文</li>
+<li>函数环境：当函数被调用时，进入函数环境执行代码，同时执行上下文被创建</li>
+</ul>
+<p>当调用一个新函数时，新的执行上下文就会被创建。JS 引擎使用栈的方式来跟踪多个执行上下文的运行情况，我们称之为「函数调用栈」。正在执行的函数永远处于栈顶，栈顶上下文执行完毕就会出栈，被垃圾回收器回收，新的栈顶上下文继续执行。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> color = <span class="string">&quot;blue&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">changeColor</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> anotherColor = <span class="string">&quot;red&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">swapColors</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> tempColor = anotherColor;</span><br><span class="line">    anotherColor = color;</span><br><span class="line">    color = tempColor;</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    <span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">trace</span>();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">swapColors</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">changeColor</span>();</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>进入全局上下文，并一直处于栈底</li>
+<li>遇到 <code>changeColor()</code>，创建 changeColor 上下文，新的上下文入栈并开始执行，此时全局上下文被挂起</li>
+<li>遇到 <code>swapColors()</code>，创建 swapColors 上下文，新的上下文入栈并开始执行，changeColor 上下文被挂起</li>
+<li>swapColors 代码执行完毕，swapColors 上下文出栈，等待被回收</li>
+<li>changeColor 上下文激活，changeColor 代码执行完毕，changeColor 上下文出栈，等待被回收</li>
+<li>全局上下文被激活，所有代码执行完毕，全局上下文出栈，函数调用栈被清空</li>
+</ol>
+<h1 id="console-trace"><a href="#console-trace" class="headerlink" title="console.trace()"></a>console.trace()</h1><p>我们可以使用 console 的 trace 方法打印出，当前函数调用栈中有哪些函数<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649153733478-fb84a717-6249-4316-8e3d-c1e57a07aded.png#clientId=u95a5304f-ad0e-4&from=paste&height=190&id=u227f8c04&originHeight=380&originWidth=786&originalType=binary&ratio=1&size=45607&status=done&style=none&taskId=ua096a82b-3eef-47d4-8cb1-ab7e8e04111&width=393" alt="image.png"></p>
+<p>当我们代码报错时，浏览器的 console 面板也会把当前函数调用栈打印出来，这是我们定位 bug 的有效手段<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649153876539-e3dfc0da-c0ae-43e7-b39e-83acef71982c.png#clientId=u95a5304f-ad0e-4&from=paste&height=219&id=ub9029c90&originHeight=438&originWidth=996&originalType=binary&ratio=1&size=63198&status=done&style=none&taskId=ubc4af06b-f9b9-41ed-a4d5-2e03929ef67&width=498" alt="image.png"></p>
+
       </div>
-    
-      <div class="post-item" title="code review">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/code-review/">
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
             
-              
-                <span>code review</span>
-              
+              <a href="/2024/02/07/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
             
-          </a>
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-07 16:00:51
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E5%86%85%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
         </div>
-      </div>
+      
+    </div>
     
-      <div class="post-item" title="音标">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E9%9F%B3%E6%A0%87/">
-            
-              
-                <span>音标</span>
-              
-            
-          </a>
-        </div>
-      </div>
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E4%BD%93"><span class="toc-text">函数体</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87"><span class="toc-text">执行上下文</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#console-trace"><span class="toc-text">console.trace()</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
     
-      <div class="post-item" title="BEM规范">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">
-            
-              
-                <span>BEM规范</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC-共识协议">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">
-            
-              
-                <span>BTC-共识协议</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC密码学原理">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">
-            
-              
-                <span>BTC密码学原理</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="ETH-以太坊概述">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">
-            
-              
-                <span>ETH-以太坊概述</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC数据结构">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-            
-              
-                <span>BTC数据结构</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="K线图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/K%E7%BA%BF%E5%9B%BE/">
-            
-              
-                <span>K线图</span>
-              
-            
-          </a>
-        </div>
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
       </div>
     
   </div>
-  <nav class="post-navigation">
-    
-    <span class="page-num">1 / 5</span>
-    
-      <a href="/page/2/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
+
 
         
 <div class="footer">
@@ -498,6 +542,24 @@
 
 
         
+  
+    <div class="share-icon tools-bar-item">
+      <a href="javascript: void(0)" id="share-icon">
+        <i class="iconfont iconshare"></i>
+      </a>
+      <div class="share-content hidden">
+        
+          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E5%2587%25BD%25E6%2595%25B0%25E8%25B0%2583%25E7%2594%25A8%25E6%25A0%2588%2F + '" target="_blank" title="Twitter">
+            <i class="iconfont icon-twitter"></i>
+          </a>
+        
+        
+          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" target="_blank" title="Facebook">
+            <i class="iconfont icon-facebooksquare"></i>
+          </a>
+        
+      </div>
+    </div>
   
   
 <script src="/js/shares.js"></script>
