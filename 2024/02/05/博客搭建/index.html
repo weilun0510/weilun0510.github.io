@@ -157,7 +157,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-05 13:17:45
+          2024-02-07 10:44:13
         </span>
         
               <span class="post-categories">
@@ -184,13 +184,13 @@
           
       </div>
       <div class="markdown-body">
-        <p>hexo + <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a>主题 + Github Pages + 自定义域名</p>
+        <p>hexo + <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a>主题 + Github Pages + 自定义域名<br><a name="rKYtK"></a></p>
 <h1 id="hexo-环境搭建"><a href="#hexo-环境搭建" class="headerlink" title="hexo 环境搭建"></a>hexo 环境搭建</h1><ol>
 <li>安装 hexo 并初始化，仓库名为 <strong>weilun0510.github.io</strong></li>
 <li>更换主题：<a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges/tree/master">hexo-theme-oranges</a></li>
 <li>修改_config.yml</li>
 <li>添加项目说明</li>
-<li>部署：安装 hexo-deployer-git</li>
+<li>部署：安装 hexo-deployer-git<br><a name="irCGk"></a></li>
 </ol>
 <h2 id="gitalk-评论"><a href="#gitalk-评论" class="headerlink" title="gitalk 评论"></a>gitalk 评论</h2><ol>
 <li>新建一个仓库 <strong>blog-comments</strong></li>
@@ -198,21 +198,42 @@
 <li>博客配置</li>
 </ol>
 <p>注意：配置后，需要手动新建一个 issues 才能使用</p>
-<p>效果图：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1707098862739-abfcb50e-b024-43f9-8be3-2c0f62dfea15.png#averageHue=%237eabc5&clientId=u8ddc28ef-76dd-4&from=paste&height=297&id=u19314aba&originHeight=297&originWidth=934&originalType=binary&ratio=1&rotation=0&showTitle=false&size=12455&status=done&style=none&taskId=u096d710a-b227-4e58-843b-11de76bd199&title=&width=934" alt="image.png"></p>
-<h1 id="hexo-源码备份"><a href="#hexo-源码备份" class="headerlink" title="hexo 源码备份"></a>hexo 源码备份</h1><p>hexo 发布<code>hexo d</code>后，github 仓库上的 hexo 源代码会消失，只保留构建后的代码，如图所示：<br><img src="https://cdn.nlark.com/yuque/0/2024/png/12749457/1707038497715-10ba09c9-0a75-4903-bb66-108d7169b074.png#averageHue=%23fefdfd&clientId=uc91d2d7b-d660-4&from=paste&height=297&id=u371d0ad9&originHeight=413&originWidth=650&originalType=binary&ratio=1&rotation=0&showTitle=false&size=17642&status=done&style=none&taskId=u2f1fa59e-785f-41fb-bb51-79b12ca8c86&title=&width=467" alt="1707038482026.png"><br>万一 **username.github.io **本地仓库的代码丢失，后面就无法进行写作。<br>所以新建一个仓库，用于专门写作，如 **blog **。后面 **username.github.io **项目不动，在 **blog **上写作即可。</p>
-<h1 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h1><ol>
+<p>效果图：<br /><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273451889.png#id=aylXj&originHeight=297&originWidth=934&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p><a name="XdxYY"></a></p>
+<h1 id="hexo-源码备份"><a href="#hexo-源码备份" class="headerlink" title="hexo 源码备份"></a>hexo 源码备份</h1><p>hexo 发布<code>hexo d</code>后，github 仓库上的 hexo 源代码会消失，只保留构建后的代码，如图所示：<br /><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1707273493092.png#id=oXpJK&originHeight=413&originWidth=650&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br />万一 **username.github.io **本地仓库的代码丢失，后面就无法进行写作。<br />所以新建一个仓库，用于专门写作，如 **blog **。后面 **username.github.io **项目不动，在 **blog **上写作即可。<br><a name="JPz1u"></a></p>
+<h1 id="Pages-自定义域名"><a href="#Pages-自定义域名" class="headerlink" title="Pages 自定义域名"></a>Pages 自定义域名</h1><ol>
 <li>买个域名，如华为云</li>
 <li>域名解析 -&gt; 添加记录集</li>
 </ol>
 <p>华为云提供了一种 CNAME 记录的设置方式，这样可以更好地适应服务器 IP 地址的变化。通过使用 CNAME 记录，你的域名将指向 GitHub Pages 的域名，而不是直接指向 IP 地址。这样，GitHub 在 IP 地址变更时会更新其域名的 DNS 记录，而你无需手动调整。</p>
-<p>自定义域名失效问题：</p>
+<p>每次部署后自定义域名失效？</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Passerby_Wang/article/details/121209799">https://blog.csdn.net/Passerby_Wang&#x2F;article&#x2F;details&#x2F;121209799</a><br><a name="sQ0As"></a></li>
+</ul>
+<h1 id="图片存储"><a href="#图片存储" class="headerlink" title="图片存储"></a>图片存储</h1><p><a name="UPBK0"></a></p>
+<h2 id="github-picGo"><a href="#github-picGo" class="headerlink" title="github + picGo"></a>github + picGo</h2><p>github 做图床(免费，上限 100G) + picGo 上传图片</p>
+<p>实现：</p>
 <ol>
-<li>将 _config.yml 文件中的 url 设置为自定义域名</li>
-<li>在 source 文件夹中新建 CNAME 文件，将自定义域名放里面</li>
+<li>设置图床<ol>
+<li>新建一个仓库 <strong>blog-images</strong></li>
+<li>添加 index.html 文件，内容随意</li>
 </ol>
-<h6 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h6><ul>
+</li>
+<li>设置 picGo。我用的 vscode，<strong>注意</strong>：repo 值得格式为 <strong>username&#x2F;仓库名</strong><ol>
+<li>配置参考： <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138012354">https://zhuanlan.zhihu.com/p/138012354</a></li>
+</ol>
+</li>
+</ol>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.current&quot;</span><span class="punctuation">:</span> <span class="string">&quot;github&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.branch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;master&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;images/&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;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&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.picBed.github.repo&quot;</span><span class="punctuation">:</span> <span class="string">&quot;weilun0510/blog-images&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;picgo.customUploadName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileName&#125;-$&#123;dateTime&#125;$&#123;extName&#125;&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>github 作为图床：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/138012354">https://zhuanlan.zhihu.com/p/138012354</a><br />上传失败：<a target="_blank" rel="noopener" href="https://blog.csdn.net/TalesOV/article/details/104450037">https://blog.csdn.net/TalesOV/article/details/104450037</a></p>
+<p>上传成功后的链接： <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/weilun0510/blog-images/master/images/index-2024-02-06-10-03-19.png">https://raw.githubusercontent.com/weilun0510/blog-images/master/images/index-2024-02-06-10-03-19.png</a></p>
+<p>使用：<br />Uploading an image from clipboard</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Windows/Unix:</span><br><span class="line">ctrl + alt + u</span><br><span class="line"></span><br><span class="line">OsX:</span><br><span class="line">Cmd + Opt + u</span><br></pre></td></tr></table></figure>
+
+<p>参考:</p>
+<ul>
 <li><a target="_blank" rel="noopener" href="https://github.com/yansheng836/yansheng836.github.io/blob/blog/docs/1hexo+yilia%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA.md">https://github.com/yansheng836/yansheng836.github.io/blob/blog/docs/1hexo+yilia%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6%E6%90%AD%E5%BB%BA.md</a></li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/Passerby_Wang/article/details/121209799">https://blog.csdn.net/Passerby_Wang&#x2F;article&#x2F;details&#x2F;121209799</a></li>
 </ul>
 
       </div>
@@ -224,7 +245,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-05 13:17:45
+              2024-02-07 10:44:13
             </span>
             
                   <span class="post-categories">
@@ -264,7 +285,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">hexo 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gitalk-%E8%AF%84%E8%AE%BA"><span class="toc-text">gitalk 评论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD"><span class="toc-text">hexo 源码备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">自定义域名</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">hexo 环境搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gitalk-%E8%AF%84%E8%AE%BA"><span class="toc-text">gitalk 评论</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo-%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD"><span class="toc-text">hexo 源码备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pages-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%9F%E5%90%8D"><span class="toc-text">Pages 自定义域名</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E5%AD%98%E5%82%A8"><span class="toc-text">图片存储</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#github-picGo"><span class="toc-text">github + picGo</span></a></li></ol></li></ol>
       
     </div>
   </div>
