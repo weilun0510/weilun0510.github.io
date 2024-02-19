@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:04:44
+          2024-02-19 15:16:20
         </span>
         
               <span class="post-tags">
@@ -196,7 +196,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">Obj</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">func</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">obj</span> = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">arr</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">und</span> = <span class="literal">undefined</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">reg</span> = <span class="regexp">/123/</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">date</span> = <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">0</span>);</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">NaN</span> = <span class="title class_">NaN</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">infinity</span> = <span class="title class_">Infinity</span>;</span><br><span class="line">  <span class="variable language_">this</span>.<span class="property">sym</span> = <span class="title class_">Symbol</span>(<span class="number">1</span>);</span><br><span class="line">  <span class="variable language_">this</span>[<span class="title class_">Symbol</span>(<span class="number">2</span>)] = <span class="string">&quot;sym2&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj1 = <span class="keyword">new</span> <span class="title class_">Obj</span>();</span><br><span class="line"></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj1, <span class="string">&quot;innumerable&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">value</span>: <span class="string">&quot;innumerable&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;obj1&quot;</span>, obj1);</span><br><span class="line"><span class="keyword">let</span> obj22 = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(obj1));</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;obj22&quot;</span>, obj22);</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/12749457/1688009487042-f5c1e25e-f48d-4662-a6a1-0b856715b54b.png#averageHue=%23fefefe&clientId=u49d9fc35-d3ad-4&from=paste&height=141&id=u84343cb5&originHeight=141&originWidth=727&originalType=binary&ratio=1&rotation=0&showTitle=false&size=25789&status=done&style=none&taskId=u0317168d-9b05-48cf-b4c1-06bfbf010b1&title=&width=727" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326973863.png" alt="pic.1708326973863"></p>
 <h2 id="基础版"><a href="#基础版" class="headerlink" title="基础版"></a>基础版</h2><p>注意点：</p>
 <ul>
 <li>不能复制不可枚举和 Symbol 类型的属性</li>
@@ -205,7 +205,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">deepClone</span>(<span class="params">target</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> target === <span class="string">&quot;object&quot;</span> &amp;&amp; target !== <span class="literal">null</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> newObj = <span class="title class_">Array</span>.<span class="title function_">isArray</span>(target) ? [] : &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> target) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">typeof</span> target[key] === <span class="string">&quot;object&quot;</span>) &#123;</span><br><span class="line">        newObj[key] = <span class="title function_">deepClone</span>(target[key]);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        newObj[key] = target[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> newObj;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj3 = <span class="title function_">deepClone</span>(obj1);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;obj3&quot;</span>, obj3);</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/12749457/1688009598777-a595ede6-9420-4740-a27e-b77a5ee2d8d1.png#averageHue=%23fefefe&clientId=u49d9fc35-d3ad-4&from=paste&height=184&id=u34593dae&originHeight=184&originWidth=633&originalType=binary&ratio=1&rotation=0&showTitle=false&size=26488&status=done&style=none&taskId=u10cea16b-4fac-4f37-87d6-40681016ad0&title=&width=633" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326963610.png" alt="pic.1708326963610"></p>
 <h2 id="改进版"><a href="#改进版" class="headerlink" title="改进版"></a>改进版</h2><ul>
 <li>对于不可枚举和 Symbol 类型，可以 Reflect.ownKeys(),Reflect.ownKeys &#x3D;&#x3D;&#x3D; Object.getOwnPropertyNames(obj).concat(Object.getOwnPropertySymbols(Obj))</li>
 <li>对于 Date 和 RegExp 类型，直接返回一个实例对象</li>
@@ -217,14 +217,14 @@
 <p>验证代码</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj4 = &#123;</span><br><span class="line">  <span class="attr">num</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">str</span>: <span class="string">&quot;&quot;</span>,</span><br><span class="line">  <span class="attr">boolean</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">unf</span>: <span class="literal">undefined</span>,</span><br><span class="line">  <span class="attr">nul</span>: <span class="literal">null</span>,</span><br><span class="line">  <span class="attr">obj</span>: &#123; <span class="attr">name</span>: <span class="string">&quot;我是一个对象&quot;</span>, <span class="attr">id</span>: <span class="number">1</span> &#125;,</span><br><span class="line">  <span class="attr">arr</span>: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">  <span class="attr">func</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;我是一个函数&quot;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">date</span>: <span class="keyword">new</span> <span class="title class_">Date</span>(<span class="number">0</span>),</span><br><span class="line">  <span class="attr">reg</span>: <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&quot;/我是一个正则/ig&quot;</span>),</span><br><span class="line">  [<span class="title class_">Symbol</span>(<span class="string">&quot;1&quot;</span>)]: <span class="number">1</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">defineProperty</span>(obj4, <span class="string">&quot;innumerable&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">enumerable</span>: <span class="literal">false</span>,</span><br><span class="line">  <span class="attr">value</span>: <span class="string">&quot;不可枚举属性&quot;</span>,</span><br><span class="line">&#125;);</span><br><span class="line">obj4 = <span class="title class_">Object</span>.<span class="title function_">create</span>(obj4, <span class="title class_">Object</span>.<span class="title function_">getOwnPropertyDescriptors</span>(obj4));</span><br><span class="line">obj4.<span class="property">loop</span> = obj4; <span class="comment">// 设置loop成循环引用的属性</span></span><br><span class="line"><span class="keyword">let</span> cloneObj = <span class="title function_">deepCloneImprove</span>(obj4);</span><br><span class="line">cloneObj.<span class="property">arr</span>.<span class="title function_">push</span>(<span class="number">4</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;obj4&quot;</span>, obj4);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;cloneObj&quot;</span>, cloneObj);</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2023/png/12749457/1688009714561-9332b9d3-3f08-4e74-a4c4-cce25d41668f.png#averageHue=%23fefefe&clientId=u49d9fc35-d3ad-4&from=paste&height=505&id=u3417a47a&originHeight=505&originWidth=728&originalType=binary&ratio=1&rotation=0&showTitle=false&size=96553&status=done&style=none&taskId=u123d546c-672d-4679-88ea-bf967933b88&title=&width=728" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326948006.png" alt="pic.1708326948006"></p>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E9%97%AD%E5%8C%85/" target="_self">
+              <a href="/2024/02/07/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2%E4%B9%8BNginx%E9%85%8D%E7%BD%AE/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -233,7 +233,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:04:44
+              2024-02-19 15:16:20
             </span>
             
                   <span class="post-tags">
@@ -250,7 +250,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" target="_self">
+              <a href="/2024/02/07/%E9%98%B2%E6%AD%A2%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BD%B0%E7%82%B8_%E8%B0%B7%E6%AD%8C%E4%BA%BA%E6%9C%BA%E6%A0%A1%E9%AA%8C_recaptchaV3/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -571,29 +571,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E6%25B7%25B1%25E6%25B5%2585%25E6%258B%25B7%25E8%25B4%259D%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

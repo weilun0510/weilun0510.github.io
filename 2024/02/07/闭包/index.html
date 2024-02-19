@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 15:58:14
+          2024-02-19 14:52:27
         </span>
         
               <span class="post-tags">
@@ -180,7 +180,7 @@
 <p>看个例子：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  (<span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(++a); <span class="comment">// 这时候闭包产生了，</span></span><br><span class="line">  &#125;)();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">//运行到这里是，f的执行上下文被销毁，闭包也消失了。此时fn中的a变成了2</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">fn</span>(); <span class="comment">// 等fn执行完，fn的执行上下文也被销毁</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649583061013-8e7cbade-bc2b-4531-a1ae-a9db5e712141.png#averageHue=%23fcfaf8&clientId=uf78052ea-b8be-4&from=paste&height=181&id=u6f00caad&originHeight=361&originWidth=759&originalType=binary&ratio=1&rotation=0&showTitle=false&size=82420&status=done&style=none&taskId=uc2814846-be96-4579-9260-1dd99208183&title=&width=379.5" alt="image.png"><br>内部函数<code>f</code>执行完毕，其执行上下文被回收，闭包对象也随之被回收。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649583079384-f7d9658a-d907-450c-ab41-22225474de3e.png#averageHue=%23f1efcb&clientId=uf78052ea-b8be-4&from=paste&height=137&id=udb39de7b&originHeight=274&originWidth=738&originalType=binary&ratio=1&rotation=0&showTitle=false&size=73426&status=done&style=none&taskId=u7b4d0306-2273-4c8c-8dfc-67dbe277afd&title=&width=369" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325490489.png" alt="pic.1708325490489"><br>内部函数<code>f</code>执行完毕，其执行上下文被回收，闭包对象也随之被回收。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325496558.png" alt="pic.1708325496558"></p>
 <h1 id="保存闭包对象不被回收"><a href="#保存闭包对象不被回收" class="headerlink" title="保存闭包对象不被回收"></a>保存闭包对象不被回收</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">bar</span>(<span class="params"></span>) &#123;</span><br><span class="line">    a = a + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">10</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a + b);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> bar;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo</span>()(); <span class="comment">// 31</span></span><br><span class="line"><span class="title function_">foo</span>()(); <span class="comment">// 31</span></span><br></pre></td></tr></table></figure>
 
 <p>foo 调用完毕，其执行上下文被回收，bar 作为 foo 的一部分，自然也被回收，那么保存在 foo.[[Scipes]] 上的闭包对象自然也被回收。</p>
@@ -194,7 +194,7 @@
 <p>用自执行函数改造-隔秒一次输出 1-5<br>自执行函数与 timer 形成闭包，所以 i 被保存了下来</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  (<span class="keyword">function</span> (<span class="params">i</span>) &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="keyword">function</span> <span class="title function_">timer</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    &#125;, i * <span class="number">1000</span>);</span><br><span class="line">  &#125;)(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649579011435-4f22073e-332b-4cd9-aa9d-1a9347bfa908.png#averageHue=%23f3f1cc&clientId=u32953fbb-b672-4&from=paste&height=119&id=l1iVy&originHeight=237&originWidth=534&originalType=binary&ratio=1&rotation=0&showTitle=false&size=56146&status=done&style=none&taskId=uf5442248-6621-4211-b9eb-9d187dc749c&title=&width=267" alt="image.png"><br>可以看到，循环执行完毕后，还能访问到 i，此时 i 的值为保存在闭包对象的值。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325509698.png" alt="pic.1708325509698"><br>可以看到，循环执行完毕后，还能访问到 i，此时 i 的值为保存在闭包对象的值。</p>
 <p>进一步改造，缩小约束范围，只约束 timer，瞬间输出 1-5</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt;= <span class="number">5</span>; i++) &#123;</span><br><span class="line">  <span class="built_in">setTimeout</span>(</span><br><span class="line">    (<span class="keyword">function</span> <span class="title function_">timer</span>(<span class="params">i</span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(i);</span><br><span class="line">    &#125;)(i),</span><br><span class="line">    i * <span class="number">1000</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -216,9 +216,9 @@
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; a &#125; <span class="keyword">from</span> <span class="string">&quot;../../../utils&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Closure</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;a&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Closure</span>;</span><br></pre></td></tr></table></figure>
 
-<p>在函数组件 Closure 中访问了 utils 模块中的变量 <code>a</code>，那么闭包对象就产生了。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649603414289-ed65c39a-f4c4-4081-9614-32d505783adf.png#averageHue=%2327292c&clientId=uf78052ea-b8be-4&from=paste&height=266&id=u51915d41&originHeight=531&originWidth=943&originalType=binary&ratio=1&rotation=0&showTitle=false&size=116726&status=done&style=none&taskId=u1b56ff07-9108-4ef1-a2c0-72730fe431a&title=&width=471.5" alt="image.png"></p>
-<h2 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h2><p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649604807750-6e197b16-4993-4f09-9d1c-ebae4166d3cb.png#averageHue=%2326282a&clientId=u13155427-3a37-4&from=paste&height=175&id=u422f8950&originHeight=350&originWidth=744&originalType=binary&ratio=1&rotation=0&showTitle=false&size=54802&status=done&style=none&taskId=u02e6b488-eac3-4fb0-967c-2cbb654fd41&title=&width=372" alt="image.png"><br>在<code>&lt;Child /&gt;</code>组件中执行<code>foo</code>时，闭包对象<code>Closure(MyClosure)</code>产生了。</p>
-<h2 id="hooks-缓存上次结果"><a href="#hooks-缓存上次结果" class="headerlink" title="hooks 缓存上次结果"></a>hooks 缓存上次结果</h2><p>本质是将上次的结果（闭包对象）缓存在函数体内<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649605310342-da0229ca-ebdd-43d1-b58a-96584fce3394.png#averageHue=%23477246&clientId=u13155427-3a37-4&from=paste&height=177&id=ua81194a6&originHeight=353&originWidth=969&originalType=binary&ratio=1&rotation=0&showTitle=false&size=83502&status=done&style=none&taskId=u44b669f2-5543-4b3a-ac3a-ac9a0b9ac72&title=&width=484.5" alt="image.png"><br>另外还有以下关于闭包的使用</p>
+<p>在函数组件 Closure 中访问了 utils 模块中的变量 <code>a</code>，那么闭包对象就产生了。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325527266.png" alt="pic.1708325527266"></p>
+<h2 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h2><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325535782.png" alt="pic.1708325535782"><br>在<code>&lt;Child /&gt;</code>组件中执行<code>foo</code>时，闭包对象<code>Closure(MyClosure)</code>产生了。</p>
+<h2 id="hooks-缓存上次结果"><a href="#hooks-缓存上次结果" class="headerlink" title="hooks 缓存上次结果"></a>hooks 缓存上次结果</h2><p>本质是将上次的结果（闭包对象）缓存在函数体内<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325542236.png" alt="pic.1708325542236"><br>另外还有以下关于闭包的使用</p>
 <ul>
 <li>高阶函数: 记忆函数</li>
 <li>状态管理：redux、mbox</li>
@@ -256,7 +256,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 15:58:14
+              2024-02-19 14:52:27
             </span>
             
                   <span class="post-tags">
@@ -273,7 +273,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_self">
+              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -594,29 +594,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E9%97%AD%E5%8C%85 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E9%2597%25AD%25E5%258C%2585%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E9%97%AD%E5%8C%85/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

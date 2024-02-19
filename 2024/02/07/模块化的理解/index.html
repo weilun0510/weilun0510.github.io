@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:03:50
+          2024-02-19 15:13:49
         </span>
         
               <span class="post-tags">
@@ -169,7 +169,7 @@
           
       </div>
       <div class="markdown-body">
-        <p><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/12749457/1652286363119-949c1e54-8367-4c15-9dcc-da5e4b55b787.jpeg"></p>
+        <p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326768564.png" alt="pic.1708326768564"></p>
 <h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>模块化，就是把一个大的问题，化解为小的问题在这种思维下提炼出来的工程化解决方案。</p>
 <h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>核心思想就是隔离。要有自己的内部属性，内部方法，以及自己来决定哪些属性与方法能够被其他模块访问。</p>
 <h1 id="模块的设计目的是什么？"><a href="#模块的设计目的是什么？" class="headerlink" title="模块的设计目的是什么？"></a>模块的设计目的是什么？</h1><p>有了模块，我们可以更方便的使用别人的代码，想要什么功能，就加载什么模块。</p>
@@ -231,10 +231,10 @@
 <li>from 表示从哪里引入</li>
 <li>‘.&#x2F;test’ 为 ‘.&#x2F;test.js’ 的简写，表示将要引入的模块的路径</li>
 </ul>
-<p>引入这个模块的同时，<code>&#39;./test&#39;</code>里的代码也执行了。因为 test.js 没有对外暴露接口，所以 test 为空对象。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648025563368-dfa73264-21d5-44f2-b3b9-eca6a9ebaec4.png#averageHue=%23f3f4f5&clientId=uc36b1956-b3d6-4&from=paste&height=101&id=ubc2ee38e&originHeight=202&originWidth=1326&originalType=binary&ratio=1&rotation=0&showTitle=false&size=31081&status=done&style=none&taskId=ubc4a6345-bb09-4386-a020-788a0593379&title=&width=663" alt="image.png"></p>
+<p>引入这个模块的同时，<code>&#39;./test&#39;</code>里的代码也执行了。因为 test.js 没有对外暴露接口，所以 test 为空对象。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326785878.png" alt="pic.1708326785878"></p>
 <h2 id="对外提供接口"><a href="#对外提供接口" class="headerlink" title="对外提供接口"></a>对外提供接口</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;my name is test.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;fn&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name,</span><br><span class="line">  obj,</span><br><span class="line">  arr,</span><br><span class="line">  fn,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>使用 <code>export default</code> 对外暴露一个对象。当使用<code>import test from &#39;./test&#39;</code>时，test 就是这个暴露的对象<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648027004433-a07b7902-0ad7-4462-b9a4-6d352ee380da.png#averageHue=%23f5f6f7&clientId=uc36b1956-b3d6-4&from=paste&height=167&id=u72c8eb46&originHeight=334&originWidth=1344&originalType=binary&ratio=1&rotation=0&showTitle=false&size=53740&status=done&style=none&taskId=u18d564e1-b41a-44a8-bcb4-d32282aeee5&title=&width=672" alt="image.png"></p>
+<p>使用 <code>export default</code> 对外暴露一个对象。当使用<code>import test from &#39;./test&#39;</code>时，test 就是这个暴露的对象<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326805238.png" alt="pic.1708326805238"></p>
 <p>我们还可以仅通过 export 暴露几个方法和属性，在 test 中添加以下代码，看看 index.js 中的 test 会发生什么变化</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> age = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">bar</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;bar&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
@@ -242,10 +242,10 @@
 <p>如果想要获取 test.js 对外暴露的所有接口，可通过如下模式获取</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> test <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br></pre></td></tr></table></figure>
 
-<p><code>*</code>号表示所有，是比较常用的通配符，as 表示别名。<code>* as test</code> 表示将 test.js 对外暴露的所有接口组成的对象，命名为 test。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648027522449-76a9e3dc-7fa0-4e45-ba81-ab0b8dfa0b46.png#averageHue=%23fefdfd&clientId=uc36b1956-b3d6-4&from=paste&height=274&id=u1f370bfe&originHeight=548&originWidth=1322&originalType=binary&ratio=1&rotation=0&showTitle=false&size=99455&status=done&style=none&taskId=ub36d02b1-3b44-4e58-a12e-c23598ad085&title=&width=661" alt="image.png"></p>
+<p><code>*</code>号表示所有，是比较常用的通配符，as 表示别名。<code>* as test</code> 表示将 test.js 对外暴露的所有接口组成的对象，命名为 test。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326814698.png" alt="pic.1708326814698"></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> test, &#123; age, bar &#125; <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等于以下写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> allTest <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; age, bar &#125; = allTest;</span><br></pre></td></tr></table></figure>
 
-<p>这种写法非常常见，test 仍表示为<code>export default</code> 所暴露的对象，<code>&#123; age, bar &#125;</code> 表示<strong>用解构的语法从返回的整个对象中取对应的接口</strong>。结果显而易见<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648028267299-d1f13ab8-d574-48a3-a8f7-29eb415abec6.png#averageHue=%23fefefe&clientId=uc36b1956-b3d6-4&from=paste&height=198&id=u5c35f142&originHeight=396&originWidth=1342&originalType=binary&ratio=1&rotation=0&showTitle=false&size=63351&status=done&style=none&taskId=u9efab9ee-3c67-4b7b-bcd9-841c42ee282&title=&width=671" alt="image.png"></p>
+<p>这种写法非常常见，test 仍表示为<code>export default</code> 所暴露的对象，<code>&#123; age, bar &#125;</code> 表示<strong>用解构的语法从返回的整个对象中取对应的接口</strong>。结果显而易见<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326822951.png" alt="pic.1708326822951"></p>
 <p>在 react，这种使用方法很常见，我们能根据导入语法，就知道 react 内部是如何封装接口的</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; lazy &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对应的导出</span></span><br><span class="line">expoet <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">lazy</span>: <span class="function">() =&gt;</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -259,7 +259,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/" target="_self">
+              <a href="/2024/02/07/%E6%9F%AF%E9%87%8C%E5%8C%96/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -268,7 +268,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:03:50
+              2024-02-19 15:13:49
             </span>
             
                   <span class="post-tags">
@@ -285,7 +285,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%9F%AF%E9%87%8C%E5%8C%96/" target="_self">
+              <a href="/2024/02/07/%E5%BE%AE%E4%BF%A1%E7%BD%91%E9%A1%B5%E5%88%86%E4%BA%AB%E3%80%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%A2%98%E3%80%81%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%9B%BE%E7%89%87%E3%80%8D/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -606,29 +606,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E6%25A8%25A1%25E5%259D%2597%25E5%258C%2596%25E7%259A%2584%25E7%2590%2586%25E8%25A7%25A3%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:33:21
+          2024-02-19 14:54:42
         </span>
         
               <span class="post-tags">
@@ -179,7 +179,7 @@
 <h2 id="在-vs-code-中使用-prettier"><a href="#在-vs-code-中使用-prettier" class="headerlink" title="在 vs code 中使用 prettier"></a>在 vs code 中使用 prettier</h2><ul>
 <li><strong>在 vs code 应用商店安装 prettier 插件</strong></li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1665628665950-329367b8-54bc-4963-b49f-d39c311a8417.png#clientId=ua0aff7ed-9ecd-4&from=paste&height=526&id=u7a625f85&originHeight=526&originWidth=2084&originalType=binary&ratio=1&rotation=0&showTitle=false&size=215553&status=done&style=none&taskId=ubb767d84-c08c-4941-8f6e-63fd3ea578c&title=&width=2084" alt="image.png"></p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325653485.png" alt="pic.1708325653485"></p>
 <ul>
 <li><strong>配置插件.prettierrc</strong></li>
 </ul>
@@ -193,7 +193,7 @@
 <h1 id="editorconfig"><a href="#editorconfig" class="headerlink" title=".editorconfig"></a>.editorconfig</h1><p>开发者<strong>使用不同编辑器或系统时</strong>，将<code>.editorconfig</code>文件保存到项目根目录下，即可让项目下所有文件都<strong>统一编辑器代码风格。</strong><br>这个文件会覆盖编辑器的默认配置。<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lwming/p/15270816.html">https://www.cnblogs.com/lwming/p/15270816.html</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># <span class="attr">http</span>:<span class="comment">//editorconfig.org</span></span><br><span class="line">root = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*]</span><br><span class="line">charset = utf-<span class="number">8</span></span><br><span class="line">end_of_line = lf</span><br><span class="line">indent_size = <span class="number">2</span></span><br><span class="line">indent_style = space</span><br><span class="line">insert_final_newline = <span class="literal">true</span></span><br><span class="line">max_line_length = <span class="number">80</span></span><br><span class="line">trim_trailing_whitespace = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*.<span class="property">md</span>]</span><br><span class="line">max_line_length = <span class="number">0</span></span><br><span class="line">trim_trailing_whitespace = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="vscode-settings-json"><a href="#vscode-settings-json" class="headerlink" title="vscode settings.json"></a>vscode settings.json</h1><p>settings.json 文件是 VS Code 众多“配置文件”中的一个，用来控制诸多工作项的配置。<br>按快捷键【Ctrl】+【,】，打开 VS Code 的设置界面，<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1660813439242-30622afc-5934-4e25-8828-4fd42cd66da4.png#clientId=u28ee5c8b-7c8c-4&from=paste&id=uabc9af07&originHeight=386&originWidth=648&originalType=url&ratio=1&rotation=0&showTitle=false&size=114497&status=done&style=none&taskId=uf0bbe929-9479-448b-9b73-77bda03c976&title=" alt="image.png"><br>可以看到设置内容有“用户” “工作区”两个分支，它们其实就分别对应了两个不同位置的 settings.json 文件，前者位于与用户相关联的特定文件夹中，后者就会位于你当前打开的文件夹的.vscode 子目录下。这两个 settings.json 文件其实都只会包含你修改过的设置项，而软件的全局默认设置则记录在软件安装目录中的某个位置，用户是不必理会的。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1660813456800-06187e9a-a737-40fc-9939-85dacf840fa4.png#clientId=u28ee5c8b-7c8c-4&from=paste&height=282&id=u39291d16&originHeight=564&originWidth=2072&originalType=binary&ratio=1&rotation=0&showTitle=false&size=129713&status=done&style=none&taskId=u2f9c2176-4875-4267-a020-9cf80bf1220&title=&width=1036" alt="image.png"><br>这些配置文件具有工作区&gt;用户&gt;全局默认 的优先级，也就是前面的配置覆盖后面的，这样做的好处是你可以为不同工作区、不同用户做不同配置，而不会互相干扰。而当你不小心在某个工作区做了错误的配置导致软件不能正常工作时，只需删除相应的设置项，或者 settings.json 文件，即可恢复到用户配置或默认配置。</p>
+<h1 id="vscode-settings-json"><a href="#vscode-settings-json" class="headerlink" title="vscode settings.json"></a>vscode settings.json</h1><p>settings.json 文件是 VS Code 众多“配置文件”中的一个，用来控制诸多工作项的配置。<br>按快捷键【Ctrl】+【,】，打开 VS Code 的设置界面，<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325666467.png" alt="pic.1708325666467"><br>可以看到设置内容有“用户” “工作区”两个分支，它们其实就分别对应了两个不同位置的 settings.json 文件，前者位于与用户相关联的特定文件夹中，后者就会位于你当前打开的文件夹的.vscode 子目录下。这两个 settings.json 文件其实都只会包含你修改过的设置项，而软件的全局默认设置则记录在软件安装目录中的某个位置，用户是不必理会的。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325675886.png" alt="pic.1708325675886"><br>这些配置文件具有工作区&gt;用户&gt;全局默认 的优先级，也就是前面的配置覆盖后面的，这样做的好处是你可以为不同工作区、不同用户做不同配置，而不会互相干扰。而当你不小心在某个工作区做了错误的配置导致软件不能正常工作时，只需删除相应的设置项，或者 settings.json 文件，即可恢复到用户配置或默认配置。</p>
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 工作区分支 .vscode/setting.json</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;prettier.printWidth&quot;</span><span class="punctuation">:</span> <span class="number">100</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 一个制表符等于的空格数。</span></span><br><span class="line">  <span class="attr">&quot;editor.tabSize&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">13</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>以“prettier”开头的配置项可以放在.prettierrc 文件中</p>
@@ -208,7 +208,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" target="_self">
+              <a href="/2024/02/07/%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -217,7 +217,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:33:21
+              2024-02-19 14:54:42
             </span>
             
                   <span class="post-tags">
@@ -234,7 +234,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/" target="_self">
+              <a href="/2024/02/07/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -555,29 +555,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E4%25BB%25A3%25E7%25A0%2581%25E8%25A7%2584%25E8%258C%2583%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

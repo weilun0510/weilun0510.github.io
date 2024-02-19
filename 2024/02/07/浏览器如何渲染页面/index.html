@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:28:49
+          2024-02-19 15:11:52
         </span>
         
               <span class="post-tags">
@@ -169,7 +169,7 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="在地址栏输入-url-后发生了什么？"><a href="#在地址栏输入-url-后发生了什么？" class="headerlink" title="在地址栏输入 url 后发生了什么？"></a>在地址栏输入 url 后发生了什么？</h1><p>用一张图描述一下：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648344927022-dea777f0-92bf-4f61-bca3-28fb97db93b2.png#averageHue=%23f5f5f5&clientId=u6b136b04-5737-4&from=ui&id=ua318834c&originHeight=532&originWidth=1674&originalType=binary&ratio=1&rotation=0&showTitle=false&size=104083&status=done&style=none&taskId=ue65f19d8-1181-4311-8f8b-d91581746aa&title=" alt="请求过程.png"></p>
+        <h1 id="在地址栏输入-url-后发生了什么？"><a href="#在地址栏输入-url-后发生了什么？" class="headerlink" title="在地址栏输入 url 后发生了什么？"></a>在地址栏输入 url 后发生了什么？</h1><p>用一张图描述一下：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326672310.png" alt="pic.1708326672310"></p>
 <ol>
 <li>输入域名</li>
 <li>DNS：域名解析，得到 ip 地址</li>
@@ -185,7 +185,7 @@
 <p>如果说进程是一个工厂，那线程就是工厂中的流水线。一个工厂的正常运行，往往需要多个流水线通力合作才能完成。在网页进程中也是一样，想要网页进程能正常渲染运行，也需要多个线程参与合作。</p>
 <p>网页的渲染运行，有如下线程参与</p>
 <h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><p>GUI(Graphical User Interface)表示图形用户界面的意思，render tree 的渲染。用一张图看一下渲染路径</p>
-<h4 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648349370409-16e06c71-9398-4b6a-929f-2abbb7411d49.png#averageHue=%23f8f8f8&clientId=u7956955b-6108-4&from=ui&id=u96abada2&originHeight=830&originWidth=1904&originalType=binary&ratio=1&rotation=0&showTitle=false&size=198769&status=done&style=none&taskId=ub7e8063a-5516-4372-abbd-719c342bf1c&title=" alt="HTML渲染过程.png"></p>
+<h4 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h4><p>![HTML渲染过程.png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326684005.png" alt="pic.1708326684005"></p>
 <p>后端返回的 html 文件其内容是个字符串，<code>&lt;html&gt;、&lt;style&gt;</code>等标签是语法糖，HTML Parser 或 CSS Parser 表示对应的解析器，解析器的工作就是将这些字符串语法糖转换为对象。</p>
 <p>加载：表示『资源文件发起请求-&gt;服务器返回结果』这一过程<br>解析：表示词法分析，先加载，后解析<br>渲染：将节点信息绘制到页面的过程</p>
 <p>html 的解析过程，是自上而下的，解析过程中，如果发现了样式文件(link 标签)，就会加载样式文件。<strong>样式文件的加载并不会阻塞 html 的解析，阻塞的是 render tree 的渲染。</strong></p>
@@ -206,8 +206,8 @@
 <p>用代码证明 css 的加载阻塞 js 的执行。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>css阻塞js的执行<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span> <span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;before css&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">var</span> startDate = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span></span></span><br><span class="line"><span class="tag">      <span class="attr">href</span>=<span class="string">&quot;https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.css&quot;</span></span></span><br><span class="line"><span class="tag">      <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>css阻塞js的执行<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">      <span class="keyword">var</span> endDate = <span class="keyword">new</span> <span class="title class_">Date</span>();</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;after css&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;经过了&quot;</span> + (endDate - startDate) + <span class="string">&quot;ms&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">    </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648392737592-9cb226b5-11ab-4d29-a5de-0cf506182acd.png#averageHue=%2327292c&clientId=ua8f6eda5-be86-4&from=paste&height=101&id=u587170c1&originHeight=202&originWidth=760&originalType=binary&ratio=1&rotation=0&showTitle=false&size=21662&status=done&style=none&taskId=u199a1f98-e5e9-4e6d-9195-4952435ecbe&title=&width=380" alt="image.png"><br>可以看出，bootstrap 样式文件加载了 111964ms，加载完成后才执行了后面的 JS。</p>
-<p>JS 与 HTML，用一张图来表示：<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648480112360-07b5c701-1440-43ed-be7f-97145a5d62eb.png#averageHue=%23fbfafa&clientId=uf3f7a4ad-71e8-4&from=paste&height=540&id=ub217d2d5&originHeight=1463&originWidth=1041&originalType=binary&ratio=1&rotation=0&showTitle=false&size=120198&status=done&style=none&taskId=u571505d0-04bb-4c34-802c-c7bfa42939e&title=&width=384" alt="image.png"><br>稍微解释一下这张图：<br>解析 HTML 时，如果发现了 script 元素，<strong>JS 的加载和解析都会阻塞 HTML 的解析</strong>，等 script 加载以及执行完毕再解析 HTML。这就是我们将 script 放在 DOM 结构后面的原因。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326697875.png" alt="pic.1708326697875"><br>可以看出，bootstrap 样式文件加载了 111964ms，加载完成后才执行了后面的 JS。</p>
+<p>JS 与 HTML，用一张图来表示：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326704654.png" alt="pic.1708326704654"><br>稍微解释一下这张图：<br>解析 HTML 时，如果发现了 script 元素，<strong>JS 的加载和解析都会阻塞 HTML 的解析</strong>，等 script 加载以及执行完毕再解析 HTML。这就是我们将 script 放在 DOM 结构后面的原因。</p>
 <p>那是不是说 script 标签必须放在 DOM 结构后面？并不是，因为可以给 script 标签添加 async 或 defre 属性。</p>
 <p><strong>带 async 属性的 script:</strong></p>
 <p>async 表示异步，即用异步的方式加载脚本，render 进程会开启一个新的线程来加载 JS，所以<strong>JS 的加载不会阻塞 HTML 的解析，但 JS 的执行仍然会阻塞 HTML 的解析。</strong>等 JS 执行完毕后，才继续解析 HTML。</p>
@@ -268,7 +268,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" target="_self">
+              <a href="/2024/02/07/%E9%97%AD%E5%8C%85/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -277,7 +277,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:28:49
+              2024-02-19 15:11:52
             </span>
             
                   <span class="post-tags">
@@ -294,7 +294,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
+              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -615,29 +615,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E6%25B5%258F%25E8%25A7%2588%25E5%2599%25A8%25E5%25A6%2582%25E4%25BD%2595%25E6%25B8%25B2%25E6%259F%2593%25E9%25A1%25B5%25E9%259D%25A2%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

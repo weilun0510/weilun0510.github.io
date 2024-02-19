@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:34:49
+          2024-02-19 15:05:40
         </span>
         
               <span class="post-tags">
@@ -175,7 +175,9 @@
 </ul>
 <p>在 node.js 中约定了一个环境变量 <code>NODE_ENV</code>，用于环境区分。</p>
 <p>未定义任何环境变量时，<code>production</code>表示线上环境，<code>development</code>表示开发环境。</p>
-<p>:::info<br>线上环境：<strong>线上环境不等于生产环境</strong>。在未定义其他环境时，线上环境表示生产环境；定义了其他环境（比如测试环境）时，线上环境表示除开发环境的其他环境。<br>:::</p>
+<blockquote>
+<p>线上环境：<strong>线上环境不等于生产环境</strong>。在未定义其他环境时，线上环境表示生产环境；定义了其他环境（比如测试环境）时，线上环境表示除开发环境的其他环境。</p>
+</blockquote>
 <p>一般我们还会有一个测试环境，通常情况下都是把线上接口改为测试接口，但是这样容易出错。<br>为了避免手动修改接口，我们可以定义一个测试环境<code>test</code>。</p>
 <h1 id="umi-环境变量配置"><a href="#umi-环境变量配置" class="headerlink" title="umi 环境变量配置"></a>umi 环境变量配置</h1><h2 id="UMI-ENV"><a href="#UMI-ENV" class="headerlink" title="UMI_ENV"></a>UMI_ENV</h2><p>当指定 UMI_ENV 时，会<strong>额外加载</strong>指定值的配置文件。参考: <a target="_blank" rel="noopener" href="https://umijs.org/docs/guides/env-variables#umi_env">https://umijs.org/docs/guides/env-variables#umi_env</a></p>
 <p>多了测试环境，这时候的<code>production</code>可能会包含<code>test</code>，所以我们再定义一个 online，用<code>online</code>表示生产。<br>:::info<br>注意：umi4.x 版本里，自定义变量时不能用 prod 表示生产环境，所以这里使用 online .<br>:::</p>
@@ -189,7 +191,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+              <a href="/2024/02/07/%E5%B0%81%E8%A3%85%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -198,7 +200,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:34:49
+              2024-02-19 15:05:40
             </span>
             
                   <span class="post-tags">
@@ -215,7 +217,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E5%B0%81%E8%A3%85%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
+              <a href="/2024/02/07/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -536,29 +538,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%92%8C%E7%BA%BF%E4%B8%8A%E7%8E%AF%E5%A2%83 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E5%25BC%2580%25E5%258F%2591%25E7%258E%25AF%25E5%25A2%2583%25E5%2592%258C%25E7%25BA%25BF%25E4%25B8%258A%25E7%258E%25AF%25E5%25A2%2583%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%92%8C%E7%BA%BF%E4%B8%8A%E7%8E%AF%E5%A2%83/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

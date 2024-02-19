@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:35:38
+          2024-02-19 17:22:39
         </span>
         
               <span class="post-tags">
@@ -187,18 +187,14 @@
 <p>可以添加<code>change</code>事件监听读取文件对象列表<code>event.target.files</code>：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file-input&quot;</span>);</span><br><span class="line">fileInput.<span class="title function_">addEventListener</span>(<span class="string">&quot;change&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> files = e.<span class="property">target</span>.<span class="property">files</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>File 对象:<br><img src="https://cdn.nlark.com/yuque/0/2023/png/12749457/1682502402804-0cf1c235-78ab-45ed-a5a2-c2c78cbfd5f5.png#averageHue=%23fefdfd&clientId=u436eb6bf-eea4-4&from=paste&height=145&id=JsiCS&originHeight=194&originWidth=589&originalType=binary&ratio=2&rotation=0&showTitle=false&size=50182&status=done&style=none&taskId=ud984bdfc-168b-4369-bacd-2080ba32302&title=&width=441.5" alt="image.png"></p>
+<p>File 对象:<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334253215.png" alt="pic.1708334253215"></p>
 <p>文件上传前，可以通过<code>File</code>对象，验证文件大小、类型等信息，决定是否进行下一步，比如验证文件大小。</p>
 <h1 id="验证文件大小"><a href="#验证文件大小" class="headerlink" title="验证文件大小"></a>验证文件大小</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file-input&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;upload-btn&quot;</span>&gt;</span>Upload File<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file-input&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> uploadBtn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;upload-btn&quot;</span>);</span><br><span class="line"></span><br><span class="line">uploadBtn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> selectedFile = fileInput.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">const</span> fileSizeLimit = <span class="number">5</span> * <span class="number">1024</span>; <span class="comment">// 5KB in bytes</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (selectedFile.<span class="property">size</span> &gt; fileSizeLimit) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(</span><br><span class="line">      <span class="string">&quot;Selected file exceeds the size limit of 5 KB. Please select a smaller file.&quot;</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// If file size is within the limit, proceed with file upload</span></span><br><span class="line">  <span class="comment">// Your code for uploading the file to the server goes here</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
-<p>:::info<br>获取 files 的方式：</p>
-<ul>
-<li>在 input 元素的 change 事件中，可通过 e.target.files 获取；</li>
-<li>或者通过 input 元素直接获取，如：document.getElementById(‘file-input’).files;</li>
-</ul>
-<p>也就是说<code>e.target === fileEl</code><br>:::</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">获取 files 的方式：</span><br><span class="line"></span><br><span class="line">- 在 input 元素的 change 事件中，可通过 e.<span class="property">target</span>.<span class="property">files</span> 获取；</span><br><span class="line">- 或者通过 input 元素直接获取，如：<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;file-input&#x27;</span>).<span class="property">files</span>;</span><br><span class="line"></span><br><span class="line">也就是说<span class="string">`e.target === fileEl`</span></span><br></pre></td></tr></table></figure>
+
 <h1 id="显示读取进度（下载文件的场景）"><a href="#显示读取进度（下载文件的场景）" class="headerlink" title="显示读取进度（下载文件的场景）"></a>显示读取进度（下载文件的场景）</h1><p><strong>FileReader.onprogress</strong><br><code>pregress</code>事件，在读取<code>Blob</code>时触发。在下载文件并显示进度这个场景下能够派上用场。</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file-input&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">id</span>=<span class="string">&quot;progress-label&quot;</span> <span class="attr">for</span>=<span class="string">&quot;progress&quot;</span>&gt;</span>Upload File<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">progress</span> <span class="attr">id</span>=<span class="string">&quot;progress&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span> <span class="attr">max</span>=<span class="string">&quot;100&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">progress</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;read-blob&quot;</span>&gt;</span>读取Blob<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -221,8 +217,8 @@
 <h1 id="Content-Type（表单的-enctype-属性）"><a href="#Content-Type（表单的-enctype-属性）" class="headerlink" title="Content-Type（表单的 enctype 属性）"></a>Content-Type（表单的 enctype 属性）</h1><p>当 method 属性值为 post 时，enctype 就是将表单的内容提交给服务器的数据编码类型。可能的取值有：</p>
 <ul>
 <li>application&#x2F;x-www-form-urlencoded：未指定属性时的默认值。</li>
-<li>multipart&#x2F;form-data：<strong>当表单包含 type&#x3D;file 的 <strong><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input"><strong><input></strong></a></strong> 元素时使用此值</strong>。</li>
-<li>text&#x2F;plain：出现于 HTML5，用于调试。这个值可被 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button"><button></a>、<a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input/submit"><input type="submit"></a> 或 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input/image"><input type="image"></a> 元素上的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button#formenctype">formenctype</a> 属性覆盖。</li>
+<li>multipart&#x2F;form-data：<strong>当表单包含 type&#x3D;file input 元素时使用此值</strong>。</li>
+<li>text&#x2F;plain：出现于 HTML5，用于调试。这个值可被 <code>&lt;button&gt;</code>、<code>&lt;input type=&quot;submit&quot;&gt;</code> 或 <code>&lt;input type=&quot;image&quot;&gt;</code> 元素上的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button#formenctype">formenctype</a> 属性覆盖。</li>
 </ul>
 <h2 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application&#x2F;x-www-form-urlencoded"></a>application&#x2F;x-www-form-urlencoded</h2><p>这种数据编码类型只支持传输文本数据</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded;charset=utf-8</span><br><span class="line"></span><br><span class="line">title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</span><br></pre></td></tr></table></figure>
@@ -276,7 +272,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" target="_self">
+              <a href="/2024/02/07/%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -285,7 +281,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:35:38
+              2024-02-19 17:22:39
             </span>
             
                   <span class="post-tags">
@@ -302,7 +298,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E5%BE%AE%E4%BF%A1%E7%BD%91%E9%A1%B5%E5%88%86%E4%BA%AB%E3%80%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%A2%98%E3%80%81%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%9B%BE%E7%89%87%E3%80%8D/" target="_self">
+              <a href="/2024/02/07/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -623,29 +619,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E6%96%87%E4%BB%B6%E7%AF%87 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E6%2596%2587%25E4%25BB%25B6%25E7%25AF%2587%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E6%96%87%E4%BB%B6%E7%AF%87/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>

@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:04:10
+          2024-02-19 15:15:20
         </span>
         
               <span class="post-tags">
@@ -181,7 +181,7 @@
 <p>重点理解 <strong>基础数据类型的值，是不可变的</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = a;</span><br><span class="line">b++;</span><br></pre></td></tr></table></figure>
 
-<p>将 a 赋予 b，这时候 a 和 b 是等价的。随后 b++，b 的值被改变了，a 的值却没有改变。这意味着 a b 的等价，并不表示他们是同一个值。也就是说，a 赋予 b 的时候，重新给 b 分配了一块内存空间。因此我们说，<strong>基础数据类型，是按值访问的。</strong>用图表示<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648965873918-a8a1f82e-97da-4e0f-9c9f-76a47460e2fb.png#averageHue=%23f8f8f8&clientId=u173bb2f8-5750-4&from=ui&id=uc76aaeb4&originHeight=600&originWidth=1314&originalType=binary&ratio=1&rotation=0&showTitle=false&size=62970&status=done&style=none&taskId=u429c8594-76b3-41d9-860b-25f64c50578&title=" alt="基础数据类型的赋值.png"><br><strong>基础数据类型的比较，是值在比较</strong></p>
+<p>将 a 赋予 b，这时候 a 和 b 是等价的。随后 b++，b 的值被改变了，a 的值却没有改变。这意味着 a b 的等价，并不表示他们是同一个值。也就是说，a 赋予 b 的时候，重新给 b 分配了一块内存空间。因此我们说，<strong>基础数据类型，是按值访问的。</strong>用图表示<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326860642.png" alt="pic.1708326860642"><br><strong>基础数据类型的比较，是值在比较</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">1</span>;</span><br><span class="line">a === b; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
 <p>当 a 和 b 在比较的时候，本质上是值在比较。</p>
@@ -191,7 +191,7 @@
 <h2 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h2><p>与基础数据类型不同，<strong>引用类型的值是可以被改变的</strong></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> book = &#123;</span><br><span class="line">  <span class="attr">title</span>: <span class="string">&quot;JavaScript 核心进阶&quot;</span>,</span><br><span class="line">  <span class="attr">author</span>: <span class="string">&quot;这波能反杀&quot;</span>,</span><br><span class="line">  <span class="attr">date</span>: <span class="string">&quot;2020.08.02&quot;</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> b2 = book;</span><br><span class="line">b2.<span class="property">author</span> = <span class="string">&quot;反杀&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(book); <span class="comment">// &#123;title: &quot;JavaScript 核心进阶&quot;, author: &quot;反杀&quot;, date: &quot;2020.08.02&quot;&#125;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b2); <span class="comment">// &#123;title: &quot;JavaScript 核心进阶&quot;, author: &quot;反杀&quot;, date: &quot;2020.08.02&quot;&#125;</span></span><br></pre></td></tr></table></figure>
 
-<p>我们发现，修改变量 b2 的值，变量 book 也被修改了。这是因为执行 b2&#x3D;book 时，b2 拷贝的是 book 的地址，所以他们指向的是同样的引用类型值。我们可称之为<strong>浅拷贝。</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648966145919-c6ef1aca-57df-4d10-beae-da618c8d1d78.png#averageHue=%23f6f6f6&clientId=u173bb2f8-5750-4&from=ui&id=u95e243a2&originHeight=570&originWidth=1222&originalType=binary&ratio=1&rotation=0&showTitle=false&size=74156&status=done&style=none&taskId=u1b5b3ea0-c14c-4837-ade7-14a97dbd8ec&title=" alt="引用数据类型的赋值.png"></p>
+<p>我们发现，修改变量 b2 的值，变量 book 也被修改了。这是因为执行 b2&#x3D;book 时，b2 拷贝的是 book 的地址，所以他们指向的是同样的引用类型值。我们可称之为<strong>浅拷贝。</strong><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326879449.png" alt="pic.1708326879449"></p>
 <p>所以说，<strong>引用数据类型，是按引用访问的</strong>。这里的引用，指的就是内存中的地址。</p>
 <p><em>地址：我们常说的地址，其实指的是内存中的首地址，因为一个引用对象占多少个内存格子是不确定的。内存管理器知道这个引用的大小，那么就能找到首尾地址。</em></p>
 <p><strong>引用类型的比较，本质上是他们的内存地址在比较</strong>。</p>
@@ -246,7 +246,7 @@
 </tbody></table>
 <p>JS 中，内存分为栈内存和堆内存。栈内存与堆内存本身没有区别，只因为存取方式的差异，而有了不同。</p>
 <p>使用栈内存时，从地址高位开始分配内存空间。使用堆内存时，从地址低位开始分配。</p>
-<p>:::info<br>内存中的地址本应该用 16 进制表示，为了便于理解，此处用 10 进制表示。<br>:::<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648650987738-89f6c559-3b75-4fe8-b8ca-610b6933b5af.png#averageHue=%23f9f9f9&clientId=u061c371c-ac74-4&from=ui&id=u357b5e5a&originHeight=1376&originWidth=1356&originalType=binary&ratio=1&rotation=0&showTitle=false&size=158913&status=done&style=none&taskId=ud4e130e1-e65d-4f67-b1fa-0dd5cad88cc&title=" alt="内存分配.png"></p>
+<p>:::info<br>内存中的地址本应该用 16 进制表示，为了便于理解，此处用 10 进制表示。<br>:::<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326895926.png" alt="pic.1708326895926"></p>
 <h3 id="内存空间"><a href="#内存空间" class="headerlink" title="内存空间"></a>内存空间</h3><p>Bit-比特<br>Byte-字节 计算机数据类型的最基本单位。1 Byte &#x3D; 8 Bits<br>KB-千字节<br>MB-兆字节<br>GB-吉字节<br>TB-太字节</p>
 <p>1 GM &#x3D; 1024 MB<br>1 TB &#x3D; 1024 GB</p>
 <p>英文字母 占一个字节空间<br>中文汉字 占两个字节空间<br>英文标点符号 占一个字节空间<br>中文标点符号 占两个字节</p>
@@ -264,7 +264,7 @@
 <h1 id="基础数据结构"><a href="#基础数据结构" class="headerlink" title="基础数据结构"></a>基础数据结构</h1><p>基础数据结构主要介绍一下栈、堆、队列</p>
 <h2 id="栈"><a href="#栈" class="headerlink" title="栈"></a>栈</h2><p>说到栈，其实有两种场景，栈数据结构和栈内存空间。</p>
 <p>第一种场景，<strong>栈数据结构：</strong>表达的是对数据的一种存取方式。</p>
-<p>把栈数据结构的存取方式，通过乒乓球盒子来分析<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1648657248895-4710a777-e0f5-4d00-9492-662e32bf4d21.png#averageHue=%23f6f6f6&clientId=u061c371c-ac74-4&from=ui&height=524&id=u5cd35c04&originHeight=1098&originWidth=1430&originalType=binary&ratio=1&rotation=0&showTitle=false&size=159796&status=done&style=none&taskId=u3ca4a68a-7ce6-41cd-8210-d3a7f0aceb3&title=&width=682" alt="栈存取方式.png"><br>乒乓球依次入栈，5 号球位于最顶层，他一定是最后放进去的。1 号球位于最底层，你要想拿 1 号球，必须将上面所有乒乓球取出来之后才能取出。但 1 号球是最先放入盒子的。</p>
+<p>把栈数据结构的存取方式，通过乒乓球盒子来分析<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326910241.png" alt="pic.1708326910241"><br>乒乓球依次入栈，5 号球位于最顶层，他一定是最后放进去的。1 号球位于最底层，你要想拿 1 号球，必须将上面所有乒乓球取出来之后才能取出。但 1 号球是最先放入盒子的。</p>
 <p>这种存取方式与栈数据结构如出一辙。特点可以总结为<strong>先进后出，后进先出（LIFO Last in, First Out）。</strong></p>
 <p>javaScript 中，数组提供了两个栈方法来应对这种存取方式。</p>
 <p><strong>push</strong>：向数组末尾添加元素「进栈方法」<br><strong>pop</strong>：删除数组末尾元素「出栈方法」</p>
@@ -342,7 +342,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" target="_self">
+              <a href="/2024/02/07/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -351,7 +351,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:04:10
+              2024-02-19 15:15:20
             </span>
             
                   <span class="post-tags">
@@ -689,29 +689,6 @@
 
 
         
-  
-    <div class="share-icon tools-bar-item">
-      <a href="javascript: void(0)" id="share-icon">
-        <i class="iconfont iconshare"></i>
-      </a>
-      <div class="share-content hidden">
-        
-          <a class="share-item" href="https://twitter.com/intent/tweet?text=' + %E5%86%85%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84 + '&url=' + https%3A%2F%2Fwww.weilunblog.top%2F2024%2F02%2F07%2F%25E5%2586%2585%25E5%25AD%2598%25E4%25B8%258E%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%2F + '" target="_blank" title="Twitter">
-            <i class="iconfont icon-twitter"></i>
-          </a>
-        
-        
-          <a class="share-item" href="https://www.facebook.com/sharer.php?u=https://www.weilunblog.top/2024/02/07/%E5%86%85%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_blank" title="Facebook">
-            <i class="iconfont icon-facebooksquare"></i>
-          </a>
-        
-      </div>
-    </div>
-  
-  
-<script src="/js/shares.js"></script>
-
-
 
       </div>
     </div>
