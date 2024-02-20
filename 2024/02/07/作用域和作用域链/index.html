@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:13:17
+          2024-02-20 13:07:05
         </span>
         
               <span class="post-tags">
@@ -199,7 +199,7 @@
 <h2 id="函数作用域"><a href="#函数作用域" class="headerlink" title="函数作用域"></a>函数作用域</h2><p>函数表达式或函数声明让花括号具备作用域，我们称之为函数作用域。函数作用域中的变量与方法，只能在下层子作用域中被访问，不能被其他不相关的作用域访问。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;do something by &quot;</span>, i);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(i); <span class="comment">// i == 5</span></span><br></pre></td></tr></table></figure>
 
-<p>这种方式并不会有作用域的限制，i 挂载在全局对象下，循环结束后，i 还能被访问。<br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649074012010-d14ce9ba-4f76-4a8c-aeda-36e57175532b.png#averageHue=%232b2d30&clientId=ue04e5b4f-1240-4&from=paste&height=295&id=ud3c39cb9&originHeight=589&originWidth=650&originalType=binary&ratio=1&rotation=0&showTitle=false&size=177280&status=done&style=none&taskId=u870feacb-d780-4e41-9040-700f6cf5eb8&title=&width=325" alt="image.png"></p>
+<p>这种方式并不会有作用域的限制，i 挂载在全局对象下，循环结束后，i 还能被访问。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405619882.png" alt="pic.1708405619882"></p>
 <h2 id="模拟块级作用域"><a href="#模拟块级作用域" class="headerlink" title="模拟块级作用域"></a>模拟块级作用域</h2><p>在没有块级作用域之前，我们可以使用自执行函数模拟块级作用域</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.<span class="property">length</span>; i++) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;do something by &quot;</span>, i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(i); <span class="comment">// i is not defined</span></span><br></pre></td></tr></table></figure>
 
@@ -238,7 +238,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/web3%E7%BB%BC%E8%BF%B0/" target="_self">
+              <a href="/2024/02/07/%E5%86%85%E5%AD%98%E4%B8%8E%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -247,7 +247,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:13:17
+              2024-02-20 13:07:05
             </span>
             
                   <span class="post-tags">

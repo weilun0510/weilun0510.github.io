@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:12:18
+          2024-02-20 13:05:39
         </span>
         
               <span class="post-tags">
@@ -190,7 +190,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 操作原型的方法</span></span><br><span class="line"><span class="keyword">const</span> parentObj = &#123;</span><br><span class="line">  <span class="attr">add</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">a</span> + <span class="variable language_">this</span>.<span class="property">b</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Object.create: 接收一个现有对象为新对象的__proto__，第二参数为属性描述符对象</span></span><br><span class="line"><span class="keyword">const</span> newObj = <span class="title class_">Object</span>.<span class="title function_">create</span>(parentObj, &#123;</span><br><span class="line">  <span class="attr">a</span>: &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="number">10</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">b</span>: &#123;</span><br><span class="line">    <span class="attr">value</span>: <span class="number">20</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(newObj.<span class="title function_">add</span>()); <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> childObj = &#123;</span><br><span class="line">  <span class="attr">a</span>: <span class="number">10</span>,</span><br><span class="line">  <span class="attr">b</span>: <span class="number">20</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 设置一个指定对象的原型</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">setPrototypeOf</span>(childObj, parentObj);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(childObj.<span class="title function_">add</span>()); <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取指定对象的原型</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Object</span>.<span class="title function_">getPrototypeOf</span>(childObj)); <span class="comment">// &#123;add: f&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 返回一个布尔值，用于检测一个对象的原型是否在另一个对象的原型链上</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(parentObj.<span class="title function_">isPrototypeOf</span>(childObj)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
 
-<p>实例、原型对象、构造函数关系图：<br><img src="https://cdn.nlark.com/yuque/0/2022/jpeg/12749457/1650167893115-f8fed870-3d91-4f36-9b44-736b47523e94.jpeg"></p>
+<p>实例、原型对象、构造函数关系图：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405528743.png" alt="pic.1708405528743"></p>
 <h1 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h1><p>定义：<br>每一个对象都包含一个原型属性，用于关联另一个对象，关联后就能够使用那个对象的属性和方法；对象之前通过原型关联在一起，就好比一条锁链将一个个对象连接在一起，最终形成了一条原型链。</p>
 <p>属性查找机制：<br>当查找对象属性时，如果实例对象自身不存在该属性，就从原型链往上一级查找，如果还没找到就再往上一级，直至最顶级的原型对象 Object.prototype，如果还没找到则返回 undefined</p>
 
@@ -199,7 +199,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" target="_self">
+              <a href="/2024/02/07/%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -208,7 +208,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:12:18
+              2024-02-20 13:05:39
             </span>
             
                   <span class="post-tags">
@@ -225,7 +225,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" target="_self">
+              <a href="/2024/02/07/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8%E6%A0%88/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>

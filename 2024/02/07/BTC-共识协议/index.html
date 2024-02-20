@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:45:45
+          2024-02-20 13:08:08
         </span>
         
               <span class="post-tags">
@@ -178,7 +178,7 @@
 <li>如何验证交易是否有效？如何防止双花攻击？</li>
 </ul>
 <p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
-<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://cdn.nlark.com/yuque/0/2023/png/12749457/1684484560550-8a13e8d3-a1dd-4781-9ca0-e83da7e55294.png#averageHue=%23445c53&clientId=u592496b2-cd81-4&from=paste&height=453&id=u1567b2cc&originHeight=906&originWidth=1606&originalType=binary&ratio=2&rotation=0&showTitle=false&size=987580&status=done&style=none&taskId=u4f91baa0-4e4d-496b-b87f-280aa281a6b&title=&width=803" alt="image.png"></p>
+<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
 <p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
 <p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
 <p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
@@ -210,7 +210,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/" target="_self">
+              <a href="/2024/02/07/K%E7%BA%BF%E5%9B%BE/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -219,7 +219,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:45:45
+              2024-02-20 13:08:08
             </span>
             
                   <span class="post-tags">
@@ -236,7 +236,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/" target="_self">
+              <a href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>

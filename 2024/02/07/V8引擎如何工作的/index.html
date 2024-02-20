@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-07 16:18:40
+          2024-02-20 13:21:32
         </span>
         
               <span class="post-tags">
@@ -170,7 +170,7 @@
       </div>
       <div class="markdown-body">
         <p>v8 是谷歌开源的 JS 引擎，用于执行 JS 代码。清楚 JS 代码的执行顺序，有助于我们了解函数调用栈、事件循环等概念。</p>
-<h1 id="V8-的工作流程图"><a href="#V8-的工作流程图" class="headerlink" title="V8 的工作流程图"></a>V8 的工作流程图</h1><p><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649077586064-8b06730f-7237-44ca-8968-edd3d8a4b7de.png#clientId=uab2708d8-ffa1-4&from=ui&id=u465b8126&originHeight=672&originWidth=1338&originalType=binary&ratio=1&size=68525&status=done&style=none&taskId=u6705667a-f91a-4f45-a900-c44f748d47f" alt="v8工作流程图.png"><br>主要了解其中 4 个重要的概念</p>
+<h1 id="V8-的工作流程图"><a href="#V8-的工作流程图" class="headerlink" title="V8 的工作流程图"></a>V8 的工作流程图</h1><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406473535.png" alt="pic.1708406473535"><br>主要了解其中 4 个重要的概念</p>
 <h1 id="1-Scanner"><a href="#1-Scanner" class="headerlink" title="1.Scanner"></a>1.Scanner</h1><p>scanner 表示扫描器，用于对纯文本 JS 代码进行词法分析。它会将代码分析为 tokens。tokens 表示不能再分割的最小单位，可能是单是字符，可能是一串字符串。<br>例如</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
 
@@ -192,7 +192,7 @@
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">foo1</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;foo1&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">foo2</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;foo2&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">foo2</span>();</span><br></pre></td></tr></table></figure>
 
-<p>对于 foo1 来说，函数并没有声明，那么生成 ATS 并没有意义。所以 foo1 采用的就是预解析，可以观察到 foo1 函数作用域的信息已经生成了。也就是说，<strong>作用域的范围信息，在预解析阶段就已经确定了。</strong><br><img src="https://cdn.nlark.com/yuque/0/2022/png/12749457/1649078978583-747056f8-fda2-4c9b-b533-f8f0815ee54a.png#clientId=u23244388-5d74-4&from=paste&height=324&id=u63936f5e&originHeight=647&originWidth=689&originalType=binary&ratio=1&size=196904&status=done&style=none&taskId=ufea556fc-5926-4d9e-9f3d-8eb3c76d3d6&width=344.5" alt="image.png"></p>
+<p>对于 foo1 来说，函数并没有声明，那么生成 ATS 并没有意义。所以 foo1 采用的就是预解析，可以观察到 foo1 函数作用域的信息已经生成了。也就是说，<strong>作用域的范围信息，在预解析阶段就已经确定了。</strong><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406487925.png" alt="pic.1708406487925"></p>
 <h2 id="全量解析"><a href="#全量解析" class="headerlink" title="全量解析"></a>全量解析</h2><p>全量解析会解析当前作用域的所有代码。会生成 AST，并且进一步明确更多的信息。</p>
 <ul>
 <li>解析给使用的代码</li>
@@ -245,7 +245,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-07 16:18:40
+              2024-02-20 13:21:32
             </span>
             
                   <span class="post-tags">
@@ -262,7 +262,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/Promise/" target="_self">
+              <a href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
