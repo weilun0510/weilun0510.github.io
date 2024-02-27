@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      浏览器的进程与线程 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">浏览器的进程与线程</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/html/" title="html">
+                    #html
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="什么是进程"><a href="#什么是进程" class="headerlink" title="什么是进程"></a>什么是进程</h1><p>操作系统上有很多 app，app 就是应用程序，应用程序就是一个软件包，一个代码集合。而应用程序是静态的，想要运行应用程序，操作系统就会对应的启动一个进程，负责该程序的运行。</p>
+<p>把浏览器看做一个大集团，那进程就是集团下的某一个工厂。</p>
+<p>总结进程有以下特点：</p>
+<ul>
+<li>动态性：进程的实质是程序的一次执行过程</li>
+<li>并发性：集团可以有多个工厂，浏览器也可以同时运行多个进程</li>
+<li>独立性：工厂是独立的，进程是一个能独立运行的基本单位</li>
+<li>异步性：因为是独立的，因此可以按照自己逻辑不可预知的运行</li>
+<li>协同性：应用程序之间能够协作完成一些任务</li>
+</ul>
+<h1 id="浏览器进程"><a href="#浏览器进程" class="headerlink" title="浏览器进程"></a>浏览器进程</h1><p>与操作系统一样，浏览器也有一个任务管理器，每一个任务，都是独立的进程。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326642981.png" alt="pic.1708326642981"></p>
+<p>浏览器主要包括如下进程：</p>
+<h2 id="一、浏览器主进程"><a href="#一、浏览器主进程" class="headerlink" title="一、浏览器主进程"></a>一、浏览器主进程</h2><p>浏览器只会创建一个主进程，它主要负责：</p>
+<ul>
+<li>浏览器界面提供的交互，如前进、后退、标签栏、设置等</li>
+<li>各页面进程的管理，如创建、关闭等</li>
+<li>网络资源的管理，如下载内容、缓存等</li>
+</ul>
+<h2 id="二、网页进程"><a href="#二、网页进程" class="headerlink" title="二、网页进程"></a>二、网页进程</h2><p><strong>网页进程</strong>：浏览器网页的渲染和 JS 执行在一个单独的进程中执行。这个进程也称为<strong>render 进程</strong>。每启动一个页面，都会启动一个 render 进程。</p>
+<p>说到网页进程，又引入了线程的概念。</p>
+<p>如果说进程是一个工厂，那线程就是工厂中的流水线。一个工厂的正常运行，往往需要多个流水线通力合作才能完成。在网页进程中也是一样，想要网页进程能正常渲染运行，也需要多个线程参与合作。</p>
+<p>网页的渲染运行，有如下线程参</p>
+<h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><p>GUI(Graphical User Interface)表示图形用户界面的意思，render tree 的渲染。用一张图看一下渲染路径<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326653199.png" alt="pic.1708326653199"><br>HTML 会解析出 DOM（Document Object Model）树，样式文件会解析出 CSSOM(CSS Object Model)树，在 Attachment 环节，GUI 线程将 DOM 树与 CSSOM 树合并在一起，生成渲染树(render tree)，并将渲染树绘制到页面。</p>
+<h3 id="JS-引擎线程"><a href="#JS-引擎线程" class="headerlink" title="JS 引擎线程"></a>JS 引擎线程</h3><p>浏览器是不支持直接运行 JS 代码的，所以需要在浏览器中植入一个内核，来支持 JS 的解析和运行。在 chrome 中，这个内核叫 V8。</p>
+<p>一个网页只会启动一个 JS 线程来处理 JS 脚本。</p>
+<p>JS 线程是单线程。这点不难理解，如果是多线程，一个线程删除 DOM，一个线程新增 DOM，浏览器要如何处理呢？</p>
+<p>还有一点，<strong>JS 线程和 GUI 线程是互斥的</strong>。所以在渲染路径阶段，存在阻塞问题。</p>
+<h3 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h3><p>专门负责 setTimeout&#x2F;setInterval 的逻辑。应该结合事件循环中的队列来理解定时器线程的执行过程。</p>
+<h3 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h3><p>当我们鼠标点击与滑动、键盘的输入等都会触发一些事件，而这些事件的触发逻辑的处理，就是依靠事件触发线程来帮助浏览器完成。</p>
+<p>该线程也会把事件的逻辑放入队列中，等待 JS 引擎的处理。在事件循环中，事件触发为宏任务。</p>
+<h3 id="http-线程"><a href="#http-线程" class="headerlink" title="http 线程"></a>http 线程</h3><p>使用无状态短链接的 http 请求，在应用层基于 http 协议的基础之上，达到与服务端进行通信的目的。</p>
+<p>该线程的触发罗家，不是在 JS 引擎线程之中，过程是异步的。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E9%97%AD%E5%8C%85/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/html/" title="html">
+                        #html
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E7%A8%8B"><span class="toc-text">什么是进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B"><span class="toc-text">浏览器进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B"><span class="toc-text">一、浏览器主进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BD%91%E9%A1%B5%E8%BF%9B%E7%A8%8B"><span class="toc-text">二、网页进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GUI-%E6%B8%B2%E6%9F%93%E7%BA%BF%E7%A8%8B"><span class="toc-text">GUI 渲染线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS-%E5%BC%95%E6%93%8E%E7%BA%BF%E7%A8%8B"><span class="toc-text">JS 引擎线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E8%A7%A6%E5%8F%91%E5%99%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">定时触发器线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%BA%BF%E7%A8%8B"><span class="toc-text">事件触发线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E7%BA%BF%E7%A8%8B"><span class="toc-text">http 线程</span></a></li></ol></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

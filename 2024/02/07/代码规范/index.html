@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      代码规范 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">代码规范</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                    #项目
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="eslint"><a href="#eslint" class="headerlink" title="eslint"></a>eslint</h1><p>通过配置<code>.eslintrc.*</code>指定团队代码规范。在编码过程中，对于不规范的代码能够进行提示，帮助开发者更正代码。同时，提供 auto-fix 能力。<br>auto-fix 能够修复的问题比较有限，无法修复较大变动的规范问题，如：单行不能超过 80 个字符。</p>
+<h1 id="prettier"><a href="#prettier" class="headerlink" title="prettier"></a>prettier</h1><p>prettier 是什么？</p>
+<p>prettier 能根据<code>.eslintrc.*</code>的约定，自动格式化代码。具有比 eslint auto-fix 更加强大的代码修复能力。</p>
+<p>配置 prettier 的几种方式：</p>
+<p>可以使用 vscode settings.json、prettier 配置文件或.editorconfig 文件。VSCode settings.json 是用来作为备用的，通常只用于非项目文件，不能用于 prettier CLI。建议你总是在项目中包含一个 prettier 配置文件，这将确保无论你以何种方式运行 prettier（通过 prettier-vscode 插件 or prettier CLI [prettier –single-quote ]），都将应用同样的格式化选项。<br>推荐使用 prettier 配置文件来设置格式化选项。如果你想将 prettier 的格式化选项应用于整个项目，只需在项目根目录下添加一个 prettier 配置文件即可。</p>
+<h2 id="配置-prettier"><a href="#配置-prettier" class="headerlink" title="配置 prettier"></a>配置 prettier</h2><p>所有的 prettier 配置项都可以直接在 settings.json 中配置，这些配置的默认值始终是 prettier 2.0 的默认值。</p>
+<p>一般我们需要<code>npm install prettier</code>进行安装，再进行使用，这里先不介绍如何使用，主要介绍下在 vs code 中的使用。</p>
+<h2 id="在-vs-code-中使用-prettier"><a href="#在-vs-code-中使用-prettier" class="headerlink" title="在 vs code 中使用 prettier"></a>在 vs code 中使用 prettier</h2><ul>
+<li><strong>在 vs code 应用商店安装 prettier 插件</strong></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325653485.png" alt="pic.1708325653485"></p>
+<ul>
+<li><strong>配置插件.prettierrc</strong></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">printWidth</span>: <span class="number">80</span>, <span class="comment">//一行的字符数，如果超过会进行换行，默认为80</span></span><br><span class="line">  <span class="attr">tabWidth</span>: <span class="number">2</span>, <span class="comment">//一个tab代表几个空格数，默认为2</span></span><br><span class="line">  <span class="attr">useTabs</span>: <span class="literal">false</span>, <span class="comment">//是否使用tab进行缩进，默认为false，表示用空格进行缩减</span></span><br><span class="line">  <span class="attr">singleQuote</span>: <span class="literal">false</span>, <span class="comment">//字符串是否使用单引号，默认为false，使用双引号</span></span><br><span class="line">  <span class="attr">semi</span>: <span class="literal">true</span>, <span class="comment">//行位是否使用分号，默认为true</span></span><br><span class="line">  <span class="attr">trailingComma</span>: <span class="string">&quot;none&quot;</span>, <span class="comment">//是否使用尾逗号，有三个可选值&quot;&lt;none|es5|all&gt;&quot;</span></span><br><span class="line">  <span class="attr">bracketSpacing</span>: <span class="literal">true</span>, <span class="comment">//对象大括号直接是否有空格，默认为true，效果：&#123; foo: bar &#125;</span></span><br><span class="line">  <span class="attr">parser</span>: <span class="string">&quot;babylon&quot;</span>, <span class="comment">//代码的解析引擎，默认为babylon，与babel相同。</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="eslint-与-prettier"><a href="#eslint-与-prettier" class="headerlink" title="eslint 与 prettier"></a>eslint 与 prettier</h1><p><strong>区别：</strong></p>
+<p>eslint 主要解决代码质量问题。代码风格问题并没有完全做完。而 Prettier 认为代码风格更重要，所以格式问题由 Prettier 处理。<br>但是 Prettier 的处理结果可能 eslint 不会完全满意，但绝对不丑，而且给予了部分配置项，可以通过<code>.prettierrc</code>文件修改。</p>
+<p><strong>冲突:</strong></p>
+<p>因为 eslint 和 prettier 一起使用会有冲突。可以通过<code>eslint-config-prettier</code> 这个插件解决。</p>
+<p><strong>eslint-config-prettier</strong>：用 prettier 的规则，覆盖掉 eslint:recommended 的部分规则。因此不会有冲突。<br><strong>eslint-plugin-prettier</strong>：将 prettier 的能力集成到 eslint。按照 prettier 的规则检查代码规范性，并进行修复。</p>
+<h1 id="editorconfig"><a href="#editorconfig" class="headerlink" title=".editorconfig"></a>.editorconfig</h1><p>开发者<strong>使用不同编辑器或系统时</strong>，将<code>.editorconfig</code>文件保存到项目根目录下，即可让项目下所有文件都<strong>统一编辑器代码风格。</strong><br>这个文件会覆盖编辑器的默认配置。<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lwming/p/15270816.html">https://www.cnblogs.com/lwming/p/15270816.html</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># <span class="attr">http</span>:<span class="comment">//editorconfig.org</span></span><br><span class="line">root = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*]</span><br><span class="line">charset = utf-<span class="number">8</span></span><br><span class="line">end_of_line = lf</span><br><span class="line">indent_size = <span class="number">2</span></span><br><span class="line">indent_style = space</span><br><span class="line">insert_final_newline = <span class="literal">true</span></span><br><span class="line">max_line_length = <span class="number">80</span></span><br><span class="line">trim_trailing_whitespace = <span class="literal">true</span></span><br><span class="line"></span><br><span class="line">[*.<span class="property">md</span>]</span><br><span class="line">max_line_length = <span class="number">0</span></span><br><span class="line">trim_trailing_whitespace = <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="vscode-settings-json"><a href="#vscode-settings-json" class="headerlink" title="vscode settings.json"></a>vscode settings.json</h1><p>settings.json 文件是 VS Code 众多“配置文件”中的一个，用来控制诸多工作项的配置。<br>按快捷键【Ctrl】+【,】，打开 VS Code 的设置界面，<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325666467.png" alt="pic.1708325666467"><br>可以看到设置内容有“用户” “工作区”两个分支，它们其实就分别对应了两个不同位置的 settings.json 文件，前者位于与用户相关联的特定文件夹中，后者就会位于你当前打开的文件夹的.vscode 子目录下。这两个 settings.json 文件其实都只会包含你修改过的设置项，而软件的全局默认设置则记录在软件安装目录中的某个位置，用户是不必理会的。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325675886.png" alt="pic.1708325675886"><br>这些配置文件具有工作区&gt;用户&gt;全局默认 的优先级，也就是前面的配置覆盖后面的，这样做的好处是你可以为不同工作区、不同用户做不同配置，而不会互相干扰。而当你不小心在某个工作区做了错误的配置导致软件不能正常工作时，只需删除相应的设置项，或者 settings.json 文件，即可恢复到用户配置或默认配置。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 工作区分支 .vscode/setting.json</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;prettier.printWidth&quot;</span><span class="punctuation">:</span> <span class="number">100</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.formatOnSave&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="comment">// 一个制表符等于的空格数。</span></span><br><span class="line">  <span class="attr">&quot;editor.tabSize&quot;</span><span class="punctuation">:</span> <span class="number">2</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;editor.fontSize&quot;</span><span class="punctuation">:</span> <span class="number">13</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>以“prettier”开头的配置项可以放在.prettierrc 文件中</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>对于 vscode 配置，setting.json 文件只会包含你「手动添加」过的设置项，在「设置页面中勾选」和「手动添加」设置项的效果是一致的。为了保持多项目使用同一份配置，建议将需要的配置『手动添加』到工作区分支的 setting.json 文件中，后续只需拷贝 setting.json 文件即可。</p>
+<p><strong>参考</strong><br><a target="_blank" rel="noopener" href="https://its401.com/article/yexudengzhidao/113249805">https://its401.com/article/yexudengzhidao/113249805</a><br>prettier: <a target="_blank" rel="noopener" href="https://juejin.cn/post/6914549928131821576">https://juejin.cn/post/6914549928131821576</a></p>
+<h1 id="Q-A"><a href="#Q-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h1><p><strong>修改了.gitignore 文件但无效？</strong><br>如果在开发的过程中添加或者修改了.gitignore 文件，那么它可能不会生效，因为一些需要忽略的文件已经加入了 git 的追踪列表中，可以通过清除 git 缓存来使新的.gitignore 生效。方法如下：<br>:::info<br>第一步：cd 到项目目录<br>第二步：git rm -r –cached .<br>第三步：git add .<br>第四步：git commit -m ‘update .gitignore’<br>:::</p>
+<p><a target="_blank" rel="noopener" href="https://its401.com/article/yexudengzhidao/113249805">
+</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E4%BD%9C%E7%94%A8%E5%9F%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                        #项目
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#eslint"><span class="toc-text">eslint</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#prettier"><span class="toc-text">prettier</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE-prettier"><span class="toc-text">配置 prettier</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%A8-vs-code-%E4%B8%AD%E4%BD%BF%E7%94%A8-prettier"><span class="toc-text">在 vs code 中使用 prettier</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#eslint-%E4%B8%8E-prettier"><span class="toc-text">eslint 与 prettier</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#editorconfig"><span class="toc-text">.editorconfig</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#vscode-settings-json"><span class="toc-text">vscode settings.json</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Q-A"><span class="toc-text">Q&amp;A</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

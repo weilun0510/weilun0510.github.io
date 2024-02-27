@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      BTC-共识协议 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">BTC-共识协议</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/web3/" title="web3">
+                    #web3
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="数字货币存在的问题"><a href="#数字货币存在的问题" class="headerlink" title="数字货币存在的问题"></a>数字货币存在的问题</h1><p>数字货币本身为带有签名的数据文件，可以进行复制。即：对用户来说，可以将同一货币花费两次。这就是“双花攻击”。<br>如何解决：对货币添加唯一编号（不可篡改），每次支付向货币发行单位查询真伪。该方法每次交易都依赖于第三方机构来判断货币真伪且防止双花攻击。这是一个典型的第三方中心化方案。<br>现实中，我们的交易往往依赖于一个可信的第三方机构（支付宝、微信），这个机构具有较高的可信度，有政府背书，所以可以采用这种方案。<br>但是，很多场景下，并不存在这样一个可信赖的第三方机构。基于这个背景，以去中心化思想为核心的比特币系统便吸引了人们的注意力。</p>
+<h1 id="去中心化需要解决的问题"><a href="#去中心化需要解决的问题" class="headerlink" title="去中心化需要解决的问题"></a>去中心化需要解决的问题</h1><ul>
+<li>货币由谁发行，如何发行，什么时候发行？</li>
+</ul>
+<p>在比特币系统中由挖矿来决定货币发行权的发行量</p>
+<ul>
+<li>如何验证交易是否有效？如何防止双花攻击？</li>
+</ul>
+<p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
+<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
+<p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
+<p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
+<p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
+<h1 id="比特币区块信息"><a href="#比特币区块信息" class="headerlink" title="比特币区块信息"></a>比特币区块信息</h1><p>区块信息可以分为两部分：block header 和 block body<br>block header 由以下信息：</p>
+<ul>
+<li>version（版本协议）</li>
+<li>hash of previous block header（指向前一个区块指针）</li>
+<li>merkle root hash（默克尔树根哈希值）</li>
+<li>target（挖矿难度目标阈值）</li>
+<li>nonce（随机数）</li>
+</ul>
+<p>hash of previous block header 只计算区块头部部分的哈希（merkle root hash 保证了 block body 内容不被篡改，所以只需要计算 block header 即可保证整个区块内容不会被篡改）。<br>区块链中，轻节点（只存储区块 block header 信息）只利用区块链，并不参与区块链系统的维护和构造。</p>
+<h1 id="比特币共识协议"><a href="#比特币共识协议" class="headerlink" title="比特币共识协议"></a>比特币共识协议</h1><p>投票方案：可行的投票方案前提是系统中的大多数节点时“好”的节点，在这种情况下进行共识协议设置。<br>比特币系统中，若直接投票，将某节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半，则加入区块链。存在以下问题：</p>
+<ol>
+<li>恶意节点不断打包不合法区块，导致一直无法达成共识</li>
+<li>无强迫投票收到，某些节点可以不投票（行政不作为）</li>
+<li>网络延迟未知，投票需要等待多久？</li>
+<li>最重要的问题，比特币系统中任何人都可以创建账户，且建账户及其简单，若黑客使用计算机专门生成大量公私钥对，当其产生超过系统中一半数目，就可以获得支配地位（女巫攻击）</li>
+</ol>
+<p>所以比特币系统并没采用这种简单的账户数目方案，而是<strong>依据算力进行投票</strong>。每个节点都可以自行组装一个候选区块，然后尝试各种 nonce 值，这就是<strong>挖矿。</strong>当某个节点找到符合要求的 nonce<code>h(block header)&lt;=target</code>，便获得了<strong>记账权</strong>，从而可以将区块发布到系统中。其他节点收到区块后，验证区块合法性，如果绝大多数节点验证通过，则接口该区块为最新区块并加入到区块链。</p>
+<h1 id="比特币激励机制"><a href="#比特币激励机制" class="headerlink" title="比特币激励机制"></a>比特币激励机制</h1><p>节点为什么要提供算力和电力成本去竞争记账权？<br>比特币引入奖励机制，通过设置<strong>出块奖励</strong>来解决该问题。<br>一个获得合法区块的节点，可以在去区块中加入一个特殊交易（铸币交易）。这也是唯一一种产生新比特币的途经。</p>
+<blockquote>
+<p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
+</blockquote>
+<p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/web3/" title="web3">
+                        #web3
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E5%AD%97%E8%B4%A7%E5%B8%81%E5%AD%98%E5%9C%A8%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">数字货币存在的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%BB%E4%B8%AD%E5%BF%83%E5%8C%96%E9%9C%80%E8%A6%81%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">去中心化需要解决的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E5%8C%BA%E5%9D%97%E4%BF%A1%E6%81%AF"><span class="toc-text">比特币区块信息</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE"><span class="toc-text">比特币共识协议</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%AF%94%E7%89%B9%E5%B8%81%E6%BF%80%E5%8A%B1%E6%9C%BA%E5%88%B6"><span class="toc-text">比特币激励机制</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

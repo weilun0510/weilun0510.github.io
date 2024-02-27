@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      文件篇 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">文件篇</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                    #项目
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>文件上传和下载是很常见的功能，今天就来梳理一下操作文件过程中常见的概念和 api，加深对文件的理解。</p>
+<h1 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h1><h2 id="Blob-对象"><a href="#Blob-对象" class="headerlink" title="Blob 对象"></a>Blob 对象</h2><p>当用户通过一个<code>input</code>元素选择文件时，浏览器会创建一个<code>Blob</code>对象代表该文件的二进制数据。如果要在将文件数据上传到服务器或者存储到本地之前对其进行操作，你可能需要使用 <code>Blob</code>对象 。</p>
+<p>举个例子，你可以使用<code>URL.createObjectURL</code>方法创建一个<code>URL</code>代表这个<code>Blob</code>对象，然后用这个<code>URL</code>在<code>&lt;img&gt;</code>或<code>video</code>元素中展示这个文件。如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> img = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;img&quot;</span>);</span><br><span class="line">img.<span class="property">src</span> = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(file);</span><br></pre></td></tr></table></figure>
+
+<h2 id="File-对象"><a href="#File-对象" class="headerlink" title="File 对象"></a>File 对象</h2><p>当用户通过一个<code>input</code>元素选择文件时，浏览器会创建一个基于<code>Blob</code>对象的<code>File</code>对象，并添加文件名<code>name</code>、大小<code>size</code>、上次修改日期<code>lastModifiedData</code>等属性。如果要在将文件上传到服务器之前验证文件的属性，则可能需要使用<code>File</code>对象。</p>
+<p>:::info<br>也就是说，File 对象是一种 Blob 对象，他包含了文件的附加信息，如 name、size、lastModifiedDate 等属性。开发人员无法直接访问底层的 Blob 对象，而是通过 api 与 File 对象进行交互。<br>:::</p>
+<h2 id="base-64"><a href="#base-64" class="headerlink" title="base 64"></a>base 64</h2><p>base64 编码将二进制数据表示为一串 ASCII 字符「我们常说的字符串」。<br>有些场合并不能传输或者储存二进制流，这时候就需要使用 base64 编码。</p>
+<p>比如，一个传输协议是基于 ASCII 文本的，那么他就不能传输二进制流，想要传输该二进制流就得编码。常用的 http 协议的 url 就是纯文本的，不能直接放二进制流。<br>大多数现代语言的 String 类型，都不能直接存储二进制流，但可以储存 base64 编码的字符串。</p>
+<p>举个例子，你可以使用<code>FileReader.readAsDataURL()</code>方法读取 File 对象的内容并将其转换为 base64 编码的 data:URL 格式的字符串，简称<code>DataURL</code>。<br>这个 DataURL 表示所读取的文件内容，可以将其发送到服务器。然后服务器可以将 DataURL 解码回<code>二进制数据</code>并将其保存为文件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * file 转 base64编码</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">File</span>&#125; file 文件流</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">base64Callback</span>&#125; callback 回调函数 - 处理响应</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">fileByBase64</span> = (<span class="params">file, callback</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">var</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// onload事件在读取操作完成时触发</span></span><br><span class="line">  reader.<span class="property">onload</span> = <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="comment">// e.target.result/reader.target 该属性表示目标对象的DataURL</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(e.<span class="property">target</span>.<span class="property">result</span>);</span><br><span class="line">    callback &amp;&amp; <span class="title function_">callback</span>(e.<span class="property">target</span>.<span class="property">result</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 以 data:URL 的形式读取数据</span></span><br><span class="line">  reader.<span class="title function_">readAsDataURL</span>(file);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="简单的文件上传"><a href="#简单的文件上传" class="headerlink" title="简单的文件上传"></a>简单的文件上传</h1><p>文件上传的传统形式，是使用<code>type=&#39;file&#39;</code>的<code>input</code>表单元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file-input&quot;</span> <span class="attr">accept</span>=<span class="string">&quot;.jpg, .jpeg, .png&quot;</span> <span class="attr">multiple</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以添加<code>change</code>事件监听读取文件对象列表<code>event.target.files</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file-input&quot;</span>);</span><br><span class="line">fileInput.<span class="title function_">addEventListener</span>(<span class="string">&quot;change&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> files = e.<span class="property">target</span>.<span class="property">files</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>File 对象:<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334253215.png" alt="pic.1708334253215"></p>
+<p>文件上传前，可以通过<code>File</code>对象，验证文件大小、类型等信息，决定是否进行下一步，比如验证文件大小。</p>
+<h1 id="验证文件大小"><a href="#验证文件大小" class="headerlink" title="验证文件大小"></a>验证文件大小</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file-input&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;upload-btn&quot;</span>&gt;</span>Upload File<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file-input&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> uploadBtn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;upload-btn&quot;</span>);</span><br><span class="line"></span><br><span class="line">uploadBtn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> selectedFile = fileInput.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">const</span> fileSizeLimit = <span class="number">5</span> * <span class="number">1024</span>; <span class="comment">// 5KB in bytes</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (selectedFile.<span class="property">size</span> &gt; fileSizeLimit) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(</span><br><span class="line">      <span class="string">&quot;Selected file exceeds the size limit of 5 KB. Please select a smaller file.&quot;</span></span><br><span class="line">    );</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// If file size is within the limit, proceed with file upload</span></span><br><span class="line">  <span class="comment">// Your code for uploading the file to the server goes here</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">获取 files 的方式：</span><br><span class="line"></span><br><span class="line">- 在 input 元素的 change 事件中，可通过 e.<span class="property">target</span>.<span class="property">files</span> 获取；</span><br><span class="line">- 或者通过 input 元素直接获取，如：<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;file-input&#x27;</span>).<span class="property">files</span>;</span><br><span class="line"></span><br><span class="line">也就是说<span class="string">`e.target === fileEl`</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="显示读取进度（下载文件的场景）"><a href="#显示读取进度（下载文件的场景）" class="headerlink" title="显示读取进度（下载文件的场景）"></a>显示读取进度（下载文件的场景）</h1><p><strong>FileReader.onprogress</strong><br><code>pregress</code>事件，在读取<code>Blob</code>时触发。在下载文件并显示进度这个场景下能够派上用场。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file-input&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">label</span> <span class="attr">id</span>=<span class="string">&quot;progress-label&quot;</span> <span class="attr">for</span>=<span class="string">&quot;progress&quot;</span>&gt;</span>Upload File<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">progress</span> <span class="attr">id</span>=<span class="string">&quot;progress&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span> <span class="attr">max</span>=<span class="string">&quot;100&quot;</span> <span class="attr">value</span>=<span class="string">&quot;0&quot;</span>&gt;</span>0<span class="tag">&lt;/<span class="name">progress</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">&quot;read-blob&quot;</span>&gt;</span>读取Blob<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>readAsDataURL</code>能够读取<code>Blob</code>对象，然后监听<code>FileReader</code>的<code>progress</code>事件，通过<code>ProgressEvent.loaded</code>和<code>ProgressEvent.total</code>计算读取的进度。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file-input&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> readBlobBtn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;read-blob&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 显示文件读取进度</span></span><br><span class="line"><span class="keyword">const</span> reader = <span class="keyword">new</span> <span class="title class_">FileReader</span>();</span><br><span class="line"></span><br><span class="line">reader.<span class="title function_">addEventListener</span>(<span class="string">&quot;progress&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (e.<span class="property">loaded</span> &amp;&amp; e.<span class="property">total</span>) &#123;</span><br><span class="line">    <span class="comment">// 计算完成百分比</span></span><br><span class="line">    <span class="keyword">const</span> percent = (e.<span class="property">loaded</span> / e.<span class="property">total</span>) * <span class="number">100</span>;</span><br><span class="line">    <span class="comment">// 将值设置为进度组件</span></span><br><span class="line">    progress.<span class="property">value</span> = percent;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">readBlobBtn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> selectedFile = fileInput.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="comment">// 以 URL 格式的字符串的形式读取数据</span></span><br><span class="line">  reader.<span class="title function_">readAsDataURL</span>(selectedFile);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="显示上传进度"><a href="#显示上传进度" class="headerlink" title="显示上传进度"></a>显示上传进度</h1><p>要显示文件的上传进度，可以使用 JavaScript 中的 XMLHttpRequest (XHR) 对象将文件上传到服务器并使用 <code>XMLHttpRequest.upload.onprogress</code> 事件跟踪进度。这是一个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fileInput = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;file-input&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> uploadBtn = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;upload-btn&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> uploadProgress = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;upload-progress&quot;</span>);</span><br><span class="line"></span><br><span class="line">uploadBtn.<span class="title function_">addEventListener</span>(<span class="string">&quot;click&quot;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> selectedFile = fileInput.<span class="property">files</span>[<span class="number">0</span>];</span><br><span class="line">  <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">  xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/upload&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Track the upload progress</span></span><br><span class="line">  xhr.<span class="property">upload</span>.<span class="property">onprogress</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> progress = (event.<span class="property">loaded</span> / event.<span class="property">total</span>) * <span class="number">100</span>;</span><br><span class="line">    uploadProgress.<span class="property">value</span> = progress;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  xhr.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;File uploaded successfully&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  xhr.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;File upload failed&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">  formData.<span class="title function_">append</span>(<span class="string">&quot;file&quot;</span>, selectedFile);</span><br><span class="line"></span><br><span class="line">  xhr.<span class="title function_">send</span>(formData);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="上传目录"><a href="#上传目录" class="headerlink" title="上传目录"></a>上传目录</h1><p><code>input</code>元素的<code>webkitdirectory</code>属性，表示允许用户选择文件目录，而不是文件。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file-input&quot;</span> <span class="attr">webkitdirectory</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>选择目录时，该目录下的文件会全部选中（包括子孙文件）。</p>
+<h1 id="拖放上传"><a href="#拖放上传" class="headerlink" title="拖放上传"></a>拖放上传</h1><p>设置一个放置文件的目标元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;drop-zone&quot;</span>&gt;</span>Drop files here<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>调用 <code>event.preventDefault()</code>，这使它能够接收 drop 事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dropZone = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;drop-zone&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// dragover 事件在可拖动元素被拖进放置目标时被触发</span></span><br><span class="line">dropZone.<span class="title function_">addEventListener</span>(<span class="string">&quot;dragover&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">preventDefault</span>();</span><br><span class="line">  dropZone.<span class="property">classList</span>.<span class="title function_">add</span>(<span class="string">&quot;drag-over&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// dragleave 事件在可拖动元素离开放置目标时被触发</span></span><br><span class="line">dropZone.<span class="title function_">addEventListener</span>(<span class="string">&quot;dragleave&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">preventDefault</span>();</span><br><span class="line">  dropZone.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;drag-over&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// drop 事件在可拖动元素放置在放置目标时被触发</span></span><br><span class="line">dropZone.<span class="title function_">addEventListener</span>(<span class="string">&quot;drop&quot;</span>, <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">  event.<span class="title function_">preventDefault</span>();</span><br><span class="line">  dropZone.<span class="property">classList</span>.<span class="title function_">remove</span>(<span class="string">&quot;drag-over&quot;</span>);</span><br><span class="line">  <span class="comment">// 获取文件</span></span><br><span class="line">  <span class="keyword">const</span> files = event.<span class="property">dataTransfer</span>.<span class="property">files</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;files: &quot;</span>, files);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> xhr = <span class="keyword">new</span> <span class="title class_">XMLHttpRequest</span>();</span><br><span class="line">  xhr.<span class="title function_">open</span>(<span class="string">&quot;POST&quot;</span>, <span class="string">&quot;/upload&quot;</span>);</span><br><span class="line"></span><br><span class="line">  xhr.<span class="property">onload</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;File uploaded successfully&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  xhr.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;File upload failed&quot;</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">  formData.<span class="title function_">append</span>(<span class="string">&quot;file&quot;</span>, files[<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">  xhr.<span class="title function_">send</span>(formData);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="Content-Type（表单的-enctype-属性）"><a href="#Content-Type（表单的-enctype-属性）" class="headerlink" title="Content-Type（表单的 enctype 属性）"></a>Content-Type（表单的 enctype 属性）</h1><p>当 method 属性值为 post 时，enctype 就是将表单的内容提交给服务器的数据编码类型。可能的取值有：</p>
+<ul>
+<li>application&#x2F;x-www-form-urlencoded：未指定属性时的默认值。</li>
+<li>multipart&#x2F;form-data：<strong>当表单包含 type&#x3D;file input 元素时使用此值</strong>。</li>
+<li>text&#x2F;plain：出现于 HTML5，用于调试。这个值可被 <code>&lt;button&gt;</code>、<code>&lt;input type=&quot;submit&quot;&gt;</code> 或 <code>&lt;input type=&quot;image&quot;&gt;</code> 元素上的 <a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/button#formenctype">formenctype</a> 属性覆盖。</li>
+</ul>
+<h2 id="application-x-www-form-urlencoded"><a href="#application-x-www-form-urlencoded" class="headerlink" title="application&#x2F;x-www-form-urlencoded"></a>application&#x2F;x-www-form-urlencoded</h2><p>这种数据编码类型只支持传输文本数据</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type: application/x-www-form-urlencoded;charset=utf-8</span><br><span class="line"></span><br><span class="line">title=test&amp;sub%5B%5D=1&amp;sub%5B%5D=2&amp;sub%5B%5D=3</span><br></pre></td></tr></table></figure>
+
+<p>首先，<code>Content-Type</code> 被指定为 <code>application/x-www-form-urlencoded</code>；其次，提交的数据按照 <code>key1=val1&amp;key2=val2</code> 的方式进行编码，<code>key</code> 和 <code>val</code> 都进行了 URL 转码。大部分服务端语言都对这种方式有很好的支持。</p>
+<p>此类型不适合用于传输大型二进制数据或者包含非 ASCII 字符的数据。平常我们使用这个类型都是把表单数据使用 url 编码后传送给后端，二进制文件当然没办法一起编码进去了。所以 multipart&#x2F;form-data 就诞生了。</p>
+<h2 id="multipart-form-data"><a href="#multipart-form-data" class="headerlink" title="multipart&#x2F;form-data"></a>multipart&#x2F;form-data</h2><p>为了支持文件上传，表单数据必须使用<code>multipart/form-data</code>内容类型进行编码。这种编码格式允许二进制数据作为请求主体的一部分发送。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">POST http://www.example.com HTTP/1.1</span><br><span class="line">Content-Type:multipart/form-data; boundary=----WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line">Content-Disposition: form-data; name=&quot;text&quot;</span><br><span class="line"></span><br><span class="line">title</span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA</span><br><span class="line">Content-Disposition: form-data; name=&quot;file&quot;; filename=&quot;chrome.png&quot;</span><br><span class="line">Content-Type: image/png</span><br><span class="line"></span><br><span class="line">PNG ... content of chrome.png ...</span><br><span class="line">------WebKitFormBoundaryrGKCBY7qhFd3TrwA--</span><br></pre></td></tr></table></figure>
+
+<p><code>Content-Type</code>被指定为<code>multipart/form-data</code>，<code>boundary</code>为<code>----WebKitFormBoundaryrGKCBY7qhFd3TrwA</code>。<code>boundary</code>用于分割提交的数据。<br><code>Content-Disposition</code>包含文件的基本信息，<code>Content-Type</code>表示文件内容类型。<br>第一部分是一个名为<code>text</code>的表单字段，该字段的内容是字符串<code>title</code>。第二部分是名为<code>file</code>的字段，文件名为<code>chrome.png</code>，文件内容类型为<code>image/png</code>，内容为<code>PNG ... content of chrome.png ...</code>，然后以<code>boundary</code>为结尾。</p>
+<h1 id="FormData"><a href="#FormData" class="headerlink" title="FormData()"></a>FormData()</h1><p>这是一个传统的最简单的 form 表单上传如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">method</span>=<span class="string">&quot;POST&quot;</span> <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">value</span>=<span class="string">&quot;请选择文件&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>FormData 的由来：</strong><br>当使用 Ajax 上传文件时，如果不指定<code>enctype=&quot;multipart/form-data&quot;</code>，会导致后端在解析 Form 表单的数据格式时与 Ajax 上传的数据格式不一致的问题。为了后端能够使用相同的代码解析这两种提交方式，所以出现了<code>FormData</code>。</p>
+<p>FormData 接口提供了一种表示表单数据的键值对<code>key/value</code>的构造方式，可以轻松的将数据通过 Ajax 发送出去。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 单文件</span></span><br><span class="line">formData.<span class="title function_">append</span>(<span class="string">&quot;files&quot;</span>, file);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 多文件</span></span><br><span class="line">_files.<span class="title function_">forEach</span>(<span class="function">(<span class="params">file</span>) =&gt;</span> &#123;</span><br><span class="line">  formData.<span class="title function_">append</span>(<span class="string">&quot;files&quot;</span>, file);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用 FormData 上传文件时，无需手动设置<code>Content-Type=&#39;multipart/form-data&#39;</code>，FormData 会自动设置正确的 Content-Type 和 数据类型。</p>
+<p>实际开发过程中也是如此，通常会使用 FormData 格式保存文件，关于<code>Content-Type</code>需要什么类型，取决于后端是怎么设计的。</p>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><h2 id="window-open"><a href="#window-open" class="headerlink" title="window.open"></a>window.open</h2><p><code>open()</code>方法，用于将指定的资源加载到浏览器新的窗口或者标签页。<br>当我们指定一个图片链接时，浏览器会自动下载该资源，下载后自动关闭该窗口。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> imgUrl =</span><br><span class="line">  <span class="string">&quot;https://nd-news-mangement.oss-cn-hangzhou.aliyuncs.com/2023/04/274a8263e05f37a5d8663193b86e1a0583.png&quot;</span>;</span><br><span class="line"><span class="variable language_">window</span>.<span class="title function_">open</span>(imgUrl);</span><br></pre></td></tr></table></figure>
+
+<h2 id="location-href"><a href="#location-href" class="headerlink" title="location.href"></a>location.href</h2><p><code>location.href</code>表示将当前页面的 URL 设置为一个新的值。它是一个字符串，包含当前页面的完成 URL，包括协议、域名、路径、查询参数和片段标识符。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> imgUrl =</span><br><span class="line">  <span class="string">&quot;https://nd-news-mangement.oss-cn-hangzhou.aliyuncs.com/2023/04/274a8263e05f37a5d8663193b86e1a0583.png&quot;</span>;</span><br><span class="line">location.<span class="property">href</span> = imgUrl;</span><br></pre></td></tr></table></figure>
+
+<p><code>window.open</code>和<code>location.href</code>的区别：</p>
+<ul>
+<li><code>window.open</code>会打开一个新窗口或选项卡，而<code>location.href</code>会替换当前页</li>
+<li><code>window.open</code> 打开太多新窗口可能会对用户体验产生负面影响</li>
+<li><code>location.href</code>可能会刷新整个页面（但如果在输入框中输入了文本，加载新页面时文本内容不会丢失，这是因为浏览器通常将表单数据保存在浏览器的缓存中）</li>
+</ul>
+<h2 id="a-标签"><a href="#a-标签" class="headerlink" title="a 标签"></a>a 标签</h2><p>a 标签通常用于用户启动的交互，而<code>location.href</code>通常用于响应用户事件。<br>a 标签的方式属性更多，如<code>download</code>、<code>target</code>，也更为灵活，在实际开发过程中，我们通常会使用 a 标签封装一个下载功能的函数来使用，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">downloadFile</span>(<span class="params">url, fileName</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> link = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;a&quot;</span>);</span><br><span class="line">  link.<span class="property">href</span> = url;</span><br><span class="line">  link.<span class="property">target</span> = <span class="string">&quot;_blank&quot;</span>;</span><br><span class="line">  <span class="comment">// download仅适用于同源 URL</span></span><br><span class="line">  link.<span class="property">download</span> = fileName;</span><br><span class="line">  link.<span class="property">style</span>.<span class="property">display</span> = <span class="string">&quot;none&quot;</span>;</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(link);</span><br><span class="line">  link.<span class="title function_">click</span>();</span><br><span class="line">  <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">removeChild</span>(link);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>File 对象是基于 Blob 对象的，只不过多了一些附加信息，如 <code>name</code>、<code>size</code>等</li>
+<li>想要显示文件读取进度时，我们可以通过 FileReader 的 readAsDataURL(file) 方法，然后监听<code>FileReader</code>的<code>progress</code>事件</li>
+<li>想要显示上传到服务器的进度时，可以通过<code>xhr.upload.onprogress</code>事件</li>
+<li>使用 FormData 上传文件时，无需手动设置<code>Content-Type=&#39;multipart/form-data&#39;</code>，FormData 会自动设置正确的 Content-Type 和 数据类型</li>
+</ul>
+<p>实际项目应用中，大多数的表单场景都是手动上传文件到服务器，也就是说在提交到服务器之前，我们是不需要使用后端接口的。但现实中遇到的情况往往是后端提供一个上传接口，再提供一个提交表单数据的接口，前一个接口就显得很多余，而且存在数据库内存被乱用的风险。</p>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/7224402365452238906#heading-11">https://juejin.cn/post/7224402365452238906#heading-11</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/WuLex/article/details/118771912">https://blog.csdn.net/WuLex/article/details/118771912</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6940547458069954596">https://juejin.cn/post/6940547458069954596</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                        #项目
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E5%BE%AE%E4%BF%A1%E7%BD%91%E9%A1%B5%E5%88%86%E4%BA%AB%E3%80%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%A2%98%E3%80%81%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%9B%BE%E7%89%87%E3%80%8D/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A6%82%E5%BF%B5"><span class="toc-text">概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Blob-%E5%AF%B9%E8%B1%A1"><span class="toc-text">Blob 对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#File-%E5%AF%B9%E8%B1%A1"><span class="toc-text">File 对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#base-64"><span class="toc-text">base 64</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E7%9A%84%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-text">简单的文件上传</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AA%8C%E8%AF%81%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="toc-text">验证文件大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E8%AF%BB%E5%8F%96%E8%BF%9B%E5%BA%A6%EF%BC%88%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E7%9A%84%E5%9C%BA%E6%99%AF%EF%BC%89"><span class="toc-text">显示读取进度（下载文件的场景）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E4%B8%8A%E4%BC%A0%E8%BF%9B%E5%BA%A6"><span class="toc-text">显示上传进度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0%E7%9B%AE%E5%BD%95"><span class="toc-text">上传目录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8B%96%E6%94%BE%E4%B8%8A%E4%BC%A0"><span class="toc-text">拖放上传</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Content-Type%EF%BC%88%E8%A1%A8%E5%8D%95%E7%9A%84-enctype-%E5%B1%9E%E6%80%A7%EF%BC%89"><span class="toc-text">Content-Type（表单的 enctype 属性）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#application-x-www-form-urlencoded"><span class="toc-text">application&#x2F;x-www-form-urlencoded</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#multipart-form-data"><span class="toc-text">multipart&#x2F;form-data</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FormData"><span class="toc-text">FormData()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-text">下载</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#window-open"><span class="toc-text">window.open</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#location-href"><span class="toc-text">location.href</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#a-%E6%A0%87%E7%AD%BE"><span class="toc-text">a 标签</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

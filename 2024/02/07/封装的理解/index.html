@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      封装的理解 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">封装的理解</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>最近在学习 canvas 的使用，并写了个 demo，就是做一个 K 线图，支持提示、拖拽、缩放，也发布为 npm 包：<a target="_blank" rel="noopener" href="https://www.npmjs.com/package/echarts-for-abc">echarts-for-abc</a><br>效果如图所示<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325742371.png" alt="pic.1708325742371"><br>写代码过程中，封装是必不可少的一部分，所以想以这个为例子来讲一下封装。</p>
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>封装的目的，是为了减少代码量。</p>
+<h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>万物皆对象，对象具有属性和行为（方法），对象公共属性和行为的提取就是封装。</p>
+<h1 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h1><p>封装的前提，必定跟场景相关联的，也就是说，先有场景，再有封装。<strong>封装前，先把场景下的属性具象化出来，再考虑提取他们的共性</strong>。如果跳过这一步直接思考他们的共性，这很容易出现思考偏差。</p>
+<p>举个例子：一个学校里面，有老师、学生、校长等各角色，不同角色有自己的特点和行为，比如学生有学号，老师有职位等级、类型，他们也有共同的特性，比如拥有性别、年龄等特点，用类（class）来表示各个角色。</p>
+<p>将学生和老师用代码抽象化表示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">studentNumber, sex, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">studentNumber</span> = studentNumber; <span class="comment">// 学号</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">sex</span> = sex;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">rank, sex</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rank</span> = rank; <span class="comment">// 等级</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">sex</span> = sex;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发现学生和老师都有性别和年龄，那就可以提取出来，所以可以很容易用<code>Person</code>封装起来，</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">sex, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">sex</span> = sex;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">age</span> = age;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后就可以使用<code>extends</code>让子类（学生）继承父类（Person）的属性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Person</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">studentNumber, sex, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(sex, age);</span><br><span class="line">    <span class="comment">// super() 表示执行父类构造函数，相当于Person.prototype.constructor.call(this), 用于继承父类Person的属性</span></span><br><span class="line">    <span class="comment">// 在这里，相当于this.sex = undefined; this.age = undefined</span></span><br><span class="line">    <span class="comment">// 传入sex,age 相当于 this.sex = sex; this.age = age;</span></span><br><span class="line"></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">studentNumber</span> = studentNumber;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> student1 = <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;330311221&quot;</span>, <span class="string">&quot;男&quot;</span>, <span class="number">15</span>);</span><br><span class="line"><span class="comment">// student1 = &#123; age: 15, sex: &quot;男&quot;, studentNumber: &quot;330311221&quot; &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_ inherited__">Person</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">rank, sex, age</span>) &#123;</span><br><span class="line">    <span class="variable language_">super</span>(sex, age);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">rank</span> = rank;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> teacher1 = <span class="keyword">new</span> <span class="title class_">Teacher</span>(<span class="string">&quot;高级教师&quot;</span>, <span class="string">&quot;女&quot;</span>, <span class="number">35</span>);</span><br><span class="line"><span class="comment">// teacher1 = &#123; age: 35, sex: &quot;女&quot;, rank: &quot;高级教师&quot; &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="封装颗粒度"><a href="#封装颗粒度" class="headerlink" title="封装颗粒度"></a>封装颗粒度</h1><p>封装颗粒度表示函数的拆分程度，是否越细越好呢，其实不是。<br>在项目中，如果组件拆的过于细，可能会导致父组件的参数向子组件一层层传递时，会出现遗漏，传错等问题。如果拆的太粗，会导致难以复用、难以维护等问题，那么怎样的颗粒度大小才算合适呢？<strong>封装的颗粒度大小，取决于不同场景下的偏向性考虑。</strong></p>
+<h1 id="考虑偏向性"><a href="#考虑偏向性" class="headerlink" title="考虑偏向性"></a>考虑偏向性</h1><p>封装偏向性可以分为两种，偏应用还是偏底层。</p>
+<p>偏应用：这个封装只适用你这个特定的场景<br>偏底层：具有独立性，颗粒度更小，可以脱离特定场景，就像工具方法，如 Lodash 工具库</p>
+<p><em>工具方法：是一个纯函数，传入参数，返回结果。也就是说不要在工具方法内部获取外部变量，要作为参数传入。</em></p>
+<p>考虑哪种偏向性，取决于场景，所以进入“写一个 K 线图 demo”的场景，来聊一聊封装。</p>
+<h2 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h2><p>可以看到图中的蜡烛出现了 10 次，那么如何封装渲染蜡烛的这个函数呢？是封装单个蜡烛合适还是一串蜡烛合适？</p>
+<p>如果作为单个蜡烛的出现，我们只需要知道蜡烛横坐标、蜡烛宽度、颜色以及四个点的纵坐标就能绘制出蜡烛，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 绘制蜡烛</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; abscissa 蜡烛横坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; topPointY 最高点纵坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; bottomPointY 最低点纵坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; secondPointY 第二个点纵坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; thirdPointY 第三个点纵坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; candleW 蜡烛宽度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">string</span>&#125; candleColor 蜡烛颜色</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">renderCandle</span>(<span class="params"></span></span><br><span class="line"><span class="params">  abscissa,</span></span><br><span class="line"><span class="params">  topPointY,</span></span><br><span class="line"><span class="params">  bottomPointY,</span></span><br><span class="line"><span class="params">  secondPointY,</span></span><br><span class="line"><span class="params">  thirdPointY,</span></span><br><span class="line"><span class="params">  candleW,</span></span><br><span class="line"><span class="params">  candleColor</span></span><br><span class="line"><span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> halfCandleW = candleW / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 绘制蜡烛上影线</span></span><br><span class="line">  ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">  ctx.<span class="title function_">moveTo</span>(abscissa, topPointY);</span><br><span class="line">  ctx.<span class="title function_">lineTo</span>(abscissa, secondPointY);</span><br><span class="line">  ctx.<span class="title function_">closePath</span>();</span><br><span class="line">  ctx.<span class="title function_">stroke</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 绘制蜡烛下影线</span></span><br><span class="line">  ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">  ctx.<span class="title function_">moveTo</span>(abscissa, bottomPointY);</span><br><span class="line">  ctx.<span class="title function_">lineTo</span>(abscissa, thirdPointY);</span><br><span class="line">  ctx.<span class="title function_">closePath</span>();</span><br><span class="line">  ctx.<span class="title function_">stroke</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 绘制蜡烛实体（中间矩形部分）</span></span><br><span class="line">  ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">  ctx.<span class="title function_">moveTo</span>(abscissa - halfCandleW, secondPointY);</span><br><span class="line">  ctx.<span class="title function_">rect</span>(</span><br><span class="line">    abscissa - halfCandleW,</span><br><span class="line">    secondPointY,</span><br><span class="line">    candleW,</span><br><span class="line">    thirdPointY - secondPointY</span><br><span class="line">  );</span><br><span class="line">  ctx.<span class="property">fillStyle</span> = candleColor;</span><br><span class="line">  ctx.<span class="title function_">fill</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">renderCandle</span>(<span class="number">50</span>, <span class="number">88</span>, <span class="number">50</span>, <span class="number">44</span>, <span class="number">33</span>, <span class="number">20</span>, <span class="string">&quot;red&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325756628.png" alt="pic.1708325756628"><br>这个函数的封装偏向性就属于偏底层封装，它具有独立性，颗粒度更小，复用率更高，就像在 Echarts 图标库里，有多个应用到单个蜡烛的地方，就可以使用这个工具函数，你只需要传入相关参数即可。</p>
+<p>但在我这个练习 demo 中，单个蜡烛并没有独立出现的场景，我考虑偏应用封装，而且在渲染蜡烛之前我需要处理数据源、判断涨跌以及蜡烛颜色的情况，所以将这些处理逻辑和绘制蜡烛封装为一个函数，不管在阅读还是使用上都更为方便，我的代码为:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 绘制一串蜡烛</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">array</span>&#125; data 数据源</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; candleW 蜡烛宽度</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">renderCandles</span>(<span class="params">data, candleW</span>) &#123;</span><br><span class="line">  <span class="comment">// 将数据源转换为绘制蜡烛所需要的纵坐标集合</span></span><br><span class="line">  <span class="keyword">const</span> dataYAxisPoint = <span class="title function_">tranPriceToOrdinate</span>(data);</span><br><span class="line">  <span class="keyword">const</span> halfCandleW = candleW / <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, candleLength = dataYAxisPoint.<span class="property">length</span>; i &lt; candleLength; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; heightPrice, lowPrice, openingPrice, closingPice &#125; =</span><br><span class="line">      dataYAxisPoint[i];</span><br><span class="line">    <span class="keyword">let</span> abscissa = <span class="title function_">xAxisTickPointX</span>(i),</span><br><span class="line">      topPointY = heightPrice,</span><br><span class="line">      bottomPointY = lowPrice,</span><br><span class="line">      secondPointY,</span><br><span class="line">      thirdPointY,</span><br><span class="line">      candleColor;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (closingPice &lt; openingPrice) &#123;</span><br><span class="line">      <span class="comment">// 涨</span></span><br><span class="line">      candleColor = <span class="string">&quot;red&quot;</span>;</span><br><span class="line">      secondPointY = closingPice;</span><br><span class="line">      thirdPointY = openingPrice;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      candleColor = <span class="string">&quot;green&quot;</span>;</span><br><span class="line">      secondPointY = openingPrice;</span><br><span class="line">      thirdPointY = closingPice;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制蜡烛上影线</span></span><br><span class="line">    ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">    ctx.<span class="title function_">moveTo</span>(abscissa, topPointY);</span><br><span class="line">    ctx.<span class="title function_">lineTo</span>(abscissa, secondPointY);</span><br><span class="line">    ctx.<span class="title function_">closePath</span>();</span><br><span class="line">    ctx.<span class="title function_">stroke</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制蜡烛下影线</span></span><br><span class="line">    ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">    ctx.<span class="title function_">moveTo</span>(abscissa, bottomPointY);</span><br><span class="line">    ctx.<span class="title function_">lineTo</span>(abscissa, thirdPointY);</span><br><span class="line">    ctx.<span class="title function_">closePath</span>();</span><br><span class="line">    ctx.<span class="title function_">stroke</span>();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 绘制蜡烛实体（中间矩形部分）</span></span><br><span class="line">    ctx.<span class="title function_">beginPath</span>();</span><br><span class="line">    ctx.<span class="title function_">moveTo</span>(abscissa - halfCandleW, secondPointY);</span><br><span class="line">    ctx.<span class="title function_">rect</span>(</span><br><span class="line">      abscissa - halfCandleW,</span><br><span class="line">      secondPointY,</span><br><span class="line">      candleW,</span><br><span class="line">      thirdPointY - secondPointY</span><br><span class="line">    );</span><br><span class="line">    ctx.<span class="property">fillStyle</span> = candleColor;</span><br><span class="line">    ctx.<span class="title function_">fill</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><ul>
+<li>封装的理念为：把场景下的属性和方法具象化，提取共性</li>
+<li>封装的颗粒度大小，取决于不同场景下的偏向性考虑</li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%83%8C%E6%99%AF"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89"><span class="toc-text">定义</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%90%86%E5%BF%B5"><span class="toc-text">理念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%81%E8%A3%85%E9%A2%97%E7%B2%92%E5%BA%A6"><span class="toc-text">封装颗粒度</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%80%83%E8%99%91%E5%81%8F%E5%90%91%E6%80%A7"><span class="toc-text">考虑偏向性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">举例说明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

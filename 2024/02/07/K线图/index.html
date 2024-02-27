@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      K线图 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">K线图</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-18 21:45:47
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                    #项目
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <h1 id="技术难点"><a href="#技术难点" class="headerlink" title="技术难点"></a>技术难点</h1><h3 id="value-对应的纵坐标"><a href="#value-对应的纵坐标" class="headerlink" title="value 对应的纵坐标"></a>value 对应的纵坐标</h3><p>已知数据里的最大值<code>maxValue</code>、最小值<code>minValue</code>、y 轴的高度<code>yAxisHeight</code>，那么就可以得到 value 与<code>yAxisHeight</code>的比例<code>ratio</code>。想要得到刻度对应的数值，只需要将<strong>最小值+刻度间距<em>i</em>ratio</strong>即可。<br>比如最大值 1000，最小值 500，y 轴高度为 100px，那么 1px 所代表<code>(1000 - 500) / 100</code>，即 5。<br>如果 y 轴刻度间距为 30px，那么对应的数值为<code>500 + 30*i*ratio</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 计算Y轴刻度对应的数值：根据最大最小值动态变化</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; i 刻度对应下标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; maxValue 最大值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; minValue 最小值</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; yAxisHeight y轴高度</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; yAxisTickSpace y轴刻度间距</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> number 刻度对应的数值</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">yAxisTickText</span> = (<span class="params"></span></span><br><span class="line"><span class="params">  i,</span></span><br><span class="line"><span class="params">  maxValue,</span></span><br><span class="line"><span class="params">  minValue,</span></span><br><span class="line"><span class="params">  yAxisHeight,</span></span><br><span class="line"><span class="params">  yAxisTickSpace</span></span><br><span class="line"><span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// ratio表示value 与 y轴高度的比例</span></span><br><span class="line">  <span class="keyword">const</span> ratio = (maxValue - minValue) / yAxisHeight;</span><br><span class="line">  <span class="keyword">const</span> value = (minValue + yAxisTickSpace * i * ratio).<span class="title function_">toFixed</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="keyword">return</span> value;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="x-轴元素动态隔点展示"><a href="#x-轴元素动态隔点展示" class="headerlink" title="x 轴元素动态隔点展示"></a>x 轴元素动态隔点展示</h3><p>x 轴元素的数量是处于变化的，但 x 轴宽度是已知的，这样我们就能算出元素之间的间距<code>xAxisItemSpace</code>是多少。知道了<code>xAxisItemSpace</code>，那我们就能知道 x 轴刻度横坐标。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 求x轴刻度横坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; i 下标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; xAxisPointX x轴原点横坐标</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &#123;<span class="type">number</span>&#125; xAxisItemSpace x轴刻度间距</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@returns</span> number x轴刻度横坐标</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">xAxisTickPointX</span> = (<span class="params">i, xAxisPointX, xAxisItemSpace</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> xAxisPointX + i * xAxisItemSpace;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>缩放时，考虑当元素太多时，如果展示所有的元素，会出现拥挤的情况。所以我们只能展示部分元素。<br>隔点展示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 绘制x轴刻度与文字</span></span><br><span class="line"><span class="keyword">const</span> xAxisItemMaxShowNumber = <span class="number">4</span>; <span class="comment">// 展示个数</span></span><br><span class="line"><span class="keyword">const</span> remainder = <span class="title class_">Math</span>.<span class="title function_">ceil</span>(xAxisItemLength / (xAxisItemMaxShowNumber - <span class="number">1</span>));</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; xAxisItemLength; i++) &#123;</span><br><span class="line">  <span class="keyword">const</span> xAxisTickX = <span class="title function_">xAxisTickPointX</span>(i, originalPointX, xAxisItemSpace);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 隔点展示</span></span><br><span class="line">  <span class="keyword">if</span> (i % remainder === <span class="number">0</span> || i === xAxisItemLength - <span class="number">1</span>) &#123;</span><br><span class="line">    <span class="title function_">renderText</span>(</span><br><span class="line">      ctx,</span><br><span class="line">      xAxisTickX,</span><br><span class="line">      yAxisOriginPointY + tickWidth + <span class="number">10</span>,</span><br><span class="line">      myDataSource.<span class="property">current</span>.<span class="title function_">map</span>(<span class="function">(<span class="params">x</span>) =&gt;</span> x.<span class="property">date</span>)[i],</span><br><span class="line">      <span class="string">&quot;center&quot;</span>,</span><br><span class="line">      <span class="variable constant_">TEXT_COLOR</span>.<span class="property">PRIMARY</span></span><br><span class="line">    );</span><br><span class="line">    <span class="title function_">renderLine</span>(</span><br><span class="line">      ctx,</span><br><span class="line">      xAxisTickX,</span><br><span class="line">      yAxisOriginPointY,</span><br><span class="line">      xAxisTickX,</span><br><span class="line">      yAxisOriginPointY + tickWidth,</span><br><span class="line">      <span class="variable constant_">COLOR</span>.<span class="property">LINE</span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="三次贝塞尔曲线前后控制点"><a href="#三次贝塞尔曲线前后控制点" class="headerlink" title="三次贝塞尔曲线前后控制点"></a>三次贝塞尔曲线前后控制点</h3><p>受前后元素纵坐标影响，由前后两个点和当前点的纵坐标构成一个平行四边形，即可得到当前元素的前后控制点。<br><img src="https://cdn.nlark.com/yuque/0/2023/jpeg/12749457/1678068079434-6fc82755-de32-4c8e-b9d4-f7114edf76fc.jpeg"></p>
+<p>还需要考虑首尾元素没有前后控制点的边界问题，所以要加入两个虚拟点。</p>
+<h3 id="辅助线"><a href="#辅助线" class="headerlink" title="辅助线"></a>辅助线</h3><p>在 canvas 里，更新画布既是重选渲染整个画布，所以辅助线的绘制采用分层处理，创建一个新的画布覆盖上去，独立开来，不影响展示画布。</p>
+<ol>
+<li>监听鼠标移动事件<code>mousemove</code></li>
+<li>清除画布</li>
+<li>如果在 gird 区域，绘制辅助线和提示框</li>
+</ol>
+<h3 id="拖拽"><a href="#拖拽" class="headerlink" title="拖拽"></a>拖拽</h3><ol>
+<li>监听鼠标按下事件<code>mousedown</code>，并创建拖动元素。可以做记忆化处理（优化手段）</li>
+<li>监听开始拖动目标元素事件<code>dragstart</code>，并记录光标位置，即<code>event.offsetX</code></li>
+<li>监听拖动事件<code>drag</code>，拖动过程中，达到一定距离，清除画布(clearRect)，然后更新要展示的数据，重新渲染即可</li>
+<li>拖动结束时，需要隐藏拖动元素，并且如果左侧临时集合数据小于页数<code>pageSize</code>，<strong>请求接口数据</strong></li>
+</ol>
+<h3 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h3><ol>
+<li>监听滚轮事件<code>wheel</code></li>
+<li>放大<code>event.deltaY &gt; 0</code>时，删除展示集合<code>dataSource</code>前后数据，并分别扔到存储被删除数据的临时集合里，直到最小展示条数</li>
+<li>缩小时「尽可能多的展示数据」，分两个情况，<ol>
+<li>当已展示条数大于最大展示条数时 或 左侧临时集合条数小于最小展示条数时，<strong>请求接口</strong>并将请求数据合并到左侧临时集合中</li>
+<li>删除临时集合的数据，并扔到展示集合中</li>
+</ol>
+</li>
+<li>处理完数据，清除画布，重新渲染</li>
+</ol>
+<h1 id="应用层的思考"><a href="#应用层的思考" class="headerlink" title="应用层的思考"></a>应用层的思考</h1><p><strong>数据如何来：</strong><br><strong>初始时</strong>，默认展示为 10 条<code>pageSize=10</code>，最大展示条数为 20 条<code>maxShowSize = pageSize*2</code>，所以需要预准备 30 条数据<code>pageSize+maxShowSize</code>，也就是首次加载 30 条数据。<br><strong>更新时</strong></p>
+<ol>
+<li>拖拽什么时候请求新数据：拖拽结束后请求新数据</li>
+</ol>
+<p>因为一次最多拖<code>maxShowSize</code>，<strong>当左侧临时集合数据小于</strong><code>**maxShowSize**</code><strong>时</strong>，请求接口数据，请求<code>maxShowSize</code>条</p>
+<ol start="2">
+<li>缩放什么时候请求新数据：缩放结束后，<strong>当左侧临时集合数据小于</strong><code>**maxShowSize**</code><strong>时</strong></li>
+</ol>
+<p>因为没有缩放结束事件，我们可以观察下缩放时的时间间隔，在<code>wheel</code>事件里打印<code>Date.now()</code>，发现滚动时间间隔在 200ms 以内，保险起见我们取个 500ms。<br>当滚动时间超过了 500ms，我们就判断为滚动结束：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> timer = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">kWrapNode.<span class="title function_">addEventListener</span>(<span class="string">&quot;wheel&quot;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span><br><span class="line">  <span class="comment">// 1. 先判断是否停止 2.停止后做什么</span></span><br><span class="line">  <span class="keyword">if</span> (timer) &#123;</span><br><span class="line">    <span class="built_in">clearTimeout</span>(timer);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 模拟缩放结束事件</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">wheelStop</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 滚动停止时执行的代码</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">warn</span>(<span class="string">&quot;wheelStop&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (leftDataSource.<span class="property">length</span> &lt; maxShowSize) &#123;</span><br><span class="line">      <span class="comment">// 请求数据</span></span><br><span class="line">      <span class="title function_">loadData</span>(maxShowSize, dataSource[<span class="number">0</span>].<span class="property">date</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        leftDataSource = [...res, ...leftDataSource];</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">  timer = <span class="built_in">setTimeout</span>(wheelStop, <span class="number">500</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/Map%E5%92%8CSet%E3%80%81Map%E5%92%8CObject%E7%9A%84%E5%8C%BA%E5%88%AB/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-18 21:45:47
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
+                        #项目
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E9%9A%BE%E7%82%B9"><span class="toc-text">技术难点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#value-%E5%AF%B9%E5%BA%94%E7%9A%84%E7%BA%B5%E5%9D%90%E6%A0%87"><span class="toc-text">value 对应的纵坐标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#x-%E8%BD%B4%E5%85%83%E7%B4%A0%E5%8A%A8%E6%80%81%E9%9A%94%E7%82%B9%E5%B1%95%E7%A4%BA"><span class="toc-text">x 轴元素动态隔点展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E6%AC%A1%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF%E5%89%8D%E5%90%8E%E6%8E%A7%E5%88%B6%E7%82%B9"><span class="toc-text">三次贝塞尔曲线前后控制点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%85%E5%8A%A9%E7%BA%BF"><span class="toc-text">辅助线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%96%E6%8B%BD"><span class="toc-text">拖拽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%A9%E6%94%BE"><span class="toc-text">缩放</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E7%9A%84%E6%80%9D%E8%80%83"><span class="toc-text">应用层的思考</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

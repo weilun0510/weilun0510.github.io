@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      Hooks-useRef 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">Hooks-useRef</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/hooks/" title="hooks">
+                    #hooks
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p>作用：</p>
+<ol>
+<li>访问 DOM 节点&#x2F;react 元素<ul>
+<li>useRef 替换 class 组件中的 createRef</li>
+<li>使用 forwardRef 传递 ref 引用</li>
+<li>使用 useImperativeHandle 自定义暴露实例值</li>
+</ul>
+</li>
+<li>保持变量引用</li>
+</ol>
+<p><a name="aAQ1Q"></a></p>
+<h1 id="保持变量的引用"><a href="#保持变量的引用" class="headerlink" title="保持变量的引用"></a>保持变量的引用</h1><p>在下面这个例子中，如果我们只是想设置一个定时器，可以使用局部变量<code>id</code>，但是如果我们想要在其他地方清除这个定时器，<code>useRef</code>就够帮助我们保存定时器的引用。</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">React</span>, &#123; useState, useEffect, useRef &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="string">&quot;./index.css&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cardDataList = [</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&quot;杭州市通用5元券&quot;</span>,</span><br><span class="line">    <span class="attr">subTitle</span>:</span><br><span class="line">      <span class="string">&quot;杭味面馆非常好吃，太好吃了，相当不错，味道鲜美，特别划算，快快抢购，聚划算&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="attr">title</span>: <span class="string">&quot;杭州市10元券&quot;</span>,</span><br><span class="line">    <span class="attr">subTitle</span>: <span class="string">&quot;兰州拉面非常好吃&quot;</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">delay</span> = (<span class="params">data</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">resolve</span>(data);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/** 这里是react实现方式**/</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">CardReact</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; data &#125; = props;</span><br><span class="line">  <span class="keyword">let</span> [btnText, setBtnText] = <span class="title function_">useState</span>(<span class="number">10</span>);</span><br><span class="line">  <span class="keyword">let</span> timer = <span class="title function_">useRef</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 抢购</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleBuy</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">delay</span>(<span class="string">&quot;已抢购&quot;</span>).<span class="title function_">then</span>(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">setBtnText</span>(res);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 开始倒计时</span></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    timer.<span class="property">current</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">setBtnText</span>(--btnText);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="function">() =&gt;</span> &#123;</span><br><span class="line">      timer.<span class="property">current</span> &amp;&amp; <span class="built_in">clearInterval</span>(timer.<span class="property">current</span>);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 满足条件后清除定时器</span></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (btnText &lt; <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// If we just wanted to set an interval, we wouldn’t need the ref (id could be local to the effect),</span></span><br><span class="line">      <span class="comment">// but it’s useful if we want to clear the interval from an event handler:</span></span><br><span class="line">      <span class="built_in">clearInterval</span>(timer.<span class="property">current</span>);</span><br><span class="line">      <span class="title function_">setBtnText</span>(<span class="string">&quot;抢购&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, [btnText]);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;card&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;info&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;title&quot;</span>&gt;</span>&#123;data.title&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;subTitle&quot;</span>&gt;</span>&#123;data.subTitle&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">className</span>=<span class="string">&quot;btn&quot;</span> <span class="attr">onClick</span>=<span class="string">&#123;handleBuy&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        &#123;btnText&#125;</span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">CardList</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;props.list.map((data) =&gt; (</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">CardReact</span> <span class="attr">data</span>=<span class="string">&#123;data&#125;</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      ))&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">CardList</span> <span class="attr">list</span>=<span class="string">&#123;cardDataList&#125;</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a name="DT64N"></a></p>
+<h1 id="ref-回调函数实参不更新问题"><a href="#ref-回调函数实参不更新问题" class="headerlink" title="ref 回调函数实参不更新问题"></a>ref 回调函数实参不更新问题</h1><figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CustomizeContext</span> = <span class="title function_">createContext</span>(defaultV);</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> &#123; <span class="title class_">CustomizeContext</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Customize</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> [sceneList, setSceneList] = useState&lt;<span class="title class_">ILiveScene</span>[]&gt;([]);</span><br><span class="line">  <span class="keyword">const</span> [activeLayerIndex, setActiveLayerIndex] = <span class="title function_">useState</span>(-<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">updateSceneList</span> = (<span class="params">sceneList: ILiveScene[]</span>) =&gt; &#123;</span><br><span class="line">    <span class="title function_">setSceneList</span>(<span class="title function_">cloneDeep</span>(sceneList));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">updateActiveLayerIndex</span> = (<span class="params">layerId: <span class="built_in">string</span> | -<span class="number">1</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span> (layerId === -<span class="number">1</span>) &#123;</span><br><span class="line">      <span class="title function_">setActiveLayerIndex</span>(-<span class="number">1</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> layerIndex = sceneList[activeSceneIndex].<span class="property">layout</span>.<span class="property">layers</span>.<span class="title function_">findIndex</span>(</span><br><span class="line">        <span class="function">(<span class="params">x</span>) =&gt;</span> x.<span class="property">id</span> === layerId</span><br><span class="line">      );</span><br><span class="line"></span><br><span class="line">      <span class="title function_">setActiveLayerIndex</span>(layerIndex);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">Container</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">CustomizeContext.Provider</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        <span class="attr">value</span>=<span class="string">&#123;&#123;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">liveId</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">sceneList</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">activeSceneIndex</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">activeLayerIndex</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">updateSceneList</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">updateActiveSceneIndex</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">          <span class="attr">updateActiveLayerIndex</span>,</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">        &#125;&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">      &gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">Scene</span> /&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;/<span class="name">CustomizeContext.Provider</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">Container</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Customize</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  useRef,</span><br><span class="line">  useState,</span><br><span class="line">  useEffect,</span><br><span class="line">  useContext,</span><br><span class="line">  useLayoutEffect,</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">CustomizeContext</span> &#125; <span class="keyword">from</span> <span class="string">&quot;../../../index&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Scene</span> = (<span class="params">&#123; zIndex &#125;: SceneProp</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> contextData = <span class="title function_">useContext</span>(<span class="title class_">CustomizeContext</span>);</span><br><span class="line">  <span class="keyword">const</span> &#123;</span><br><span class="line">    sceneList,</span><br><span class="line">    activeSceneIndex,</span><br><span class="line">    updateSceneList,</span><br><span class="line">    updateActiveLayerIndex,</span><br><span class="line">    activeLayerIndex,</span><br><span class="line">  &#125; = contextData;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 保存drop节点，监听拖拽事件</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> node drop节点</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span> layer 该节点对应的数据</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">handleDropRefCallback</span> = (<span class="params"></span></span><br><span class="line"><span class="params">    node: <span class="built_in">any</span>,</span></span><br><span class="line"><span class="params">    layer: ILiveScene[<span class="string">&quot;layout&quot;</span>][<span class="string">&quot;layers&quot;</span>][<span class="built_in">number</span>]</span></span><br><span class="line"><span class="params">  </span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> map = <span class="title function_">getMap</span>();</span><br><span class="line">    <span class="keyword">if</span> (node) &#123;</span><br><span class="line">      map.<span class="title function_">set</span>(layer.<span class="property">id</span>, node);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 按下非 active drop</span></span><br><span class="line">      node.<span class="title function_">addEventListener</span>(<span class="string">&quot;mousedown&quot;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (!activeDropStateRef.<span class="property">current</span>.<span class="property">isDragging</span>) &#123;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">isResize</span> = <span class="literal">false</span>;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">isDragging</span> = <span class="literal">true</span>;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">startX</span> = e.<span class="property">clientX</span>;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">startY</span> = e.<span class="property">clientY</span>;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">node</span> = node;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">id</span> = layer.<span class="property">id</span>;</span><br><span class="line">          activeDropStateRef.<span class="property">current</span>.<span class="property">rect</span> = layer.<span class="property">rect</span>;</span><br><span class="line"></span><br><span class="line">          <span class="comment">// node.style.zIndex = (zIndex + 1).toString();</span></span><br><span class="line">          <span class="title function_">updateActiveLayerIndex</span>(layer.<span class="property">id</span>);</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      map.<span class="title function_">delete</span>(layer.<span class="property">id</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;styles.sceneContentWrap&#125;</span> <span class="attr">style</span>=<span class="string">&#123;sceneStyle&#125;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      &#123;sceneList[activeSceneIndex].layout.layers.map((layer, i) =&gt; &#123;</span></span><br><span class="line"><span class="language-xml">        let cp;</span></span><br><span class="line"><span class="language-xml">        const &#123; text, type, digitalHuman, image, video, z &#125; = layer;</span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">        return (</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;<span class="name">div</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">className</span>=<span class="string">&#123;cx(styles.drop,</span> &#123;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">              [<span class="attr">styles.active</span>]<span class="attr">:</span> <span class="attr">layer.id</span> === <span class="string">activeDropStateRef.current.id,</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            &#125;)&#125;</span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            // <span class="attr">key</span>=<span class="string">&#123;layer.id&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">key</span>=<span class="string">&#123;i&#125;</span></span></span></span><br><span class="line"><span class="tag"><span class="language-xml">            <span class="attr">ref</span>=<span class="string">&#123;(node)</span> =&gt;</span> handleDropRefCallback(node, layer, i)&#125;</span></span><br><span class="line"><span class="language-xml">            style=&#123;&#123;</span></span><br><span class="line"><span class="language-xml">              left: rect.x,</span></span><br><span class="line"><span class="language-xml">              top: rect.y,</span></span><br><span class="line"><span class="language-xml">              width: rect.width,</span></span><br><span class="line"><span class="language-xml">              height: rect.height,</span></span><br><span class="line"><span class="language-xml">              backgroundColor: type === &quot;text&quot; ? text.backgroundColor : &quot;&quot;,</span></span><br><span class="line"><span class="language-xml">              zIndex: z,</span></span><br><span class="line"><span class="language-xml">            &#125;&#125;</span></span><br><span class="line"><span class="language-xml">          &gt;</span></span><br><span class="line"><span class="language-xml">            <span class="tag">&lt;<span class="name">img</span> <span class="attr">style</span>=<span class="string">&#123;s&#125;</span> <span class="attr">src</span>=<span class="string">&#123;image.url&#125;</span> /&gt;</span>;</span></span><br><span class="line"><span class="language-xml">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        );</span></span><br><span class="line"><span class="language-xml">      &#125;)&#125;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Scene</span>;</span><br></pre></td></tr></table></figure>
+
+<p>有一个列表，为了保存列表项节点，我使用 ref 回调来处理。</p>
+<p>有这么个场景，点击 layers 中的第一项并做删除操作，layers.splice(0, 1)，然后更新 layers 引用</p>
+<p>点击第二项时，我期望<code>handleDropRefCallback</code> 中的<code>i</code>为 0，因为 layer 已经更新了，但是结果为 1，也就是还是首次 i 的值</p>
+<p>纳闷了好久，后面才发现是<code>key</code>属性<code>key=&#123;layer.id&#125;</code>保持了该节点的稳定，该节点没有重新渲染，所以 ref 的回调函数还是旧的回调函数，i 的值还是第一项还未删除时的值。<br />解决这个问题，只需要将 key 改为<code>key=&#123;i&#125;</code>，此时列表项重新渲染，<code>handleDropRefCallback</code> 中的<code>i</code>就是期望值 0。</p>
+<p>但是我们清楚，用下标作为 key 的值，如果列表发生更改（新增、删除）时，那么其他列表项的 key 值可能会发生变化，那么变化的部分就会造成没必要的重新渲染问题。所以我还是想用<code>layer.id</code>作为 key 值，通过 id，遍历 layers，查找当前项所在的下标位置。<br />结果却出乎意外，发现 Provied.value 对象中<code>updateLayersFn</code>函数中的 layers 还是旧值，难道 Provider 组件 value 对象中的函数引用了 layers，此时产生了闭包对象？</p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/27/Hooks-useReducer/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/hooks/" title="hooks">
+                        #hooks
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/27/Hooks-useImperativeHandle-forwardRef/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BF%9D%E6%8C%81%E5%8F%98%E9%87%8F%E7%9A%84%E5%BC%95%E7%94%A8"><span class="toc-text">保持变量的引用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ref-%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%E5%AE%9E%E5%8F%82%E4%B8%8D%E6%9B%B4%E6%96%B0%E9%97%AE%E9%A2%98"><span class="toc-text">ref 回调函数实参不更新问题</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

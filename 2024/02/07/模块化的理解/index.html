@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      模块化的理解 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">模块化的理解</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326768564.png" alt="pic.1708326768564"></p>
+<h1 id="什么是模块化"><a href="#什么是模块化" class="headerlink" title="什么是模块化"></a>什么是模块化</h1><p>模块化，就是把一个大的问题，化解为小的问题在这种思维下提炼出来的工程化解决方案。</p>
+<h1 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h1><p>核心思想就是隔离。要有自己的内部属性，内部方法，以及自己来决定哪些属性与方法能够被其他模块访问。</p>
+<h1 id="模块的设计目的是什么？"><a href="#模块的设计目的是什么？" class="headerlink" title="模块的设计目的是什么？"></a>模块的设计目的是什么？</h1><p>有了模块，我们可以更方便的使用别人的代码，想要什么功能，就加载什么模块。</p>
+<h1 id="什么是-js-模块？"><a href="#什么是-js-模块？" class="headerlink" title="什么是 js 模块？"></a>什么是 js 模块？</h1><p>在 es6 之前，JavaScript 没有官方规范，主要采用 CommonJS 和 AMD 这两种规范。</p>
+<h1 id="无模块化"><a href="#无模块化" class="headerlink" title="无模块化"></a>无模块化</h1><p>函数 -&gt; 命名空间 -&gt; 立即执行函数</p>
+<h1 id="CommonJS-规范"><a href="#CommonJS-规范" class="headerlink" title="CommonJS 规范"></a>CommonJS 规范</h1><p>nodeJS 采用的就是 CommonJS 规范，运行在 nodeJS 中的规范。</p>
+<p>CommonJS 的加载方式称为运行时加载，以下代码的实质是加载整个<code>fs</code>对象，再从<code>fs</code>对象上读取这三个方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CommonJS模块</span></span><br><span class="line"><span class="keyword">let</span> &#123; stat, exists, readfile &#125; = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等同于</span></span><br><span class="line"><span class="keyword">let</span> _fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> stat = _fs.<span class="property">stat</span>;</span><br><span class="line"><span class="keyword">let</span> exists = _fs.<span class="property">exists</span>;</span><br><span class="line"><span class="keyword">let</span> readfile = _fs.<span class="property">readfile</span>;</span><br></pre></td></tr></table></figure>
+
+<h2 id="require"><a href="#require" class="headerlink" title="require()"></a>require()</h2><p>在 node 源码中有一个 module.js 文件，这个文件实现了 node 的整个模块加载系统。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// module.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Module</span>(<span class="params">id, parent</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">id</span> = id;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">exports</span> = &#123;&#125;;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">parent</span> = parent;</span><br><span class="line">    <span class="comment">//...</span></span><br></pre></td></tr></table></figure>
+
+<p>我们在 nodeJS 中使用的 require()方法调用的就是 module.require 方法。具体可参考 <a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/113478">Node.js 模块加载机制 Require()</a></p>
+<p><strong><em>注意：node 中使用的</em></strong><code>**_require()_**</code><strong><em>和 RequireJS 是两个东西。</em></strong></p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>主要有 module、exports、require。</p>
+<h3 id="导出：module"><a href="#导出：module" class="headerlink" title="导出：module"></a>导出：<strong>module</strong></h3><p>module.exports 由 Module 对象创建。如果我们想导出一个对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a-common.js(导出)</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123; <span class="attr">foo</span>: <span class="string">&quot;bar&quot;</span> &#125;;</span><br><span class="line"></span><br><span class="line">或者;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span>.<span class="property">foo</span> = <span class="string">&quot;bar&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>exports 是 module.exports 的一个引用，所以我们可以使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ✅</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">foo</span> = <span class="string">&quot;bar&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>错误使用，这相当于重新定义了 exports</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ❎</span></span><br><span class="line"><span class="built_in">exports</span> = &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="导入：require"><a href="#导入：require" class="headerlink" title="导入：require"></a>导入：require</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="built_in">require</span>(<span class="string">&quot;./a-common.js&quot;</span>);</span><br><span class="line"></span><br><span class="line">使用;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(o.<span class="property">foo</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><p>优点：<br>解决了依赖、全局变量污染的问题</p>
+<p>缺点：<br>因为 nodeJS 是运行在服务端，服务端所有的模块是放在本地的，模块的加载速度就是硬盘的读取速度，是同步的。但是浏览器的模块是放在服务器端，如果一个模块过大，浏览器会处于一种假死状态。</p>
+<p>因此，浏览器端的模块不能采用”同步加载”，只能采用”异步加载”。所以 AMD 规范诞生了。</p>
+<h1 id="AMD-规范"><a href="#AMD-规范" class="headerlink" title="AMD 规范"></a>AMD 规范</h1><p>AMD 是”Asynchronous Module Definition”的缩写，意思是”异步模块定义“。模块的加载不影响后面语句的运行。所有依赖这个模块的语句，都定义在一个回调函数中，等模块加载完毕，回调函数才会执行。<br>define 和 require 就是 require.js 在全局注入的函数。</p>
+<p>AMD 规范主要由 <a target="_blank" rel="noopener" href="https://requirejs.org/">require.js</a> 和 <a target="_blank" rel="noopener" href="https://github.com/cujojs/curl">curl.js</a> 这两个 JavaScript 库实现。<br>在网页中嵌入 require.js，就可以进行模块化编程了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script data-main=<span class="string">&quot;scripts/main&quot;</span> src=<span class="string">&quot;scripts/require.js&quot;</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="定义模块"><a href="#定义模块" class="headerlink" title="定义模块"></a>定义模块</h2><p>使用 define 方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">define</span>(<span class="string">&quot;A&quot;</span>, [<span class="string">&quot;require&quot;</span>, <span class="string">&quot;exports&quot;</span>], <span class="keyword">function</span> (<span class="params"><span class="built_in">require</span>, <span class="built_in">exports</span></span>) &#123;</span><br><span class="line">  <span class="built_in">exports</span>.<span class="property">fun</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">&quot;B&quot;</span>).<span class="property">fun</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="导入模块"><a href="#导入模块" class="headerlink" title="导入模块"></a>导入模块</h2><p>AMD 也是采用 require()语句加载模块，<code>require([module], callback)</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">&quot;math&quot;</span>], <span class="keyword">function</span> (<span class="params">math</span>) &#123;</span><br><span class="line">  math.<span class="title function_">add</span>(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意，不要与 NodeJS 中的 require()混淆。CommonJS 中的 require 是 NodeJS 源代码 module.js 文件中定义的方法，AMD 中的 require()是由 RequireJs 实现的。</strong></p>
+<h1 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h1><p>CMD，全称 Common Module Definition，它整合了 CommonJS 和 AMD 规范的特点。<br>主要区别为一下两点：</p>
+<ol>
+<li>CMD 可以同步加载模块，也可以异步加载，而 AMD 需要异步加载模块</li>
+<li>CMD 遵循依赖就近原则，而 AMD 遵循依赖前置原则。也就是说 CMD 在使用模块前，引入模块即可，而 AMD 需要把所有的依赖提前放在依赖数组中。</li>
+</ol>
+<h1 id="UMD"><a href="#UMD" class="headerlink" title="UMD"></a>UMD</h1><p>umd，全称 Universal Module Definition，它允许在环境中同时使用 AMD 规范和 CommonJS 规范。</p>
+<h1 id="ES-Module"><a href="#ES-Module" class="headerlink" title="ES Module"></a>ES Module</h1><p>module 可完全取代 CommonJS 和 AMD 规范，成为浏览器和服务器通用的解决方案。<br>ES Module 的设计思想是静态化，也就是说在编译时就确定了模块的依赖关系，而 CommonJS 和 AMD 是在运行时确定，这是 EM 模块和其他模块最显著的差别；第二个差别是 ES6 模块输出的是值的引用，而 CommonJS 输出的是值的拷贝。</p>
+<p>ES6 模块的加载方式称为“编译时加载”，在编译时就完成了加载，效率要比 CommonJS 和 AMD 的“运行时加载”效率高。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES6模块</span></span><br><span class="line"><span class="keyword">import</span> &#123; stat, exists, readFile &#125; <span class="keyword">from</span> <span class="string">&quot;fs&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码只会从<code>fs</code>中加载这 3 个方法，其他方法不会加载。</p>
+<h2 id="引入模块"><a href="#引入模块" class="headerlink" title="引入模块"></a>引入模块</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.js</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;my name is test.js&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;test: &quot;</span>, test);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>import 表示引入一个模块</li>
+<li>test 可理解为要引入模块的名字</li>
+<li>from 表示从哪里引入</li>
+<li>‘.&#x2F;test’ 为 ‘.&#x2F;test.js’ 的简写，表示将要引入的模块的路径</li>
+</ul>
+<p>引入这个模块的同时，<code>&#39;./test&#39;</code>里的代码也执行了。因为 test.js 没有对外暴露接口，所以 test 为空对象。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326785878.png" alt="pic.1708326785878"></p>
+<h2 id="对外提供接口"><a href="#对外提供接口" class="headerlink" title="对外提供接口"></a>对外提供接口</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;my name is test.js&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> name = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> obj = &#123; <span class="attr">a</span>: <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> <span class="title function_">fn</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;fn&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name,</span><br><span class="line">  obj,</span><br><span class="line">  arr,</span><br><span class="line">  fn,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>使用 <code>export default</code> 对外暴露一个对象。当使用<code>import test from &#39;./test&#39;</code>时，test 就是这个暴露的对象<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326805238.png" alt="pic.1708326805238"></p>
+<p>我们还可以仅通过 export 暴露几个方法和属性，在 test 中添加以下代码，看看 index.js 中的 test 会发生什么变化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// test.js</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> age = <span class="number">20</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">bar</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;bar&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>结果发现 test 并没有什么变化，因为它仅仅等于<code>export defaule</code>所暴露的对象</p>
+<p>如果想要获取 test.js 对外暴露的所有接口，可通过如下模式获取</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> test <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>*</code>号表示所有，是比较常用的通配符，as 表示别名。<code>* as test</code> 表示将 test.js 对外暴露的所有接口组成的对象，命名为 test。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326814698.png" alt="pic.1708326814698"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> test, &#123; age, bar &#125; <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 等于以下写法</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> test <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> allTest <span class="keyword">from</span> <span class="string">&quot;./test&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> &#123; age, bar &#125; = allTest;</span><br></pre></td></tr></table></figure>
+
+<p>这种写法非常常见，test 仍表示为<code>export default</code> 所暴露的对象，<code>&#123; age, bar &#125;</code> 表示<strong>用解构的语法从返回的整个对象中取对应的接口</strong>。结果显而易见<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326822951.png" alt="pic.1708326822951"></p>
+<p>在 react，这种使用方法很常见，我们能根据导入语法，就知道 react 内部是如何封装接口的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; lazy &#125; <span class="keyword">from</span> <span class="string">&#x27;react&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对应的导出</span></span><br><span class="line">expoet <span class="keyword">default</span> &#123;</span><br><span class="line">	<span class="attr">lazy</span>: <span class="function">() =&gt;</span> &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>还有另一种写法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> &#123; <span class="keyword">default</span> <span class="keyword">as</span> <span class="title class_">RightMain</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./right-main&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// import RightMain from &#x27;./right-main&#x27;;</span></span><br><span class="line"><span class="comment">// export &#123;</span></span><br><span class="line"><span class="comment">//   RightMain</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<br><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/113478">https://developer.aliyun.com/article/113478</a></p>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E6%9F%AF%E9%87%8C%E5%8C%96/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-text">什么是模块化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84%E8%AE%BE%E8%AE%A1%E7%9B%AE%E7%9A%84%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">模块的设计目的是什么？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF-js-%E6%A8%A1%E5%9D%97%EF%BC%9F"><span class="toc-text">什么是 js 模块？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E6%A8%A1%E5%9D%97%E5%8C%96"><span class="toc-text">无模块化</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CommonJS-%E8%A7%84%E8%8C%83"><span class="toc-text">CommonJS 规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#require"><span class="toc-text">require()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8"><span class="toc-text">使用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%EF%BC%9Amodule"><span class="toc-text">导出：module</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%EF%BC%9Arequire"><span class="toc-text">导入：require</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">优缺点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#AMD-%E8%A7%84%E8%8C%83"><span class="toc-text">AMD 规范</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9A%E4%B9%89%E6%A8%A1%E5%9D%97"><span class="toc-text">定义模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">导入模块</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#CMD"><span class="toc-text">CMD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#UMD"><span class="toc-text">UMD</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ES-Module"><span class="toc-text">ES Module</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="toc-text">引入模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%B9%E5%A4%96%E6%8F%90%E4%BE%9B%E6%8E%A5%E5%8F%A3"><span class="toc-text">对外提供接口</span></a></li></ol></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>

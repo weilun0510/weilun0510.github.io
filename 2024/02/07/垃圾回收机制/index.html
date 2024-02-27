@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh" color-mode="light">
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="weilun" />
+  <!-- Open Graph Description 简短摘要-->
+  
+  <!-- 用于搜索引擎的文章摘要 -->
+  
+  
+  
+  <title>
+    
+      垃圾回收机制 
+      
+      
+      |
+    
+     维论
+  </title>
+
+  
+    <link rel="apple-touch-icon" href="/images/favicon.png">
+    <link rel="icon" href="/images/favicon.png">
+  
+
+  <!-- Raleway-Font -->
+  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+  <!-- hexo site css -->
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
+  <!-- 代码块风格 -->
+  
+
+  <!-- jquery3.3.1 -->
+  
+    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
+  
+
+  <!-- fancybox -->
+  
+    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
+    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
+  
+  
+<script src="/js/fancybox.js"></script>
+
+
+  
+
+  
+
+  <script>
+    var html = document.documentElement
+    const colorMode = localStorage.getItem('color-mode')
+    if (colorMode) {
+      document.documentElement.setAttribute('color-mode', colorMode)
+    }
+  </script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+  <body>
+    <div id="app">
+      <div class="header">
+  <div class="avatar">
+    <a href="/">
+      <!-- 头像取消懒加载，添加no-lazy -->
+      
+        <img src="/images/avatar.png" alt="">
+      
+    </a>
+    <div class="nickname"><a href="/">维论</a></div>
+  </div>
+  <div class="navbar">
+    <ul>
+      
+        <li class="nav-item" data-path="/">
+          <a href="/">首页</a>
+        </li>
+      
+        <li class="nav-item" data-path="/archives/">
+          <a href="/archives/">归档</a>
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          <a href="/tags/">标签</a>
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          <a href="/about/">关于</a>
+        </li>
+      
+    </ul>
+  </div>
+</div>
+
+
+<script src="/js/activeNav.js"></script>
+
+
+
+      <div class="flex-container">
+        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
+<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+
+
+  <!-- LaTex Display -->
+
+  
+    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
+  
+  <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    }
+  </script>
+
+
+
+
+
+  <!-- clipboard -->
+
+  
+    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
+  
+  
+<script src="/js/codeCopy.js"></script>
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
+  <div class="container post-details" id="post-details">
+    <div class="post-content">
+      <div class="post-title">垃圾回收机制</div>
+      <div class="post-attach">
+        <span class="post-pubtime">
+          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+          2024-02-27 22:30:13
+        </span>
+        
+              <span class="post-tags">
+                <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                
+                <span class="span--tag mr-8">
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
+                  </a>
+                </span>
+                
+              </span>
+          
+      </div>
+      <div class="markdown-body">
+        <p><strong>垃圾</strong>：无任何引用的对象</p>
+<p><strong>回收</strong>：清理被垃圾占用的内存</p>
+<p><strong>区域</strong>：堆内存（栈内存有自己的回收机制）</p>
+<p><strong>发生时间</strong>：程序空闲时间</p>
+<h1 id="垃圾如何产生的"><a href="#垃圾如何产生的" class="headerlink" title="垃圾如何产生的"></a>垃圾如何产生的</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">a = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326437848.png" alt="pic.1708326437848"></p>
+<p>将变量 a 赋值为 2 的时候，会在内存中开辟一个新的空间，变量 a 指向这个新的地址，那么虚线部分的数据失去了连接，这时候它就成为了一个垃圾。如果不清理垃圾，等所以内存被占满时，内存就会溢出，所以有了垃圾回收机制。</p>
+<p>垃圾回收机制是什么<br>垃圾回收机制是 V8 引擎实现的一套清理垃圾的方案，它会在程序空闲时，周期性的清理被标记为是垃圾的内存。</p>
+<h1 id="识别垃圾（标记方式）"><a href="#识别垃圾（标记方式）" class="headerlink" title="识别垃圾（标记方式）"></a>识别垃圾（标记方式）</h1><p>识别垃圾有两种标记法，引用计数法和根搜索算法。</p>
+<h2 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h2><p>通过添加一个计数变量的方法，当对象被初始化赋值后，该变量计数为 1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = &#123; <span class="attr">n</span>: <span class="number">1</span> &#125;; <span class="comment">// 计数变量 = 1</span></span><br></pre></td></tr></table></figure>
+
+<p>当有一个地方引用它时，变量计数+1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> b = a; <span class="comment">// 计数变量 +1 = 2</span></span><br><span class="line"><span class="keyword">var</span> c = a; <span class="comment">// 计数变量 +1 = 3</span></span><br></pre></td></tr></table></figure>
+
+<p>引用失效时，变量计数-1</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="literal">null</span>; <span class="comment">// 计数变量 -1 = 2</span></span><br><span class="line">b = &#123;&#125;; <span class="comment">// 计数变量 -1 = 1</span></span><br></pre></td></tr></table></figure>
+
+<p>当计数器为 0 时，则表示失去了所有引用，该对象成为垃圾。</p>
+<p><strong>关联场景：改实现原理和数组 length 的实现一样。</strong></p>
+<p>优点就是简单、高效。缺点就是无法解决循环引用的问题，这会导致内存泄漏。这个一个重大缺陷，所以 V8 没有采用这种标记法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> p = &#123;</span><br><span class="line">  <span class="attr">n</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">next</span>: &#123;</span><br><span class="line">    <span class="attr">n</span>: <span class="number">2</span>,</span><br><span class="line">    <span class="attr">next</span>: p,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">p = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>![引用计数法的内存泄漏.png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326472502.png" alt="pic.1708326472502"><br>对象无法访问，计数也不为 0，无法被回收，导致内存泄漏。</p>
+<p>循环引用的问题并不是没有办法解决，这需要开发者手动删除引用，即<code>let a = null</code> 这种方式。</p>
+<h2 id="根搜索算法（标记法）"><a href="#根搜索算法（标记法）" class="headerlink" title="根搜索算法（标记法）"></a>根搜索算法（标记法）</h2><p>V8 采用根搜索算法，根搜索算法会对堆内存进行遍历，找到<strong>GC Root(根对象)<strong>引用的其他对象，</strong>能访问到的都标记为活跃对象</strong>，其余则为非活跃对象。</p>
+<p>如果不考虑循环引用，GC Roots Set(根集)会表现为一颗树状结构。考虑循环引用，则会呈现出图结构，所以不存在内存泄露问题。<br>![根搜索算法.png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326483934.png" alt="pic.1708326483934"></p>
+<p>根对象 Root：</p>
+<ul>
+<li>所有正在运行的栈上的引用变量</li>
+<li>全局对象 Global、window(对于浏览器来说，Glocal 等于 window)</li>
+<li>所有内置对象</li>
+</ul>
+<p>关于标记阶段指的注意的是，开始标记之前，需要先暂停应用线程(<code>stop-the-world</code>)</p>
+<h1 id="代际假说（The-Generational-Hypothesis）"><a href="#代际假说（The-Generational-Hypothesis）" class="headerlink" title="代际假说（The Generational Hypothesis）"></a>代际假说（The Generational Hypothesis）</h1><p>代际假说是垃圾回收中的一个重要术语，他主要有两个特点：</p>
+<ul>
+<li>大部分对象在内存中的存活周期都很短暂。例如执行上下文</li>
+<li>不死的对象，存活周期比较漫长。例如函数声明，全局对象</li>
+</ul>
+<h1 id="V8-回收器-Orinoco"><a href="#V8-回收器-Orinoco" class="headerlink" title="V8 回收器 Orinoco"></a>V8 回收器 Orinoco</h1><p>V8 回收器名叫 <code>Orinoco</code>。垃圾回收器在进行标记或回收行为时，会暂停 JS 主线程的执行。</p>
+<p>任何垃圾回收器的基本任务：</p>
+<ol>
+<li>识别死&#x2F;活对象</li>
+<li>回收&#x2F;重用死对象占用的内存</li>
+<li>压缩碎片内存（可选）</li>
+</ol>
+<p><code>Orinoco</code>利用代际假说这一假设，<strong>大多数对象都会在新生代中死亡，只有少数对象能在新生代中存活下来，然后移动到老生代。</strong></p>
+<p>所以，GC 复制算法得以在 V8 中被使用。</p>
+<h1 id="V8-回收算法（GC-复制算法）"><a href="#V8-回收算法（GC-复制算法）" class="headerlink" title="V8 回收算法（GC 复制算法）"></a>V8 回收算法（GC 复制算法）</h1><p><strong>分代回收</strong><br>在<code>Orinoco</code>中，存在两个不同的 GC。Minor GC: 用于回收新生代的垃圾，Major: 用于回收老生代的垃圾。</p>
+<p>对于存活周期漫长的对象，那他需要的空间肯定也比较大，对应的算法也就不同。</p>
+<h2 id="新生代-Minor-GC"><a href="#新生代-Minor-GC" class="headerlink" title="新生代(Minor GC)"></a>新生代(Minor GC)</h2><h3 id="Scavenge（深度优先-存在递归问题）"><a href="#Scavenge（深度优先-存在递归问题）" class="headerlink" title="Scavenge（深度优先 存在递归问题）"></a>Scavenge（深度优先 存在递归问题）</h3><p>Scavenge 是典型的牺牲空间换时间的复制算法。</p>
+<p>在<code>to-space</code>中，存在<code>$free</code>指针，用于指向当前对应空间可分配内存的起始地址。当我们从复制完一个对象后，<code>$free</code>会移动到新的起始位置。</p>
+<p>具体步骤为以下 4 步：</p>
+<ol>
+<li>从 Root 引用开始查询，通过根搜索算法标记活动对象和非活动对象</li>
+<li>复制<code>from-space</code>的活动对象到<code>to-space</code>中</li>
+<li>清空<code>from-space</code></li>
+<li><code>from-space</code>和<code>to-space</code>角色互换，以便下次回收</li>
+</ol>
+<p>第二步还有个细节，将某个活动对象复制到<code>to-space</code>后，会在<code>from-space</code>中将该对象标记为已复制，而不是马上清空该对象占用的空间。这是因为该对象可能被其他对象引用。</p>
+<p>还有一点，在<code>from-space</code>中找到某个活动对象（B）后，如果该活动对象下还有别的活动对象（A），就会将 A 复制到<code>to-space</code>。这是一个<strong>递归</strong>过程。</p>
+<p>递归的问题：</p>
+<ol>
+<li>持续占用栈内存，而且可能出现爆栈的情况</li>
+<li>执行一个函数就会创建一个执行上下文，也会持续占用内存</li>
+</ol>
+<p>递归带来的负担不可忽视，V8 并没有完全采用<code>Scavenge</code>算法，之后引入了<code>cheney</code>算法，用迭代来解决该问题。</p>
+<h3 id="cheney（广度优先-迭代）"><a href="#cheney（广度优先-迭代）" class="headerlink" title="cheney（广度优先 迭代）"></a>cheney（广度优先 迭代）</h3><p><code>cheney</code>算法引入了新的指针<code>$scan</code>，该指针用于标记<code>to-space</code>中，还没有被向下搜索过子对象的起始位置。</p>
+<ol>
+<li>从 Root 引用开始查询，通过根搜索算法标记活动对象和非活动对象</li>
+<li>依次将活动对象复制到<code>to-space</code>中（不再进行递归查找）</li>
+<li><code>$scan</code>指针不变，<code>$free</code>指针向右移动</li>
+<li>Root 节点中没有找到别的引用后，我们从<code>to-space</code>（可以看做队列）头部开始搜索。<code>to-space</code>头部的对象成为了新的 Root 节点，<code>$scan</code>指针向右移动（出队）如果发现新节点存在引用，则复制进入队列。</li>
+<li><code>$scan</code>指针依次向右移动，发现新对象就复制入队，直到<code>$scan</code>指针与<code>$free</code>指针重合，表示所有活动对象查询完毕。</li>
+<li>剩下的就是清理空间然后互换。</li>
+</ol>
+<p>知识体系关联：与 Promise 的任务队列方式相似</p>
+<figure class="highlight tsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">PromiseJobs</span> = [];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 加入 job1</span></span><br><span class="line"><span class="title class_">PromiseJobs</span>.<span class="title function_">push</span>(job1);</span><br><span class="line"><span class="comment">// 加入 job2</span></span><br><span class="line"><span class="title class_">PromiseJobs</span>.<span class="title function_">push</span>(job2);</span><br><span class="line"></span><br><span class="line"><span class="title class_">PromiseJobs</span> = [job1, job2];</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> job;</span><br><span class="line"><span class="comment">// 将先进入队列的 job 移除队列，并执行</span></span><br><span class="line"><span class="comment">// PromiseJobs 是处于动态变化的，所以只能用 while 来处理这种动态循环的场景。不能用 for 循环</span></span><br><span class="line"><span class="keyword">while</span> ((job = <span class="title class_">PromiseJobs</span>.<span class="title function_">shift</span>())) &#123;</span><br><span class="line">  <span class="title function_">job</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>cheney 算法采用的是广度优先遍历，这就是迭代，这样把堆用做队列的方式，消除了 <code>scavenge</code>算法的递归风险。代价就是访问速度上，与<code>scavenge</code> 相比可能会稍微慢一点。</p>
+<p>知识体系关联：队列优先级的算法，在 React Fiber 架构中也有用到。</p>
+<h2 id="老生代-Major-GC"><a href="#老生代-Major-GC" class="headerlink" title="老生代(Major GC)"></a>老生代(Major GC)</h2><p><code>scavenge</code>算法为什么不合适老生代，因为</p>
+<ul>
+<li><code>scavenge</code>是复制算法，反复复制存活率高的对象没有意义</li>
+<li><code>scavenge</code> 是以空间换时间的算法，老生代内存空间很大，所以空间资源非常浪费</li>
+</ul>
+<p>所以老生代使用了<code>mark-sweep(标记清理)</code>和<code>mark-Compact(标记清理整理)</code></p>
+<h3 id="Mark-Sweep"><a href="#Mark-Sweep" class="headerlink" title="Mark-Sweep"></a>Mark-Sweep</h3><p><code>Mark-Sweep</code>算法分为两个阶段，标记和清理。标记依旧是通过根搜索算法。清理阶段与<code>scavenge</code>算法不同，<code>scavenge</code> 算法是复制后再清理，而<code>Mark-Sweep</code>是标记后直接清理。</p>
+<h3 id="Mark-Compact"><a href="#Mark-Compact" class="headerlink" title="Mark-Compact"></a>Mark-Compact</h3><p><code>Mark-Compact</code>是为了解决<code>Mark-Sweep</code>算法带来的内存缝隙而提出的解决方案。</p>
+<p>compact 主要做两件事：</p>
+<ol>
+<li>把活动对象移动到该去的位置</li>
+<li>修改引用，让他们指向新的地址</li>
+</ol>
+<p>![Mark-Compact.png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326499231.png" alt="pic.1708326499231"></p>
+<h2 id="全停顿-Stop-The-World"><a href="#全停顿-Stop-The-World" class="headerlink" title="全停顿(Stop-The-World)"></a>全停顿(Stop-The-World)</h2><p>JS 代码的运行需要用到 JS 引擎，垃圾回收也要用到 JS 引擎，如果这两者同时运行怎么办？答案是<strong>垃圾回收优于代码执行</strong>。代码会暂停执行，等待垃圾回收完毕再执行。这个过程称为<strong>全停顿</strong>。<br>但这样的代价就是页面明细卡顿，因此<code>Orinoco</code>还继续做了优化。</p>
+<h1 id="Orinoco-进一步优化"><a href="#Orinoco-进一步优化" class="headerlink" title="Orinoco 进一步优化"></a>Orinoco 进一步优化</h1><h3 id="增量标记-惰性清理"><a href="#增量标记-惰性清理" class="headerlink" title="增量标记+惰性清理"></a>增量标记+惰性清理</h3><p>2011 年，V8 从早期的<code>stop-the-world</code> 切换到 <code>Incremental</code>增量标记 + <code>Lazy Sweeping</code>惰性清理的模式。</p>
+<p>垃圾回收任务被拆分为多个小任务，然后在主线程空隙中执行这个小任务。</p>
+<p>增量标记是针对<strong>标记</strong>阶段的优化。只有当垃圾达到一定数量是，增量标记就会开启：<code>标记一点，JS代码运行一段</code></p>
+<p>惰性清理是针对<strong>清除</strong>阶段的优化。假如当前可用内存足以让代码快速执行，那就延迟清理，或清理部分垃圾。</p>
+<p>结合浏览器的<code>requestIdleCallback</code>，增量标记与惰性清理的出现，使主线程的最大停顿时间减少了 80%。页面更流畅了。</p>
+<p>但是也带来了问题，标记和代码执行的穿插，可能会造成<strong>对象引用改变、标记错误</strong>的现象。这就需要<strong>写屏障</strong>技术来记录这些引用关系的变化。</p>
+<p>2018 年，V8 同时引入了并行与并发，让垃圾回收的时间进一步缩短。</p>
+<h3 id="并行-Parallel"><a href="#并行-Parallel" class="headerlink" title="并行(Parallel)"></a>并行(Parallel)</h3><p>并行指的是主线程和辅助线程同时执行大致数量相等的清理任务。依旧采用<code>stop-the-world</code>的方式，但是将清理任务交给多个线程来执行。这是实现起来最简单的方案。<br>![多线程并行减少主线程等待时间.png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326507586.png" alt="pic.1708326507586"></p>
+<h3 id="并发-Concurrent"><a href="#并发-Concurrent" class="headerlink" title="并发(Concurrent)"></a>并发(Concurrent)</h3><p>并发指的是在不暂停 JS 代码执行的同时，辅助线程在后台执行垃圾回收工作。除了<strong>需要写屏障</strong>技术，还可能会存在辅助线程与 JS 主线程同时读取或修改同一对象的问题，这就能能处理了。这是三种技术中实现起来最难的。<br>![并发执行(不暂停js的执行).png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326513601.png" alt="pic.1708326513601"></p>
+<p><code>知识体系关联：React 18 的并发(Concurrent)</code></p>
+<h1 id="V8-当前的垃圾回收机制"><a href="#V8-当前的垃圾回收机制" class="headerlink" title="V8 当前的垃圾回收机制"></a>V8 当前的垃圾回收机制</h1><p>在新生代中，使用并行机制。在将活动对象从<code>from-space</code>赋值到<code>to-space</code>时，启用多个辅助线程并行整理。由于多个线程可能会竞争同一个对象，因此第一个线程对该对象操作之后，都必须维护这个对象的转发地址，以便其他线程能够快速判断该对象是否已被复制。</p>
+<p>新生代：<strong>并行方式+cheney 算法</strong></p>
+<p>在老生代中，如果堆中的内存大小超过某个阈值，会启用并发标记任务。每个辅助线程都会去追踪每个标记到的对象的指针以及对这个对象的引用，JS 代码执行的之后，并发标记也在后台的辅助进程中进行，当堆中的某个对象被修改的时候，写入屏障技术会在辅助线程在进行并发标记时进行追踪。</p>
+<p>并发标记完成后，辅助线程会进行内存整理，不影响 JS 代码的执行。</p>
+<h1 id="从-V8-到实践"><a href="#从-V8-到实践" class="headerlink" title="从 V8 到实践"></a>从 V8 到实践</h1><p>了解 V8 垃圾回收的内部机制，可以帮助我们考虑内存使用。例如，从垃圾回收角度来看，存活周期漫长的对象维护成本会偏高。因为</p>
+<ul>
+<li>对于无效函数的声明就应该更严谨</li>
+<li>使用 shaking 技术</li>
+<li>减少闭包对象的大小（Redux 的 Provider 注入，Provider 只放少量必要的数据）</li>
+</ul>
+<p>参考：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://xiaozhuanlan.com/advance/4158792360">https://xiaozhuanlan.com/advance/4158792360</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.teqng.com/2021/09/01/13%E5%BC%A0%E5%9B%BE%EF%BC%8120%E5%88%86%E9%92%9F%EF%BC%81%E8%AE%A4%E8%AF%86v8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/#31_zeng_liang_biao_ji_Incremental_marking">https://www.teqng.com/2021/09/01/13%E5%BC%A0%E5%9B%BE%EF%BC%8120%E5%88%86%E9%92%9F%EF%BC%81%E8%AE%A4%E8%AF%86v8%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6/#31_zeng_liang_biao_ji_Incremental_marking</a></li>
+</ul>
+
+      </div>
+      
+        <div class="prev-or-next">
+          <div class="post-foot-next">
+            
+              <a href="/2024/02/07/%E5%BC%82%E6%AD%A5%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" target="_self">
+                <i class="iconfont icon-chevronleft"></i>
+                <span>Prev</span>
+              </a>
+            
+          </div>
+          <div class="post-attach">
+            <span class="post-pubtime">
+              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
+              2024-02-27 22:30:13
+            </span>
+            
+                  <span class="post-tags">
+                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
+                    
+                    <span class="span--tag mr-8">
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
+                      </a>
+                    </span>
+                    
+                  </span>
+              
+          </div>
+          <div class="post-foot-prev">
+            
+              <a href="/2024/02/07/%E5%8E%9F%E5%9E%8B%E5%92%8C%E5%8E%9F%E5%9E%8B%E9%93%BE/" target="_self">
+                <span>Next</span>
+                <i class="iconfont icon-chevronright"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+    </div>
+    
+  <div id="btn-catalog" class="btn-catalog">
+    <i class="iconfont icon-catalog"></i>
+  </div>
+  <div class="post-catalog hidden" id="catalog">
+    <div class="title">Contents</div>
+    <div class="catalog-content">
+      
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9E%83%E5%9C%BE%E5%A6%82%E4%BD%95%E4%BA%A7%E7%94%9F%E7%9A%84"><span class="toc-text">垃圾如何产生的</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E5%9E%83%E5%9C%BE%EF%BC%88%E6%A0%87%E8%AE%B0%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-text">识别垃圾（标记方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-text">引用计数法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E6%90%9C%E7%B4%A2%E7%AE%97%E6%B3%95%EF%BC%88%E6%A0%87%E8%AE%B0%E6%B3%95%EF%BC%89"><span class="toc-text">根搜索算法（标记法）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%A3%E9%99%85%E5%81%87%E8%AF%B4%EF%BC%88The-Generational-Hypothesis%EF%BC%89"><span class="toc-text">代际假说（The Generational Hypothesis）</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#V8-%E5%9B%9E%E6%94%B6%E5%99%A8-Orinoco"><span class="toc-text">V8 回收器 Orinoco</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#V8-%E5%9B%9E%E6%94%B6%E7%AE%97%E6%B3%95%EF%BC%88GC-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95%EF%BC%89"><span class="toc-text">V8 回收算法（GC 复制算法）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E7%94%9F%E4%BB%A3-Minor-GC"><span class="toc-text">新生代(Minor GC)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scavenge%EF%BC%88%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88-%E5%AD%98%E5%9C%A8%E9%80%92%E5%BD%92%E9%97%AE%E9%A2%98%EF%BC%89"><span class="toc-text">Scavenge（深度优先 存在递归问题）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cheney%EF%BC%88%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88-%E8%BF%AD%E4%BB%A3%EF%BC%89"><span class="toc-text">cheney（广度优先 迭代）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%80%81%E7%94%9F%E4%BB%A3-Major-GC"><span class="toc-text">老生代(Major GC)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Mark-Sweep"><span class="toc-text">Mark-Sweep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Mark-Compact"><span class="toc-text">Mark-Compact</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%A8%E5%81%9C%E9%A1%BF-Stop-The-World"><span class="toc-text">全停顿(Stop-The-World)</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Orinoco-%E8%BF%9B%E4%B8%80%E6%AD%A5%E4%BC%98%E5%8C%96"><span class="toc-text">Orinoco 进一步优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A2%9E%E9%87%8F%E6%A0%87%E8%AE%B0-%E6%83%B0%E6%80%A7%E6%B8%85%E7%90%86"><span class="toc-text">增量标记+惰性清理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C-Parallel"><span class="toc-text">并行(Parallel)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E5%8F%91-Concurrent"><span class="toc-text">并发(Concurrent)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#V8-%E5%BD%93%E5%89%8D%E7%9A%84%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">V8 当前的垃圾回收机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%8E-V8-%E5%88%B0%E5%AE%9E%E8%B7%B5"><span class="toc-text">从 V8 到实践</span></a></li></ol>
+      
+    </div>
+  </div>
+
+  
+<script src="/js/catalog.js"></script>
+
+
+
+
+    
+      <div class="comments-container">
+        
+
+
+
+
+
+
+  <div id="gitalk-container"></div>
+
+  <script>
+    function loadGitalkSuc() {
+      const gitalk = new Gitalk({
+        clientID: '7f36612d9db1de0ab1f2',
+        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
+        repo: 'weilun0510.github.io',
+        owner: 'weilun0510',
+        admin: ['weilun0510'],
+        id: location.pathname,
+        distractionFreeMode: false
+      })
+
+      gitalk.render('gitalk-container')
+    }
+  </script>
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
+  
+
+
+
+      </div>
+    
+  </div>
+
+
+        
+<div class="footer">
+  <div class="social">
+    <ul>
+      
+        <li>
+          
+              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
+                <i class="iconfont icon-github"></i>
+              </a>
+              
+        </li>
+        
+    </ul>
+  </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
+        
+    </div>
+  
+    
+    <div class="footer-more">
+      
+        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
+        
+    </div>
+  
+  
+</div>
+
+      </div>
+
+      <div class="tools-bar">
+        <div class="back-to-top tools-bar-item hidden">
+  <a href="javascript: void(0)">
+    <i class="iconfont icon-chevronup"></i>
+  </a>
+</div>
+
+
+<script src="/js/backtotop.js"></script>
+
+
+
+        
+  <div class="search-icon tools-bar-item" id="search-icon">
+    <a href="javascript: void(0)">
+      <i class="iconfont icon-search"></i>
+    </a>
+  </div>
+
+  <div class="search-overlay hidden">
+    <div class="search-content" tabindex="0">
+      <div class="search-title">
+        <span class="search-icon-input">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-search"></i>
+          </a>
+        </span>
+        
+          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
+        
+        <span class="search-close-icon" id="search-close-icon">
+          <a href="javascript: void(0)">
+            <i class="iconfont icon-close"></i>
+          </a>
+        </span>
+      </div>
+      <div class="search-result" id="search-result"></div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var inputArea = document.querySelector("#search-input")
+    var searchOverlayArea = document.querySelector(".search-overlay")
+
+    inputArea.onclick = function() {
+      getSearchFile()
+      this.onclick = null
+    }
+
+    inputArea.onkeydown = function() {
+      if(event.keyCode == 13)
+        return false
+    }
+
+    function openOrHideSearchContent() {
+      let isHidden = searchOverlayArea.classList.contains('hidden')
+      if (isHidden) {
+        searchOverlayArea.classList.remove('hidden')
+        document.body.classList.add('hidden')
+        // inputArea.focus()
+      } else {
+        searchOverlayArea.classList.add('hidden')
+        document.body.classList.remove('hidden')
+      }
+    }
+
+    function blurSearchContent(e) {
+      if (e.target === searchOverlayArea) {
+        openOrHideSearchContent()
+      }
+    }
+
+    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
+    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
+    searchOverlayArea.addEventListener("click", blurSearchContent, false)
+
+    var searchFunc = function (path, search_id, content_id) {
+      'use strict';
+      var $input = document.getElementById(search_id);
+      var $resultContent = document.getElementById(content_id);
+      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
+      $.ajax({
+        // 0x01. load xml file
+        url: path,
+        dataType: "xml",
+        success: function (xmlResponse) {
+          // 0x02. parse xml file
+          var datas = $("entry", xmlResponse).map(function () {
+            return {
+              title: $("title", this).text(),
+              content: $("content", this).text(),
+              url: $("url", this).text()
+            };
+          }).get();
+          $resultContent.innerHTML = "";
+
+          $input.addEventListener('input', function () {
+            // 0x03. parse query to keywords list
+            var str = '<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length <= 0) {
+              return;
+            }
+            // 0x04. perform local searching
+            datas.forEach(function (data) {
+              var isMatch = true;
+              var content_index = [];
+              if (!data.title || data.title.trim() === '') {
+                data.title = "Untitled";
+              }
+              var orig_data_title = data.title.trim();
+              var data_title = orig_data_title.toLowerCase();
+              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
+              var data_content = orig_data_content.toLowerCase();
+              var data_url = data.url;
+              var index_title = -1;
+              var index_content = -1;
+              var first_occur = -1;
+              // only match artiles with not empty contents
+              if (data_content !== '') {
+                keywords.forEach(function (keyword, i) {
+                  index_title = data_title.indexOf(keyword);
+                  index_content = data_content.indexOf(keyword);
+
+                  if (index_title < 0 && index_content < 0) {
+                    isMatch = false;
+                  } else {
+                    if (index_content < 0) {
+                      index_content = 0;
+                    }
+                    if (i == 0) {
+                      first_occur = index_content;
+                    }
+                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
+                  }
+                });
+              } else {
+                isMatch = false;
+              }
+              // 0x05. show search results
+              if (isMatch) {
+                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
+                var content = orig_data_content;
+                if (first_occur >= 0) {
+                  // cut out 100 characters
+                  var start = first_occur - 20;
+                  var end = first_occur + 80;
+
+                  if (start < 0) {
+                    start = 0;
+                  }
+
+                  if (start == 0) {
+                    end = 100;
+                  }
+
+                  if (end > content.length) {
+                    end = content.length;
+                  }
+
+                  var match_content = content.substr(start, end);
+
+                  // highlight all keywords
+                  keywords.forEach(function (keyword) {
+                    var regS = new RegExp(keyword, "gi");
+                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
+                  });
+
+                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
+                }
+                str += "</li>";
+              }
+            });
+            str += "</ul>";
+            if (str.indexOf('<li>') === -1) {
+              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
+            }
+            $resultContent.innerHTML = str;
+          });
+        },
+        error: function(xhr, status, error) {
+          $resultContent.innerHTML = ""
+          if (xhr.status === 404) {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
+          } else {
+            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+          }
+        }
+      });
+      $(document).on('click', '#search-close-icon', function() {
+        $('#search-input').val('');
+        $('#search-result').html('');
+      });
+    }
+
+    var getSearchFile = function() {
+        var path = "/search.xml";
+        searchFunc(path, 'search-input', 'search-result');
+    }
+  </script>
+
+
+
+
+        
+  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
+    <a href="javascript: void(0)">
+      <i id="theme-icon" class="iconfont icon-moon"></i>
+    </a>
+  </div>
+
+  
+<script src="/js/colorscheme.js"></script>
+
+
+
+
+
+        
+
+      </div>
+    </div>
+  </body>
+</html>
