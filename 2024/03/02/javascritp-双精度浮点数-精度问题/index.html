@@ -13,7 +13,7 @@
   
   <title>
     
-      Nginx安装和启动 
+      javascritp 双精度浮点数 精度问题 
       
       
       |
@@ -149,19 +149,19 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">Nginx安装和启动</div>
+      <div class="post-title">javascritp 双精度浮点数 精度问题</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-03-03 19:34:24
+          2024-03-02 22:50:49
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/nginx/" title="nginx">
-                    #nginx
+                  <a href="/tags/javascript/" title="javascript">
+                    #javascript
                   </a>
                 </span>
                 
@@ -169,56 +169,54 @@
           
       </div>
       <div class="markdown-body">
-        <p>nginx 是一个轻量 web 服务器。<br><a name="iRU1S"></a></p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>查看服务器是什么系统</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uname -a</span><br></pre></td></tr></table></figure>
-
-<p>我是 Linux 系统，可使用 yum 软件包管理器</p>
-<p>第一步：先安装 PCRE pcre-devel 和 Zlib，配置 nginx 的时候会用到这两个东西</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum install -y pcre pcre-devel</span><br><span class="line">yum install -y zlib zlib-devel</span><br></pre></td></tr></table></figure>
-
-<p>第二步：安装 nginx1.18.0</p>
+        <p><a name="Jfg8D"></a></p>
+<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>今天遇到一个问题，场景如下：<br />后端返回一个 uuid 为 <code>1763118905011392500</code> ，我带 <code>1763118905011392500</code> 去查数据时，接口报错提示： <code>uuid 不存在</code>，我问后端怎么回事，后端查了一下这个 uuid，发现数据库确实不存在值为 <code>1763118905011392500</code> 的 uuid。</p>
+<p>谷歌了一下，发现是 <strong>javascript 使用双精度浮点数表示数字，最大安全整数是 2^53 - 1 ，即 9007199254740991</strong>。<br /></p>
+<p>浏览器中可以接收的值的大小取决于浏览器的 javascript 引擎的实现。大多数浏览器都遵循 javascript 标准。<br /></p>
+<p>当浏览器接收到大于最大安全整数的值时，超出这个范围的整数值将会失去精度，可能会被舍入。<br /></p>
+<p>也就是说，后端给我的值大于 2^53-1 ，浏览器将丢失精度的值保存了下来，前端将丢失精度的值传递给后端去查询数据时，那必然找不到该值。</p>
+<p>找到了原因后，接下来了解下 <strong>双精度浮点数</strong> ，以及如何解决这个问题。<br><a name="F37SD"></a></p>
+<h1 id="双精度浮点数"><a href="#双精度浮点数" class="headerlink" title="双精度浮点数"></a>双精度浮点数</h1><p>浮点数是什么？</p>
+<blockquote>
+<p>在 JavaScript 中，浮点数是一种用于表示小数的数据类型。浮点数采用 IEEE 754 标准表示，通常被称为双精度浮点数，即使用 64 位（8 字节）来表示一个浮点数。这意味着无论数字的大小如何，它们在内存中占用的空间都是相同的，即 64 位或者 8 个字节。<br>这种格式可以表示小数（小数是指非整数的有理数，其中包含了小数点及其后面的数字部分）部分，而不仅仅是整数部分，因此可以用来存储小数值。</p>
+</blockquote>
+<p>双精度浮点数是什么？</p>
+<blockquote>
+<p>双精度浮点数是一种用于表示实数的数字表示方法，它在计算机科学中被广泛使用。它的名称中的“双精度”表示它的存储空间是单精度浮点数(32 位)的两倍，因此可以存储更大范围和更高精度的数字。<br>具体来说，双精度浮点数使用 64 位（8 字节）来存储一个数字，这 64 位被划分为三部分：</p>
 <ol>
-<li>下载 nginx 文件</li>
+<li>符号位（1 位）：用于表示数字的正负。</li>
+<li>指数部分（11 位）：用于表示数字的指数部分，决定了数字的数量级。</li>
+<li>尾数部分（52 位）：用于表示数字的小数部分，决定了数字的精度。</li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -c https://nginx.org/download/nginx-1.18.0.tar.gz</span><br></pre></td></tr></table></figure>
+<p>在科学计数法中，一个数字通常表示为 M × 10^E 的形式，其中 M 是尾数（即小数部分），E 是指数（表示这个数需要移动的小数点位数）</p>
+</blockquote>
+<p>64 位（8 字节）是什么意思？</p>
+<blockquote>
+<p>64 位（8 字节）是指在计算机中用来表示数据的一种存储方式。它表示一个数据单元占用的存储空间大小。具体来说，64 位意味着这个数据单元可以存储 64 位二进制数字，即包含了 64 个二进制位。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Bit</span>-比特 <span class="title class_">Byte</span>-字节 <span class="variable constant_">KB</span>-千字节 <span class="variable constant_">MB</span>-兆字节 <span class="variable constant_">GB</span>-吉字节 <span class="variable constant_">TB</span>-太字节</span><br><span class="line"></span><br><span class="line"><span class="number">1</span> <span class="title class_">Byte</span> = <span class="number">8</span> <span class="title class_">Bits</span></span><br><span class="line"><span class="number">1</span> <span class="variable constant_">GM</span> = <span class="number">1024</span> <span class="variable constant_">MB</span></span><br><span class="line"><span class="number">1</span> <span class="variable constant_">TB</span> = <span class="number">1024</span> <span class="variable constant_">GB</span></span><br><span class="line"></span><br><span class="line">一个二进制位的大小称为一比特，也就是最小单位</span><br></pre></td></tr></table></figure>
 
-<p>Linux 系统中的 wget 是一个下载文件的工具</p>
-<ol start="2">
-<li>解压并进入 nginx 目录</li>
+<p><a name="OrLuV"></a></p>
+<h1 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h1><p>js 有没有什么办法可以表示大于 2^53 - 1 的数呢？有的，就是 BigInt 类型，它可以表示任意大的整数。</p>
+<p>要表示 2^53，可以直接使用 BigInt 类型的字面量赋值，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bigIntNumber = <span class="number">2n</span> ** <span class="number">53n</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(bigIntNumber); <span class="comment">// 输出：9007199254740992n</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="keyword">typeof</span> bigIntNumber); <span class="comment">// &#x27;bigint&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 <strong>2n</strong> 表示一个 BigInt 数字 2，<strong>**</strong> 表示幂运算符，<strong>53n</strong> 表示一个 BigInt 数字 53。</p>
+<p>但在因为 Java 原生不支持 BitInt 类型，所以不能使用 BitInt 来处理。</p>
+<p>所以解决方案有以下两种：</p>
+<ol>
+<li>将 uuid 改为 2^53-1 下的值，也就是小于等于 15 位数</li>
+<li>或者将 uuid 字符串化，如<code>&#39;1763118905011392500&#39;</code><br><a name="JO3vL"></a></li>
 </ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf nginx-1.18.0.tar.gz</span><br><span class="line">cd nginx-1.18.0</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>使用 nginx 的默认配置</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure</span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>编译安装</li>
-</ol>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-
-<p>nginx 已经安装完成了</p>
-<p>查找 nginx 安装路径：<br /><br><code>whereis nginx</code><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/pic.1709045302233.png" alt="pic.1709045302233"></p>
-<p>启动 nginx 服务器。进入 nginx 安装目录下的 sbin 目录，并执行 nginx 文件，即执行<code>./nginx</code><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/pic.1709045387708.png" alt="pic.1709045387708"></p>
-<p><br />没有任何提示就表示启动成功了。访问机器 ip，如果显示 welcome to nginx 则表示 nginx 运行成功了。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/pic.1709045415961.png" alt="pic.1709045415961"></p>
-<p>如果还无法访问服务器 ip 地址，以我的华为云服务器为例，还需要添加安全组规则。http 协议默认 80 端口（https 默认端口为 443），我们添加一个 80 端口：<br /><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/pic.1709045483441.png" alt="pic.1709045483441"></p>
-<p>添加后即可成功访问 nginx 欢迎页面。</p>
-<p>查看配置文件目录。这个语句也可以验证 nginx.conf 文件是否正确。正确的格式会提示 test is successful</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./nginx -t</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/pic.1709045506823.png" alt="pic.1709045506823"><br><a name="hN0ts"></a></p>
-<h1 id="nginx-常用命令"><a href="#nginx-常用命令" class="headerlink" title="nginx 常用命令"></a>nginx 常用命令</h1><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">查看Nginx安装位置</span><br><span class="line">  <span class="attribute">whereis</span> nginx</span><br><span class="line">常见位置：</span><br><span class="line">  /etc/nginx/conf</span><br><span class="line">  /usr/local/etc/nginx</span><br><span class="line">  /opt/homebrew/etc/nginx</span><br><span class="line"></span><br><span class="line">启动</span><br><span class="line">  启动代码格式：nginx安装目录地址 -c nginx配置文件地址</span><br><span class="line">  /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf</span><br><span class="line">  ./nginx</span><br><span class="line">没有任何提示消息就表示成功了</span><br><span class="line"></span><br><span class="line">查看Nginx进程</span><br><span class="line">  ps -ef|grep nginx</span><br><span class="line">master 是主进程（唯一），worker是工作进程</span><br><span class="line"></span><br><span class="line">查看端口情况</span><br><span class="line">  lsof -i:<span class="number">80</span></span><br><span class="line">-i:<span class="number">80</span> 表示只看<span class="number">80</span>端口</span><br><span class="line"></span><br><span class="line">杀死进程</span><br><span class="line">kill -QUIT pid</span><br><span class="line"></span><br><span class="line">Nginx停止或重启。进入nginx可执行目录sbin下，输入以下命令</span><br><span class="line">  ./nginx -s signal</span><br><span class="line">    quit		:优雅停止</span><br><span class="line">    stop		:立即停止</span><br><span class="line">    reload	:重载配置文件</span><br><span class="line">    reopen	:重新打开日志文件</span><br></pre></td></tr></table></figure>
-
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000012297511">https://segmentfault.com/a/1190000012297511</a><br /><a target="_blank" rel="noopener" href="https://bbs.huaweicloud.com/blogs/304663">https://bbs.huaweicloud.com/blogs/304663</a><br /><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ghzjm/p/10677599.html">https://www.cnblogs.com/ghzjm/p/10677599.html</a></p>
+<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>js 标准中，使用双精度浮点数表示数字，最大安全整数为 2^53 - 1。js number 类型无法精准表示超出最大安全数的值，可用 BigInt 类型表示。如果后端给的数值超出最大安全值，可以采用”字符串化”方案，解决前后端交互时精度丢失的问题。</p>
+<p>思考：<br />3 和 99 占用的存储空间大小一样吗？</p>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/27/%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E8%99%9A%E6%8B%9FDOM/" target="_self">
+              <a href="/2024/02/27/Nginx-pm2-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -227,15 +225,15 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-03-03 19:34:24
+              2024-03-02 22:50:49
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags mr-10" title="Tags"></i>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/nginx/" title="nginx">
-                        #nginx
+                      <a href="/tags/javascript/" title="javascript">
+                        #javascript
                       </a>
                     </span>
                     
@@ -243,11 +241,6 @@
               
           </div>
           <div class="post-foot-prev">
-            
-              <a href="/2024/02/27/Nginx-pm2-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
             
           </div>
         </div>
@@ -261,7 +254,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nginx-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">nginx 常用命令</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%8C%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="toc-text">双精度浮点数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">解决方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-text">小结</span></a></li></ol>
       
     </div>
   </div>
