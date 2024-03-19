@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-19 15:11:52
+          2024-03-11 10:28:03
         </span>
         
               <span class="post-tags">
@@ -169,7 +169,8 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="在地址栏输入-url-后发生了什么？"><a href="#在地址栏输入-url-后发生了什么？" class="headerlink" title="在地址栏输入 url 后发生了什么？"></a>在地址栏输入 url 后发生了什么？</h1><p>用一张图描述一下：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326672310.png" alt="pic.1708326672310"></p>
+        <p><strong>在地址栏输入 url 后发生了什么？</strong></p>
+<p>用一张图描述一下：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326672310.png" alt="pic.1708326672310"></p>
 <ol>
 <li>输入域名</li>
 <li>DNS：域名解析，得到 ip 地址</li>
@@ -185,7 +186,7 @@
 <p>如果说进程是一个工厂，那线程就是工厂中的流水线。一个工厂的正常运行，往往需要多个流水线通力合作才能完成。在网页进程中也是一样，想要网页进程能正常渲染运行，也需要多个线程参与合作。</p>
 <p>网页的渲染运行，有如下线程参与</p>
 <h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><p>GUI(Graphical User Interface)表示图形用户界面的意思，render tree 的渲染。用一张图看一下渲染路径</p>
-<h4 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h4><p>![HTML渲染过程.png]<img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326684005.png" alt="pic.1708326684005"></p>
+<h4 id="渲染路径"><a href="#渲染路径" class="headerlink" title="渲染路径"></a>渲染路径</h4><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326684005.png" alt="pic.1708326684005"></p>
 <p>后端返回的 html 文件其内容是个字符串，<code>&lt;html&gt;、&lt;style&gt;</code>等标签是语法糖，HTML Parser 或 CSS Parser 表示对应的解析器，解析器的工作就是将这些字符串语法糖转换为对象。</p>
 <p>加载：表示『资源文件发起请求-&gt;服务器返回结果』这一过程<br>解析：表示词法分析，先加载，后解析<br>渲染：将节点信息绘制到页面的过程</p>
 <p>html 的解析过程，是自上而下的，解析过程中，如果发现了样式文件(link 标签)，就会加载样式文件。<strong>样式文件的加载并不会阻塞 html 的解析，阻塞的是 render tree 的渲染。</strong></p>
@@ -268,7 +269,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" target="_self">
+              <a href="/2024/02/07/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -277,7 +278,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-19 15:11:52
+              2024-03-11 10:28:03
             </span>
             
                   <span class="post-tags">
@@ -294,7 +295,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%96%87%E4%BB%B6%E7%AF%87/" target="_self">
+              <a href="/2024/02/07/%E6%A8%A1%E5%9D%97%E5%8C%96%E7%9A%84%E7%90%86%E8%A7%A3/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -311,7 +312,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9C%A8%E5%9C%B0%E5%9D%80%E6%A0%8F%E8%BE%93%E5%85%A5-url-%E5%90%8E%E5%8F%91%E7%94%9F%E4%BA%86%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">在地址栏输入 url 后发生了什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GUI-%E6%B8%B2%E6%9F%93%E7%BA%BF%E7%A8%8B"><span class="toc-text">GUI 渲染线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="toc-text">渲染路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS-%E4%B8%8E%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="toc-text">JS 与渲染路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E7%BB%98%E5%92%8C%E5%9B%9E%E6%B5%81"><span class="toc-text">重绘和回流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E5%9B%9E%E6%B5%81"><span class="toc-text">如何减少回流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS-%E5%BC%95%E6%93%8E%E7%BA%BF%E7%A8%8B"><span class="toc-text">JS 引擎线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E8%A7%A6%E5%8F%91%E5%99%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">定时触发器线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%BA%BF%E7%A8%8B"><span class="toc-text">事件触发线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E7%BA%BF%E7%A8%8B"><span class="toc-text">http 线程</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#GUI-%E6%B8%B2%E6%9F%93%E7%BA%BF%E7%A8%8B"><span class="toc-text">GUI 渲染线程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="toc-text">渲染路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS-%E4%B8%8E%E6%B8%B2%E6%9F%93%E8%B7%AF%E5%BE%84"><span class="toc-text">JS 与渲染路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E7%BB%98%E5%92%8C%E5%9B%9E%E6%B5%81"><span class="toc-text">重绘和回流</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91%E5%9B%9E%E6%B5%81"><span class="toc-text">如何减少回流</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS-%E5%BC%95%E6%93%8E%E7%BA%BF%E7%A8%8B"><span class="toc-text">JS 引擎线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E8%A7%A6%E5%8F%91%E5%99%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">定时触发器线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%BA%BF%E7%A8%8B"><span class="toc-text">事件触发线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E7%BA%BF%E7%A8%8B"><span class="toc-text">http 线程</span></a></li></ol>
       
     </div>
   </div>
