@@ -13,7 +13,7 @@
   
   <title>
     
-      浏览器的进程与线程 
+      开发环境代理 proxy 
       
       
       |
@@ -149,19 +149,19 @@
   <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
   <div class="container post-details" id="post-details">
     <div class="post-content">
-      <div class="post-title">浏览器的进程与线程</div>
+      <div class="post-title">开发环境代理 proxy</div>
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-27 22:30:13
+          2024-05-30 20:32:36
         </span>
         
               <span class="post-tags">
                 <i class="iconfont icon-tags mr-10" title="Tags"></i>
                 
                 <span class="span--tag mr-8">
-                  <a href="/tags/html/" title="html">
-                    #html
+                  <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF/" title="项目场景">
+                    #项目场景
                   </a>
                 </span>
                 
@@ -169,45 +169,44 @@
           
       </div>
       <div class="markdown-body">
-        <h1 id="什么是进程"><a href="#什么是进程" class="headerlink" title="什么是进程"></a>什么是进程</h1><p>操作系统上有很多 app，app 就是应用程序，应用程序就是一个软件包，一个代码集合。而应用程序是静态的，想要运行应用程序，操作系统就会对应的启动一个进程，负责该程序的运行。</p>
-<p>把浏览器看做一个大集团，那进程就是集团下的某一个工厂。</p>
-<p>总结进程有以下特点：</p>
+        <p>前端项目本地开发过程中，常常会遇到跨域问题，这是因为我们的本地服务域名为<code>localhost</code>，而后端服务一般都是在后端服务器上，所以两个不同的域名之间通信就会存在跨域，严谨点来说是受同源策略的影响。</p>
+<p>假设后端的完整 api 路径：<code>https://pruduct.com/api/chat/user/list</code>，前端在<code>localhost</code>下想要去访问这个api</p>
+<p>有个重要的前提是，<strong>后端需要在响应头设置<code>&#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;</code></strong> ，该属性表示允许任何的源都有权限访问资源，<code>*</code>表示通配符。<br>如果后端没有设置这个属性，就算前端设置了本地代理<code>proxy</code>也是无法成功访问的。</p>
+<p>后端设置了<code>Access-Control-Allow-Origin</code>后，其实本地可以不需要proxy也不会产生跨域问题，因为已经允许了任何源都有权限访问。</p>
+<p>下面这个示例直接写死baseURL发起请求，不会跨域：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">&#x27;https://pruduct.com&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="title function_">request</span>(<span class="string">&#x27;/api/chat/user/list&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<p>那什么场景需要使用<code>proxy</code>代理呢？<br></p>
+<p>以下场景，<code>proxy</code>就派上了用场：</p>
 <ul>
-<li>动态性：进程的实质是程序的一次执行过程</li>
-<li>并发性：集团可以有多个工厂，浏览器也可以同时运行多个进程</li>
-<li>独立性：工厂是独立的，进程是一个能独立运行的基本单位</li>
-<li>异步性：因为是独立的，因此可以按照自己逻辑不可预知的运行</li>
-<li>协同性：应用程序之间能够协作完成一些任务</li>
+<li>想在本地调用&#x2F;打包不同环境的数据，不想手动修改 request baseURL</li>
+<li>本地需要同时调用多个服务（测试环境&#x2F;正式环境，可能还有一些第三方环境）的接口，写死 <code>baseURL</code>无法满足要求</li>
 </ul>
-<h1 id="浏览器进程"><a href="#浏览器进程" class="headerlink" title="浏览器进程"></a>浏览器进程</h1><p>与操作系统一样，浏览器也有一个任务管理器，每一个任务，都是独立的进程。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326642981.png" alt="pic.1708326642981"></p>
-<p>浏览器主要包括如下进程：</p>
-<h2 id="一、浏览器主进程"><a href="#一、浏览器主进程" class="headerlink" title="一、浏览器主进程"></a>一、浏览器主进程</h2><p>浏览器只会创建一个主进程，它主要负责：</p>
-<ul>
-<li>浏览器界面提供的交互，如前进、后退、标签栏、设置等</li>
-<li>各页面进程的管理，如创建、关闭等</li>
-<li>网络资源的管理，如下载内容、缓存等</li>
-</ul>
-<h2 id="二、网页进程"><a href="#二、网页进程" class="headerlink" title="二、网页进程"></a>二、网页进程</h2><p><strong>网页进程</strong>：浏览器网页的渲染和 JS 执行在一个单独的进程中执行。这个进程也称为<strong>render 进程</strong>。每启动一个页面，都会启动一个 render 进程。</p>
-<p>说到网页进程，又引入了线程的概念。</p>
-<p>如果说进程是一个工厂，那线程就是工厂中的流水线。一个工厂的正常运行，往往需要多个流水线通力合作才能完成。在网页进程中也是一样，想要网页进程能正常渲染运行，也需要多个线程参与合作。</p>
-<p>网页的渲染运行，有如下线程参</p>
-<h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><p>GUI(Graphical User Interface)表示图形用户界面的意思，render tree 的渲染。用一张图看一下渲染路径<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326653199.png" alt="pic.1708326653199"><br>HTML 会解析出 DOM（Document Object Model）树，样式文件会解析出 CSSOM(CSS Object Model)树，在 Attachment 环节，GUI 线程将 DOM 树与 CSSOM 树合并在一起，生成渲染树(render tree)，并将渲染树绘制到页面。</p>
-<h3 id="JS-引擎线程"><a href="#JS-引擎线程" class="headerlink" title="JS 引擎线程"></a>JS 引擎线程</h3><p>浏览器是不支持直接运行 JS 代码的，所以需要在浏览器中植入一个内核，来支持 JS 的解析和运行。在 chrome 中，这个内核叫 V8。</p>
-<p>一个网页只会启动一个 JS 线程来处理 JS 脚本。</p>
-<p>JS 线程是单线程。这点不难理解，如果是多线程，一个线程删除 DOM，一个线程新增 DOM，浏览器要如何处理呢？</p>
-<p>还有一点，<strong>JS 线程和 GUI 线程是互斥的</strong>。所以在渲染路径阶段，存在阻塞问题。</p>
-<h3 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h3><p>专门负责 setTimeout&#x2F;setInterval 的逻辑。应该结合事件循环中的队列来理解定时器线程的执行过程。</p>
-<h3 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h3><p>当我们鼠标点击与滑动、键盘的输入等都会触发一些事件，而这些事件的触发逻辑的处理，就是依靠事件触发线程来帮助浏览器完成。</p>
-<p>该线程也会把事件的逻辑放入队列中，等待 JS 引擎的处理。在事件循环中，事件触发为宏任务。</p>
-<h3 id="http-线程"><a href="#http-线程" class="headerlink" title="http 线程"></a>http 线程</h3><p>使用无状态短链接的 http 请求，在应用层基于 http 协议的基础之上，达到与服务端进行通信的目的。</p>
-<p>该线程的触发罗家，不是在 JS 引擎线程之中，过程是异步的。</p>
+<p>来看下如何使用<code>proxy</code>解决这两个问题</p>
+<h3 id="脚本调用-打包不同服务"><a href="#脚本调用-打包不同服务" class="headerlink" title="脚本调用&#x2F;打包不同服务"></a>脚本调用&#x2F;打包不同服务</h3><p>如果不想手动修改 request baseURL，可以通过脚本调用不同的环境变量来实现，假如环境变量为<code>API_BASE_URL</code>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="variable constant_">API_BASE_URL</span>,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cross-env UMI_ENV=test max dev&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dev:online&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cross-env UMI_ENV=online max dev&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// .umirc.online.ts 生产环境配置文件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">define</span>: &#123;</span><br><span class="line">    <span class="attr">API_BASE_URL</span>: <span class="string">&#x27;https://pruduct.com&#x27;</span>, <span class="comment">// 正式环境</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// .umirc.test.ts 测试环境配置文件</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">define</span>: &#123;</span><br><span class="line">    <span class="attr">API_BASE_URL</span>: <span class="string">&#x27;https://test.com&#x27;</span>, <span class="comment">// 测试环境</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="同时调用多个服务"><a href="#同时调用多个服务" class="headerlink" title="同时调用多个服务"></a>同时调用多个服务</h3><p>就好比想同时请求两个服务时，<code>/api/user</code>这个接口在<code>https://pruduct.com</code>下，<code>/test/user</code>在<code>https://test.com</code>下，本地代理就派上用场了。</p>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="attr">proxy</span>: &#123;</span><br><span class="line">  <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;https://pruduct.com&#x27;</span>,</span><br><span class="line">    <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&#x27;/test&#x27;</span>: &#123;</span><br><span class="line">    <span class="attr">target</span>: <span class="string">&#x27;https://test.com&#x27;</span>,</span><br><span class="line">    <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="proxy-怎么用"><a href="#proxy-怎么用" class="headerlink" title="proxy 怎么用"></a>proxy 怎么用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">API_BASE_URL</span>=<span class="string">&#x27;https://pruduct.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件发起请求</span></span><br><span class="line"><span class="keyword">const</span> request = axios.<span class="title function_">create</span>(&#123;</span><br><span class="line">  <span class="attr">baseURL</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">const</span> apiUrl = <span class="string">&#x27;/api/user&#x27;</span></span><br><span class="line"><span class="title function_">request</span>(apiUrl)</span><br><span class="line"></span><br><span class="line"><span class="attr">proxy</span>: &#123;</span><br><span class="line">  <span class="string">&#x27;/api&#x27;</span>: &#123;</span><br><span class="line">    <span class="attr">target</span>: <span class="variable constant_">API_BASE_URL</span>,</span><br><span class="line">    <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>发起<code>/api/user</code>请求时，匹配到proxy对象的路径<code>/api</code>后，那么实际请求地址为<code>target + /api/user</code>，即 <code>https://pruduct.com + /api/user</code></p>
+<p>应该有部分人以为 proxy 匹配路径必须是后端定义的，其实不是。<br>假设前端想自定义路径，或者说后端没有统一的路径，那么就可以自定义匹配路径</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable constant_">API_BASE_URL</span>=<span class="string">&#x27;https://pruduct.com&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 组件发起请求</span></span><br><span class="line"><span class="title function_">request</span>(<span class="string">&#x27;/customApiPrefix/api/user&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="attr">proxy</span>: &#123;</span><br><span class="line">  <span class="string">&#x27;/customApiPrefix&#x27;</span>: &#123;</span><br><span class="line">    <span class="attr">target</span>: <span class="variable constant_">API_BASE_URL</span>,</span><br><span class="line">    <span class="attr">changeOrigin</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// 重写匹配的字段，如果不想出现在请求路径上，可以重写为&quot;&quot;</span></span><br><span class="line">    <span class="attr">pathRewrite</span>: &#123; <span class="string">&quot;^/customApiPrefix&quot;</span>: <span class="string">&quot;&quot;</span> &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>实际请求地址还是为<code>https://pruduct.com + /api/user</code></p>
+<p>小结：<br>开发过程中出现跨域是因为受同源策略的约束影响，<code>localhost</code>不能与后端服务通信，想要通信，后端需要设置允许请求的源<code>&#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;</code>。设置<code>&#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;</code>后，如果后端服务只有一个，可以写死<code>baseUrl</code>无需proxy。如果有多个服务，那么通过<code>proxy</code>和环境变量的配置，可以让我们在开发或打包时更方便。</p>
 
       </div>
       
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_self">
+              <a href="/2024/03/16/css-padding-top-%E5%AE%9E%E7%8E%B0%E5%AE%B9%E5%99%A8%E8%87%AA%E9%80%82%E5%BA%94%E5%AE%BD%E9%AB%98%E6%AF%94%E4%BE%8B/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -216,15 +215,15 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-27 22:30:13
+              2024-05-30 20:32:36
             </span>
             
                   <span class="post-tags">
                     <i class="iconfont icon-tags mr-10" title="Tags"></i>
                     
                     <span class="span--tag mr-8">
-                      <a href="/tags/html/" title="html">
-                        #html
+                      <a href="/tags/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF/" title="项目场景">
+                        #项目场景
                       </a>
                     </span>
                     
@@ -233,7 +232,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/" target="_self">
+              <a href="/2024/03/20/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%87%92%E5%8A%A0%E8%BD%BD/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
@@ -250,7 +249,7 @@
     <div class="title">Contents</div>
     <div class="catalog-content">
       
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E8%BF%9B%E7%A8%8B"><span class="toc-text">什么是进程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8%E8%BF%9B%E7%A8%8B"><span class="toc-text">浏览器进程</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%BB%E8%BF%9B%E7%A8%8B"><span class="toc-text">一、浏览器主进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BD%91%E9%A1%B5%E8%BF%9B%E7%A8%8B"><span class="toc-text">二、网页进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GUI-%E6%B8%B2%E6%9F%93%E7%BA%BF%E7%A8%8B"><span class="toc-text">GUI 渲染线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS-%E5%BC%95%E6%93%8E%E7%BA%BF%E7%A8%8B"><span class="toc-text">JS 引擎线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9A%E6%97%B6%E8%A7%A6%E5%8F%91%E5%99%A8%E7%BA%BF%E7%A8%8B"><span class="toc-text">定时触发器线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E8%A7%A6%E5%8F%91%E7%BA%BF%E7%A8%8B"><span class="toc-text">事件触发线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http-%E7%BA%BF%E7%A8%8B"><span class="toc-text">http 线程</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%84%9A%E6%9C%AC%E8%B0%83%E7%94%A8-%E6%89%93%E5%8C%85%E4%B8%8D%E5%90%8C%E6%9C%8D%E5%8A%A1"><span class="toc-text">脚本调用&#x2F;打包不同服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%8C%E6%97%B6%E8%B0%83%E7%94%A8%E5%A4%9A%E4%B8%AA%E6%9C%8D%E5%8A%A1"><span class="toc-text">同时调用多个服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proxy-%E6%80%8E%E4%B9%88%E7%94%A8"><span class="toc-text">proxy 怎么用</span></a></li></ol>
       
     </div>
   </div>

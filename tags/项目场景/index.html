@@ -13,8 +13,8 @@
   
   <title>
     
-      项目部署之Nginx配置 
-      
+      Tag 
+       : 项目场景
       
       |
     
@@ -104,184 +104,84 @@
 
 
       <div class="flex-container">
-        <!-- 文章详情页，展示文章具体内容，url形式：https://yoursite/文章标题/ -->
-<!-- 同时为「标签tag」，「朋友friend」，「分类categories」，「关于about」页面的承载页面，具体展示取决于page.type -->
+        <!-- 标签详情页，展示某个标签下的文章列表，url形式：https://yoursite/tags/某个标签/ -->
 
-
-  <!-- LaTex Display -->
-
+<div class="container tag-details">
+  <div class="content-title">
+    <h2>
+      <span>项目场景</span>
+    </h2>
+  </div>
   
-    <script async type="text/javascript" src="/plugins/mathjax/tex-chtml.js"></script>
-  
-  <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      }
-    }
-  </script>
-
-
-
-
-
-  <!-- clipboard -->
-
-  
-    <script async type="text/javascript" src="/plugins/clipboard.min.js"></script>
-  
-  
-<script src="/js/codeCopy.js"></script>
-
-
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  <!-- 文章内容页 url形式：https://yoursite/文章标题/ -->
-  <div class="container post-details" id="post-details">
-    <div class="post-content">
-      <div class="post-title">项目部署之Nginx配置</div>
-      <div class="post-attach">
-        <span class="post-pubtime">
-          <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-18 21:45:47
-        </span>
-        
-              <span class="post-tags">
-                <i class="iconfont icon-tags mr-10" title="Tags"></i>
-                
-                <span class="span--tag mr-8">
-                  <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
-                    #项目
-                  </a>
-                </span>
-                
-              </span>
-          
+    <div class="post-list">
+      <div class="post-item" title="开发环境代理 proxy">
+        <span class="time-m-d">2024-03-16</span>
+        <a href="/2024/03/16/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%A3%E7%90%86-proxy/">
+          <span>开发环境代理 proxy</span>
+        </a>
       </div>
-      <div class="markdown-body">
-        <p>大概流程为：<br>前端打包生成资源文件<code>dist</code>，提供<code>前端资源存放路径</code>（运维直接自己创建也行），产品提供<code>域名</code>。<br>运维在 Nginx 上配置<code>域名「环境访问地址」</code>、<code>端口</code>、<code>前端资源存放路径</code>和<code>证书</code>。</p>
-<p>web 服务器（Nginx）</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">地址：<span class="number">81.219</span><span class="number">.59</span><span class="number">.81</span></span><br><span class="line">用户名：root</span><br><span class="line">密码： xxxxx</span><br></pre></td></tr></table></figure>
-
-<p>Nginx 配置</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">server <span class="punctuation">&#123;</span></span><br><span class="line">  server_name  dev.nftera.news;	<span class="comment">// 配置域名</span></span><br><span class="line"></span><br><span class="line">  location / <span class="punctuation">&#123;</span></span><br><span class="line">    root /home/wwwroot/nftera/dist;	<span class="comment">// 前端资源目录</span></span><br><span class="line">    gzip_static on;	<span class="comment">// 开启查找压缩文件</span></span><br><span class="line">    try_files  $uri $uri/    /index.html;	<span class="comment">// history路由匹配兜底文件</span></span><br><span class="line">    index index.html index.htm;</span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line">  location /v1/news <span class="punctuation">&#123;</span>	<span class="comment">// 接口地址 https://dev.nftera.news/v1/news</span></span><br><span class="line">    proxy_pass http<span class="punctuation">:</span><span class="comment">//127.0.0.1:8091/;	// 反向代理，指向本地(Nginx)8091端口</span></span><br><span class="line"></span><br><span class="line">    proxy_redirect      off;</span><br><span class="line">    proxy_set_header Host $host;</span><br><span class="line">    proxy_set_header X-Real-IP $remote_addr;</span><br><span class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="comment">// 证书配置</span></span><br><span class="line">  listen <span class="number">443</span> ssl; # managed by Certbot</span><br><span class="line">  ssl_certificate /etc/letsencrypt/live/dev.nftera.news/fullchain.pem; # managed by Certbot</span><br><span class="line">  ssl_certificate_key /etc/letsencrypt/live/dev.nftera.news/privkey.pem; # managed by Certbot</span><br><span class="line">  include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot</span><br><span class="line">  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot</span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>配置解读：</p>
-<ul>
-<li>前端环境域名为<code>dev.nftera.news</code> ，对应的<code>ip</code>就是 Nginx 地址<code>81.219.59.81</code>。Nginx 可以配置多个域名，一个域名对应一段配置。当我们添加一个环境时，需要让运维重新添加一段配置。</li>
-<li>域名端口为<code>8091</code></li>
-<li>前端资源存放目录为<code>/home/wwwroot/nftera/dist</code></li>
-<li>接口地址为 <code>https://dev.nftera.news/v1/news</code>。</li>
-</ul>
-<h1 id="try-files-和-gzip-static"><a href="#try-files-和-gzip-static" class="headerlink" title="try_files 和 gzip_static"></a>try_files 和 gzip_static</h1><p>以下是后端需要做的事</p>
-<ul>
-<li>当前端使用<code>history</code>时，需要让后端在 nginx 添加<code>try_files  $uri $uri/    /index.html</code>。可参考 <a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039046545">https://segmentfault.com/a/1190000039046545</a></li>
-<li>当前端上传经 gzip 压缩过的文件时，需要后端添加<code>gzip_static on</code>，表示开启查找压缩文件。(压缩工作后端也可以处理，但是需要花费时间去压缩，如果前端压缩过了就不需要再花费时间)</li>
-</ul>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039046545">
-</a></p>
-
-      </div>
-      
-        <div class="prev-or-next">
-          <div class="post-foot-next">
-            
-          </div>
-          <div class="post-attach">
-            <span class="post-pubtime">
-              <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-18 21:45:47
-            </span>
-            
-                  <span class="post-tags">
-                    <i class="iconfont icon-tags mr-10" title="Tags"></i>
-                    
-                    <span class="span--tag mr-8">
-                      <a href="/tags/%E9%A1%B9%E7%9B%AE/" title="项目">
-                        #项目
-                      </a>
-                    </span>
-                    
-                  </span>
-              
-          </div>
-          <div class="post-foot-prev">
-            
-              <a href="/2024/02/07/%E9%98%B2%E6%AD%A2%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BD%B0%E7%82%B8_%E8%B0%B7%E6%AD%8C%E4%BA%BA%E6%9C%BA%E6%A0%A1%E9%AA%8C_recaptchaV3/" target="_self">
-                <span>Next</span>
-                <i class="iconfont icon-chevronright"></i>
-              </a>
-            
-          </div>
-        </div>
-      
     </div>
-    
-  <div id="btn-catalog" class="btn-catalog">
-    <i class="iconfont icon-catalog"></i>
-  </div>
-  <div class="post-catalog hidden" id="catalog">
-    <div class="title">Contents</div>
-    <div class="catalog-content">
-      
-        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#try-files-%E5%92%8C-gzip-static"><span class="toc-text">try_files 和 gzip_static</span></a></li></ol>
-      
-    </div>
-  </div>
-
   
-<script src="/js/catalog.js"></script>
-
-
-
-
-    
-      <div class="comments-container">
-        
-
-
-
-
-
-
-  <div id="gitalk-container"></div>
-
-  <script>
-    function loadGitalkSuc() {
-      const gitalk = new Gitalk({
-        clientID: '7f36612d9db1de0ab1f2',
-        clientSecret: '3a814ba52ef16148a8790bff7134bd9db6fce9d4',
-        repo: 'weilun0510.github.io',
-        owner: 'weilun0510',
-        admin: ['weilun0510'],
-        id: location.pathname,
-        distractionFreeMode: false
-      })
-
-      gitalk.render('gitalk-container')
-    }
-  </script>
-  
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" onload="loadGitalkSuc(this)"></script>
-  
-
-
-
+    <div class="post-list">
+      <div class="post-item" title="K线图">
+        <span class="time-m-d">2024-02-07</span>
+        <a href="/2024/02/07/K%E7%BA%BF%E5%9B%BE/">
+          <span>K线图</span>
+        </a>
       </div>
+    </div>
+  
+    <div class="post-list">
+      <div class="post-item" title="代码规范">
+        <span class="time-m-d">2024-02-07</span>
+        <a href="/2024/02/07/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">
+          <span>代码规范</span>
+        </a>
+      </div>
+    </div>
+  
+    <div class="post-list">
+      <div class="post-item" title="开发环境和线上环境">
+        <span class="time-m-d">2024-02-07</span>
+        <a href="/2024/02/07/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%92%8C%E7%BA%BF%E4%B8%8A%E7%8E%AF%E5%A2%83/">
+          <span>开发环境和线上环境</span>
+        </a>
+      </div>
+    </div>
+  
+    <div class="post-list">
+      <div class="post-item" title="微信网页分享「自定义标题、描述和图片」">
+        <span class="time-m-d">2024-02-07</span>
+        <a href="/2024/02/07/%E5%BE%AE%E4%BF%A1%E7%BD%91%E9%A1%B5%E5%88%86%E4%BA%AB%E3%80%8C%E8%87%AA%E5%AE%9A%E4%B9%89%E6%A0%87%E9%A2%98%E3%80%81%E6%8F%8F%E8%BF%B0%E5%92%8C%E5%9B%BE%E7%89%87%E3%80%8D/">
+          <span>微信网页分享「自定义标题、描述和图片」</span>
+        </a>
+      </div>
+    </div>
+  
+    <div class="post-list">
+      <div class="post-item" title="文件篇">
+        <span class="time-m-d">2024-02-07</span>
+        <a href="/2024/02/07/%E6%96%87%E4%BB%B6%E7%AF%87/">
+          <span>文件篇</span>
+        </a>
+      </div>
+    </div>
+  
+    <div class="post-list">
+      <div class="post-item" title="防止验证码轰炸_谷歌人机校验_recaptchaV3">
+        <span class="time-m-d">2024-02-07</span>
+        <a href="/2024/02/07/%E9%98%B2%E6%AD%A2%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BD%B0%E7%82%B8_%E8%B0%B7%E6%AD%8C%E4%BA%BA%E6%9C%BA%E6%A0%A1%E9%AA%8C_recaptchaV3/">
+          <span>防止验证码轰炸_谷歌人机校验_recaptchaV3</span>
+        </a>
+      </div>
+    </div>
+  
+  <nav class="post-navigation">
     
-  </div>
-
+    <span class="page-num">1 / 1</span>
+    
+  </nav>
+</div>
 
         
 <div class="footer">

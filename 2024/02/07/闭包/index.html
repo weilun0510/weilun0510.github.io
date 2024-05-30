@@ -153,7 +153,7 @@
       <div class="post-attach">
         <span class="post-pubtime">
           <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-          2024-02-27 22:30:13
+          2024-05-30 20:32:36
         </span>
         
               <span class="post-tags">
@@ -176,6 +176,8 @@
 <p>p 函数的局部变量 a，被 foo 和 bar 这两个函数共享</p>
 <p><strong>定义：</strong> 闭包是一个特殊的对象。它由两部分组成，执行上下文 A 以及在 A 中创建的函数 B。当 B 执行时，如果访问了 A 中的变量，那么闭包就产生了。</p>
 <p>在 chrome 中，执行上下文 A 的函数名代指闭包</p>
+<p>词法作用域：在我们编写代码时，语法规范就已经确定了词法作用域的作用范围。<br><br>词法作用域是为了明确告诉我们，当前的上下文环境中，能够访问哪些变量参与程序的运行。除了自身上下文，还可以从函数体的[[Scopes]]属性访问其他作用域的声明。</p>
+<p>闭包形成的原因：<br><br>闭包是基于词法作用域的规则产生，让函数内部可以访问函数外部的声明。闭包在代码解析时就能确定。</p>
 <h1 id="闭包对象什么时候被回收"><a href="#闭包对象什么时候被回收" class="headerlink" title="闭包对象什么时候被回收"></a>闭包对象什么时候被回收</h1><p>闭包对象<code>[Closure(A)]</code>的引用存在于函数体 B 的内存中。如果 B 函数体被回收，闭包对象同样也被回收。</p>
 <p>看个例子：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">1</span>;</span><br><span class="line">  (<span class="keyword">function</span> <span class="title function_">f</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(++a); <span class="comment">// 这时候闭包产生了，</span></span><br><span class="line">  &#125;)();</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a); <span class="comment">//运行到这里是，f的执行上下文被销毁，闭包也消失了。此时fn中的a变成了2</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">fn</span>(); <span class="comment">// 等fn执行完，fn的执行上下文也被销毁</span></span><br></pre></td></tr></table></figure>
@@ -247,7 +249,7 @@
         <div class="prev-or-next">
           <div class="post-foot-next">
             
-              <a href="/2024/02/07/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_self">
+              <a href="/2024/02/07/%E9%98%B2%E6%AD%A2%E9%AA%8C%E8%AF%81%E7%A0%81%E8%BD%B0%E7%82%B8_%E8%B0%B7%E6%AD%8C%E4%BA%BA%E6%9C%BA%E6%A0%A1%E9%AA%8C_recaptchaV3/" target="_self">
                 <i class="iconfont icon-chevronleft"></i>
                 <span>Prev</span>
               </a>
@@ -256,7 +258,7 @@
           <div class="post-attach">
             <span class="post-pubtime">
               <i class="iconfont icon-updatetime mr-10" title="Update time"></i>
-              2024-02-27 22:30:13
+              2024-05-30 20:32:36
             </span>
             
                   <span class="post-tags">
@@ -273,7 +275,7 @@
           </div>
           <div class="post-foot-prev">
             
-              <a href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/" target="_self">
+              <a href="/2024/02/07/%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/" target="_self">
                 <span>Next</span>
                 <i class="iconfont icon-chevronright"></i>
               </a>
