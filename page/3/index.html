@@ -482,28 +482,13 @@
 <p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
 </blockquote>
 <p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">10 分钟读完 (大约1507个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">BTC密码学原理</a></p><div class="content"><p>比特币(bitcion)：基于去中心化，以区块链作为底层技术的加密货币。</p>
-<h1 id="hash-哈希"><a href="#hash-哈希" class="headerlink" title="hash(哈希)"></a>hash(哈希)</h1><p>hash，可以简单理解为对某一事物的投影操作，即<code>A--&gt;Hash(A)</code>。<br>哈希函数(cryptographic hash function)主要有三个特性：</p>
-<ul>
-<li>collision resistance（碰撞反抗）</li>
-<li>hiding（隐秘性）</li>
-<li>puzzle friendly（谜题友好）</li>
-</ul>
-<p><strong>哈希碰撞：</strong><br>给定一个哈希函数，不同的输入，得到相同的输出，则称为 hash 碰撞。<br>如：给定 x 和 y，且 x!&#x3D;y，可以得到 Hash(x)&#x3D;Hash(y)。</p>
-<h2 id="collision-resistance"><a href="#collision-resistance" class="headerlink" title="collision resistance"></a>collision resistance</h2><p>collision resistance(碰撞反抗)：表示对哈希碰撞具有<strong>抗碰撞性</strong>。<br>在实际应用中，哈希碰撞基本上难以避免，我们只要保证给定 x，很难找到一个 y，能够在 x!&#x3D;y 的前提下，使得 Hash(x)&#x3D;Hash(y)，就认为其是 collision resistance 的。</p>
-<p>用处：如果我们自己有一条信息 x，我们希望别人知道我有 x 但不想让别人知道 x 具体是什么，就可以通过告诉其 Hash(x)，由于该性质，保证了 x!&#x3D;y 时，Hash(x)和 Hash(y)是不相等的。我们只需要告诉别人 Hash(x)即可，对方可以通过 Hash(x)知道你确实知道 x 这个信息，但他无法（很难）通过 Hash(x)反推出 x。</p>
-<h2 id="hiding"><a href="#hiding" class="headerlink" title="hiding"></a>hiding</h2><p>我们认为，给定 x 和 Hash(),可以很容易得到 Hash(x),但没有办法在已知 Hash(x)和 Hash()的情况下，反推出 x 的具体取值，当然这也是一个理想的情况。</p>
-<p><strong>digital commitment(数据保证)：collision resistance + hiding</strong><br>在视频中，肖老师提到关于股市预 测的案例，某个人对某个股票进行涨停预测，我们如何保证能够知晓其预测是否准确？最简单的是提前公布， 等待实际结果出现后验证。但实际中，当提前发布预测后，可能会由于预测者本身对股市实际结果造成影响。 所以，应该将提前将其写于纸上并密封，交给第三方机构保管，等到实际结果出现后开启密封与实际对比，这 就是 digital commitment。而第三方机构需要能够使人信服，在实际生活中，有很多场景并不存在一个这样的 第三方机构，而区块链技术正为此提供了一个很好的解决方法。 我们把预测结果看作 x，提前公布 Hash(x)，等 到预测结果发生时间来临后，公布 x，如果根据 x 可以得到公布的 Hash(x)，则说明公布的 x 确实为所预先预测的 内容。从而，我们可以实际进行判断预测是否准确。实际使用中，为了 x 足够大，会对 x 进行“加盐”，对 x 拼接一 个 nonce，对其整体取 Hash## puzzle friendly<br>在比特币系统中，还需要第三个性质 Puzzle friendly。该性质要求哈希值计算事先不可预测， 仅仅根据输入很难预测出输出。例如：我们需要一个哈希值，存在于某一个范围内，只能通过不停运算查找出来。<br>该性质保证了比特币系统中，只能通过“挖矿”获得比特币。<br>:::info<br>挖矿：试图通过暴力手段不断尝试，直到得到一个符合约定规则的 hash 值。这也是为什么挖矿是一个非常消耗算力的过程。<br>:::<br>也就是说，该性质保证了工作量证明(POW)机制 可以运行下去【“挖矿难，但验证易”】。</p>
-<p><strong>SHA-256：</strong><br>在比特币系统中采用 SHA-256 哈希函数。该函数具备以上三个特性。<br>sha256 具有极强的抗碰撞性。目前为止，世界上最强的超级计算机也不具备人为制作碰撞的能力。</p>
-<h1 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h1><p>比特币中账户管理 在第三方中心化系统中，账户开通依赖于第三方。但去中心化的比特币系统中，很明显不能 进行“申请账户”。<br>在比特币系统中，申请账户是用户自己来处理的，即自己创建一个公钥-私钥对（来自于非对称加密体系 asymmetric encryption algorithm）。公钥和私钥的应用保证了“签名”的应用。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对称加密体系：提前商量好一个秘钥，加密和解密采用同一个秘钥。</span><br><span class="line">存在问题：秘钥显然不能以明文的方式在网络上传输，容易被盗取。</span><br></pre></td></tr></table></figure>
-
-<p><strong>非对称加密体系：</strong><br><strong>用接收方的公钥加密，接收方的私钥解密</strong>。这就解决了对称加密体系中<strong>秘钥分发的问题</strong>。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405707415.png" alt="pic.1708405707415"></p>
-<p>当在比特币网络中进行转账时，通过 <strong>“签名”可以明确是由哪个账户转出的，从而防止不良分子对其他账户比特币的盗取</strong>。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加密，解决的是秘钥分发的问题；签名，解决的是明确由哪个账户转出的问题</span><br></pre></td></tr></table></figure>
-
-<p>在发布交易时，<strong>通过发起方私钥签名</strong>，其他人可以<strong>根据发起方公钥进行验证</strong>，从而<strong>保证该交易由发起方发起</strong>。</p>
-<p>也就是说，只有拥有私钥，才能将该账户中的比特币转走。 【注意：比特币系统中，很难通过生成大量公私钥对来获取他人私钥】</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约473个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">ETH-以太坊概述</a></p><div class="content"><p>BTC 和 ETH 是最主要的两种加密货币，BTC 称为区块链 1.0，以太坊称为区块链 2.0。<br>以太坊对比特币设计中的某些不足进行了改进，比例：出块时间、共识协议、mining puzzle(对内存要求高，反 ASIC 芯片使用) ，并且用权益证明（POS）替代工作量证明（POW）。除此之外，以太坊还增加了对<strong>智能合约（smart contract）</strong>的支持。</p>
+<h1 id="为什么要开发智能合约"><a href="#为什么要开发智能合约" class="headerlink" title="为什么要开发智能合约"></a>为什么要开发智能合约</h1><p>BTC 是一种去中心化的货币，在比特币取得成功之后，很多人开始思考：如果货币可以去中心化，还有什么可以去中心化。<br>以太坊的一个特性就是增加了对去中心化合约的支持。</p>
+<blockquote>
+<p>BTC 货币中的最小单位为“聪”，Satoshi。ETH 的最小单位为“Wei”.</p>
+</blockquote>
+<h1 id="去中心化的合约"><a href="#去中心化的合约" class="headerlink" title="去中心化的合约"></a>去中心化的合约</h1><p>去中心化货币本身由政府发行，政府公信力为其背书，<strong>BTC 通过技术手段取代了政府的职能</strong>。<br>现实生活中，我们经常提到的“契约”或“合约”，其有效性也是需要政府进行维护的，如果产生纠纷，政府合法性合同进行判决。<strong>ETH 的设计目的就是，通过技术手段取代政府对于合约的职能</strong>。</p>
+<p>去中心化的合同有什么好处：<br>若合同签署方并非一个国家，需要跨国转账，没有统一的司法管辖权（如：众筹）。如果可以编写无法修改的合约，一旦发布到区块链上，所有人（包括写智能合约的作者）只能按照制定的规则执行。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1068个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">BTC数据结构</a></p><div class="content"><h1 id="hash-pointer-哈希指针"><a href="#hash-pointer-哈希指针" class="headerlink" title="hash pointer(哈希指针)"></a>hash pointer(哈希指针)</h1><p>在传统链表里，通过指针将各个节点串联起来。<br><strong>指针</strong>指的是一个节点对象在内存中的首地址。</p>
 <p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405846740.png" alt="pic.1708405846740"></p>
 <p>顾名思义，区块链也是一种链表结构，节点为区块。不过区块链并未采用指针，而是使用了<strong>哈希指针。</strong><br>如下图所示，该节点有两个指针指向这个节点（实际上为一个），其中 p 为该节点的地址，H()为该节点的哈希值，该值与节点中内容有关。当节点（区块）中内容发生变化，该哈希值也会发生改变，从而保证了区块内容不能被篡改。</p>
