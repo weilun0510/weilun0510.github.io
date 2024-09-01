@@ -1,509 +1,577 @@
-<!DOCTYPE html>
-<html lang="zh" color-mode="light">
-
-  <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="weilun" />
-  <!-- Open Graph Description 简短摘要-->
-  
-  <!-- 用于搜索引擎的文章摘要 -->
-  
-  
-    <meta name="robots" content="noindex" />
-  
-  
-  <title>
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>weilun</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#f7f7f7"><meta name="application-name" content="Icaurs - Hexo Theme"><meta name="msapplication-TileImage" content="/img/favicon.png"><meta name="msapplication-TileColor" content="#f7f7f7"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Icaurs - Hexo Theme"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="weilun"><meta property="og:url" content="https://www.weilunblog.top/"><meta property="og:site_name" content="weilun"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://www.weilunblog.top/img/og_image.png"><meta property="article:author" content="weilun"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://www.weilunblog.top/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.weilunblog.top"},"headline":"weilun","image":["https://www.weilunblog.top/img/og_image.png"],"author":{"@type":"Person","name":"weilun"},"publisher":{"@type":"Organization","name":"weilun","logo":{"@type":"ImageObject","url":"https://www.weilunblog.top/img/logo.png"}},"description":""}</script><link rel="icon" href="/img/favicon.png"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link data-pjax rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.7.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link data-pjax rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><script src="https://www.googletagmanager.com/gtag/js?id=UA-72437521-5" async></script><script>window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
     
-     维论
-  </title>
-
-  
-    <link rel="apple-touch-icon" href="/images/favicon.png">
-    <link rel="icon" href="/images/favicon.png">
-  
-
-  <!-- Raleway-Font -->
-  <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
-
-  <!-- hexo site css -->
-  <link rel="stylesheet" href="/css/main.css" />
-  <link rel="stylesheet" href="//at.alicdn.com/t/font_1886449_67xjft27j1l.css" />
-  <!-- 代码块风格 -->
-  
-
-  <!-- jquery3.3.1 -->
-  
-    <script defer type="text/javascript" src="/plugins/jquery.min.js"></script>
-  
-
-  <!-- fancybox -->
-  
-    <link href="/plugins/jquery.fancybox.min.css" rel="stylesheet">
-    <script defer type="text/javascript" src="/plugins/jquery.fancybox.min.js"></script>
-  
-  
-<script src="/js/fancybox.js"></script>
-
-
-  
-
-  
-
-  <script>
-    var html = document.documentElement
-    const colorMode = localStorage.getItem('color-mode')
-    if (colorMode) {
-      document.documentElement.setAttribute('color-mode', colorMode)
-    }
-  </script>
-<meta name="generator" content="Hexo 6.3.0"></head>
-
-
-  <body>
-    <div id="app">
-      <div class="header">
-  <div class="avatar">
-    <a href="/">
-      <!-- 头像取消懒加载，添加no-lazy -->
-      
-        <img src="/images/avatar.png" alt="">
-      
-    </a>
-    <div class="nickname"><a href="/">维论</a></div>
-  </div>
-  <div class="navbar">
-    <ul>
-      
-        <li class="nav-item" data-path="/">
-          <a href="/">首页</a>
-        </li>
-      
-        <li class="nav-item" data-path="/archives/">
-          <a href="/archives/">归档</a>
-        </li>
-      
-        <li class="nav-item" data-path="/tags/">
-          <a href="/tags/">标签</a>
-        </li>
-      
-        <li class="nav-item" data-path="/about/">
-          <a href="/about/">关于</a>
-        </li>
-      
-    </ul>
-  </div>
-</div>
-
-
-<script src="/js/activeNav.js"></script>
-
-
-
-      <div class="flex-container">
-        <div class="container index">
-  <div class="post-list">
-    <!-- 遍历渲染文章 -->
-    
-      <div class="post-item" title="Hooks闭包陷阱">
-        <div class="time-m-d">2024-02-27</div>
-        <div class="title">
-          <a href="/2024/02/27/Hooks%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/">
-            
-              
-                <span>Hooks闭包陷阱</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="Hooks与闭包">
-        <div class="time-m-d">2024-02-27</div>
-        <div class="title">
-          <a href="/2024/02/27/Hooks%E4%B8%8E%E9%97%AD%E5%8C%85/">
-            
-              
-                <span>Hooks与闭包</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="umijs/max 设计师指南">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/umijs-max-%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%8C%87%E5%8D%97/">
-            
-              
-                <span>umijs/max 设计师指南</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="视频合成流程图">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%9B%BE/">
-            
-              
-                <span>视频合成流程图</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="code review">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/code-review/">
-            
-              
-                <span>code review</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="音标">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/%E9%9F%B3%E6%A0%87/">
-            
-              
-                <span>音标</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BEM规范">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">
-            
-              
-                <span>BEM规范</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC-共识协议">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">
-            
-              
-                <span>BTC-共识协议</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC密码学原理">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">
-            
-              
-                <span>BTC密码学原理</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-      <div class="post-item" title="BTC数据结构">
-        <div class="time-m-d">2024-02-07</div>
-        <div class="title">
-          <a href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">
-            
-              
-                <span>BTC数据结构</span>
-              
-            
-          </a>
-        </div>
-      </div>
-    
-  </div>
-  <nav class="post-navigation">
-    
-      <a href="/page/2/"><i class="iconfont icon-angleleft"></i></a>
-    
-    <span class="page-num">3 / 7</span>
-    
-      <a href="/page/4/"><i class="iconfont icon-angleright"></i></a>
-    
-  </nav>
-</div>
-
-        
-<div class="footer">
-  <div class="social">
-    <ul>
-      
-        <li>
-          
-              <a title="github" target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">
-                <i class="iconfont icon-github"></i>
-              </a>
-              
-        </li>
-        
-    </ul>
-  </div>
-  
-    
-    <div class="footer-more">
-      
-        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Copyright © 2024 Oranges</a>
-        
-    </div>
-  
-    
-    <div class="footer-more">
-      
-        <a target="_blank" rel="noopener" href="https://github.com/zchengsite/hexo-theme-oranges">Theme by Oranges | Powered by Hexo</a>
-        
-    </div>
-  
-  
-</div>
-
-      </div>
-
-      <div class="tools-bar">
-        <div class="back-to-top tools-bar-item hidden">
-  <a href="javascript: void(0)">
-    <i class="iconfont icon-chevronup"></i>
-  </a>
-</div>
-
-
-<script src="/js/backtotop.js"></script>
-
-
-
-        
-  <div class="search-icon tools-bar-item" id="search-icon">
-    <a href="javascript: void(0)">
-      <i class="iconfont icon-search"></i>
-    </a>
-  </div>
-
-  <div class="search-overlay hidden">
-    <div class="search-content" tabindex="0">
-      <div class="search-title">
-        <span class="search-icon-input">
-          <a href="javascript: void(0)">
-            <i class="iconfont icon-search"></i>
-          </a>
-        </span>
-        
-          <input type="text" class="search-input" id="search-input" placeholder="搜索...">
-        
-        <span class="search-close-icon" id="search-close-icon">
-          <a href="javascript: void(0)">
-            <i class="iconfont icon-close"></i>
-          </a>
-        </span>
-      </div>
-      <div class="search-result" id="search-result"></div>
-    </div>
-  </div>
-
-  <script type="text/javascript">
-    var inputArea = document.querySelector("#search-input")
-    var searchOverlayArea = document.querySelector(".search-overlay")
-
-    inputArea.onclick = function() {
-      getSearchFile()
-      this.onclick = null
-    }
-
-    inputArea.onkeydown = function() {
-      if(event.keyCode == 13)
-        return false
-    }
-
-    function openOrHideSearchContent() {
-      let isHidden = searchOverlayArea.classList.contains('hidden')
-      if (isHidden) {
-        searchOverlayArea.classList.remove('hidden')
-        document.body.classList.add('hidden')
-        // inputArea.focus()
-      } else {
-        searchOverlayArea.classList.add('hidden')
-        document.body.classList.remove('hidden')
-      }
-    }
-
-    function blurSearchContent(e) {
-      if (e.target === searchOverlayArea) {
-        openOrHideSearchContent()
-      }
-    }
-
-    document.querySelector("#search-icon").addEventListener("click", openOrHideSearchContent, false)
-    document.querySelector("#search-close-icon").addEventListener("click", openOrHideSearchContent, false)
-    searchOverlayArea.addEventListener("click", blurSearchContent, false)
-
-    var searchFunc = function (path, search_id, content_id) {
-      'use strict';
-      var $input = document.getElementById(search_id);
-      var $resultContent = document.getElementById(content_id);
-      $resultContent.innerHTML = "<ul><span class='local-search-empty'>First search, index file loading, please wait...<span></ul>";
-      $.ajax({
-        // 0x01. load xml file
-        url: path,
-        dataType: "xml",
-        success: function (xmlResponse) {
-          // 0x02. parse xml file
-          var datas = $("entry", xmlResponse).map(function () {
-            return {
-              title: $("title", this).text(),
-              content: $("content", this).text(),
-              url: $("url", this).text()
-            };
-          }).get();
-          $resultContent.innerHTML = "";
-
-          $input.addEventListener('input', function () {
-            // 0x03. parse query to keywords list
-            var str = '<ul class=\"search-result-list\">';
-            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-            $resultContent.innerHTML = "";
-            if (this.value.trim().length <= 0) {
-              return;
-            }
-            // 0x04. perform local searching
-            datas.forEach(function (data) {
-              var isMatch = true;
-              var content_index = [];
-              if (!data.title || data.title.trim() === '') {
-                data.title = "Untitled";
-              }
-              var orig_data_title = data.title.trim();
-              var data_title = orig_data_title.toLowerCase();
-              var orig_data_content = data.content.trim().replace(/<[^>]+>/g, "");
-              var data_content = orig_data_content.toLowerCase();
-              var data_url = data.url;
-              var index_title = -1;
-              var index_content = -1;
-              var first_occur = -1;
-              // only match artiles with not empty contents
-              if (data_content !== '') {
-                keywords.forEach(function (keyword, i) {
-                  index_title = data_title.indexOf(keyword);
-                  index_content = data_content.indexOf(keyword);
-
-                  if (index_title < 0 && index_content < 0) {
-                    isMatch = false;
-                  } else {
-                    if (index_content < 0) {
-                      index_content = 0;
-                    }
-                    if (i == 0) {
-                      first_occur = index_content;
-                    }
-                    // content_index.push({index_content:index_content, keyword_len:keyword_len});
-                  }
-                });
-              } else {
-                isMatch = false;
-              }
-              // 0x05. show search results
-              if (isMatch) {
-                str += "<li><a href='" + data_url + "' class='search-result-title'>" + orig_data_title + "</a>";
-                var content = orig_data_content;
-                if (first_occur >= 0) {
-                  // cut out 100 characters
-                  var start = first_occur - 20;
-                  var end = first_occur + 80;
-
-                  if (start < 0) {
-                    start = 0;
-                  }
-
-                  if (start == 0) {
-                    end = 100;
-                  }
-
-                  if (end > content.length) {
-                    end = content.length;
-                  }
-
-                  var match_content = content.substr(start, end);
-
-                  // highlight all keywords
-                  keywords.forEach(function (keyword) {
-                    var regS = new RegExp(keyword, "gi");
-                    match_content = match_content.replace(regS, "<span class=\"search-keyword\">" + keyword + "</span>");
-                  });
-
-                  str += "<p class=\"search-result-abstract\">" + match_content + "...</p>"
-                }
-                str += "</li>";
-              }
-            });
-            str += "</ul>";
-            if (str.indexOf('<li>') === -1) {
-              return $resultContent.innerHTML = "<ul><span class='local-search-empty'>No result<span></ul>";
-            }
-            $resultContent.innerHTML = str;
-          });
-        },
-        error: function(xhr, status, error) {
-          $resultContent.innerHTML = ""
-          if (xhr.status === 404) {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The search.xml file was not found, please refer to：<a href='https://github.com/zchengsite/hexo-theme-oranges#configuration' target='_black'>configuration</a><span></ul>";
-          } else {
-            $resultContent.innerHTML = "<ul><span class='local-search-empty'>The request failed, Try to refresh the page or try again later.<span></ul>";
+        gtag('config', 'UA-72437521-5');</script><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css"><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
           }
-        }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.png" alt="weilun" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item" href="/archives">Archives</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/weilun0510"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-27T02:29:41.000Z" title="2024/2/27 10:29:41">2024-02-27</time>发表</span><span class="level-item">17 分钟读完 (大约2549个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/27/Hooks%E9%97%AD%E5%8C%85%E9%99%B7%E9%98%B1/">Hooks闭包陷阱</a></p><div class="content"><p><a name="fWl5z"></a></p>
+<h1 id="闭包陷阱"><a href="#闭包陷阱" class="headerlink" title="闭包陷阱"></a>闭包陷阱</h1><p>以下两段代码，来自 <a target="_blank" rel="noopener" href="https://github.com/hacker0limbo/my-blog/issues/6">https://github.com/hacker0limbo/my-blog/issues/6</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createIncrement</span>(<span class="params">i</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    value += i;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">    <span class="keyword">const</span> message = <span class="string">`Current value is <span class="subst">$&#123;value&#125;</span>`</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;value: &quot;</span>, value);</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(message);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> increment;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> inc = <span class="title function_">createIncrement</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> log = <span class="title function_">inc</span>(); <span class="comment">// 1</span></span><br><span class="line"><span class="title function_">inc</span>(); <span class="comment">// 2</span></span><br><span class="line"><span class="title function_">inc</span>(); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">log</span>(); <span class="comment">// &quot;Current value is 1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createIncrementFixed</span>(<span class="params">i</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    value += i;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(value);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">const</span> message = <span class="string">`Current value is <span class="subst">$&#123;value&#125;</span>`</span>;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(message);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> increment;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> inc = <span class="title function_">createIncrementFixed</span>(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">const</span> log = <span class="title function_">inc</span>(); <span class="comment">// 1</span></span><br><span class="line"><span class="title function_">inc</span>(); <span class="comment">// 2</span></span><br><span class="line"><span class="title function_">inc</span>(); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">log</span>(); <span class="comment">// &quot;Current value is 3&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>截取文章中的一段话，如下：<br /><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227103752.png"><br /><br>对于这句话，我再做下解释：<br />在 value 变量修改值之后，message 变量保存的值仍旧是原始的值。这是因为<strong>基础数据类型的值是不可变的。</strong><br><a name="XVxXr"></a></p>
+<h2 id="基础数据类型的值是不可变的"><a href="#基础数据类型的值是不可变的" class="headerlink" title="基础数据类型的值是不可变的"></a>基础数据类型的值是不可变的</h2><p>让我们举例说明，看下这段代码，思考 a 的值为多少？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">let</span> b = a;</span><br><span class="line">b++;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(b);</span><br></pre></td></tr></table></figure>
+
+<p><code>b++</code>，b 的值被改变了，但是 a 没被改变，依然为 1。这意味着 a b 的等价，并不表示他们是同一个值。也就是说，a 赋予 b 的时候，重新给 b 分配了一块内存空间。因此我们说，<strong>基础数据类型，是按值访问的。</strong> 用图表示<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227103852.png"></p>
+<p><strong>基础数据类型的比较，是值在比较</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">const</span> b = <span class="number">1</span>;</span><br><span class="line">a === b; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>当 a 和 b 在比较的时候，本质上是值在比较。所以我们说<strong>基础数据类型的值是不可变的。</strong><br><a name="gYWVk"></a></p>
+<h2 id="出现闭包陷阱的原因"><a href="#出现闭包陷阱的原因" class="headerlink" title="出现闭包陷阱的原因"></a>出现闭包陷阱的原因</h2><p>为第一段代码第 6 行打上断点</p>
+<ol>
+<li>开始执行<code>createIncrement</code>函数，先定义<strong>基础数据类型 value</strong>并赋值为 0，然后返回<code>increment</code>函数并赋值给<code>inc</code>。</li>
+<li>inc 执行，进入<code>increment</code>函数，执行到第 8 行，<code>value+=i</code>，变量<code>value</code>的值变成了 1，同时产生了闭包对象<code>Closure(createIncrement)</code>，该闭包对象存在<code>increment</code>作用域当中。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227104106.png"></p>
+<ol start="3">
+<li>接着执行到第 10 行，声明了<code>message</code>变量，并将<strong>基础数据类型 value</strong>的值赋给<code>message</code>，此时<code>value</code>为 1，所以<code>message = &quot;Current value is 1&quot;</code>，然后返回<code>logValue</code>函数，<code>increment</code>函数执行完毕，并赋值给<code>log</code>变量。因为闭包对象<code>Closure(createIncrement)</code>的产生，<code>log</code><strong>变量将会引用着</strong><code>increment</code><strong>函数第一次执行时创建的作用域。</strong>如图所示，作用域里的 Local 对象「活动对象」中的<code>message = &quot;Current value is 1&quot;</code>。</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227104124.png"></p>
+<ol start="4">
+<li>解释第 25 行，执行<code>logValue</code>函数，寻找<code>message</code>变量。 先查找 Local 活动对象，没找到，发现作用域链中的闭包对象<code>Closure(increment)</code>中存在<code>message</code>，且值为<code>Current value is 1</code>，打印<code>message</code>，<code>logValue</code>函数执行完毕。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Local 活动对象：仅仅只有处于栈顶的执行上下文，才会生成 Local 对象。</span><br><span class="line">除了 Local 活动对象，作用域链中的其他几种变量对象（Closure/Module/Global）都能够在函数解析时确定</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227104143.png"></p>
+<p>虽然<code>Closure(createIncrement)</code>中的<code>value</code>已经变成了 3，但是并不影响<strong>基础数据类型 message 变量中的 value 值。</strong><br />那是不是只要将引用类型赋值给 message 变量，就可以解决闭包陷阱问题？<br><a name="Ttyu1"></a></p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>让我们稍微改下代码，将<code>value</code><strong>改为引用类型</strong>，再赋值给 message</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 闭包陷阱</span></span><br><span class="line"><span class="comment">// 参考: https://github.com/hacker0limbo/my-blog/issues/6</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">Trap</span> = (<span class="params">props</span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// debugger</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">createIncrement</span>(<span class="params">i</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> value = &#123;</span><br><span class="line">      <span class="attr">a</span>: <span class="number">0</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">      value.<span class="property">a</span> += i;</span><br><span class="line">      <span class="keyword">const</span> message = value;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;value: &quot;</span>, value);</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;message: &quot;</span>, message);</span><br><span class="line">      &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> increment;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> inc = <span class="title function_">createIncrement</span>(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">const</span> log = <span class="title function_">inc</span>(); <span class="comment">// 1</span></span><br><span class="line">  <span class="title function_">inc</span>(); <span class="comment">// 2</span></span><br><span class="line">  <span class="title function_">inc</span>(); <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">log</span>(); <span class="comment">// &quot;Current value is 3&quot;</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>闭包陷阱<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">Trap</span>;</span><br></pre></td></tr></table></figure>
+
+<p>第一次执行<code>increment</code>函数时，<code>value.a += 1</code>，所以<code>value = &#123; a: 1 &#125;</code>，<code>message = &#123; a: 1 &#125;</code>，<code>increment</code>函数执行完毕，并赋值给<code>log</code>变量。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227104204.png"></p>
+<p>后面执行<code>logValue</code>时，虽然<code>createIncrement</code> <strong>函数第一次执行时创建的作用域</strong>中的<code>message = &#123; a: 1 &#125;</code>，但是<code>message</code>的引用指向着<code>value</code>，所以当<code>value = &#123; a: 3 &#125;</code>时，<code>message</code>也等于<code>&#123; a: 3 &#125;</code>。所以将引用类型赋值给<code>message</code>确实能解决闭包陷阱问题。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227104241.png"></p>
+<p>小结：</p>
+<ol>
+<li><code>log</code>变量引用着<code>increment</code>函数第一次执行时创建的作用域，此时<code>message = &quot;Current value is 1&quot;</code>。</li>
+<li>执行三次<code>increment</code>函数后，<code>value</code>变成了 3，然后执行<code>logValue</code>函数而<code>message</code>中的<code>value</code>依旧为 1 的原因是<code>value</code>变量是个基础数据类型。</li>
+<li>想要拿到<code>value</code>变量的最新值，我们只需要把<code>value</code>变量从基础数据类型改为引用数据类，并让<code>message</code>指向<code>value</code>变量即可。</li>
+</ol>
+<p>思考以下三种不同赋值方式<code>message</code>的值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">createIncrement</span>(<span class="params">i</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    value.<span class="property">a</span> += i;</span><br><span class="line">    <span class="keyword">const</span> message = <span class="string">`Current value is <span class="subst">$&#123;value.a&#125;</span>`</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;value: &quot;</span>, value); <span class="comment">// &#123; a: 3 &#125;</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;message: &quot;</span>, message); <span class="comment">// Current value is 1</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> increment;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createIncrement</span>(<span class="params">i</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    value.<span class="property">a</span> += i;</span><br><span class="line">    <span class="keyword">const</span> message = &#123;</span><br><span class="line">      <span class="attr">a</span>: value.<span class="property">a</span>,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;value: &quot;</span>, value); <span class="comment">// &#123; a: 3 &#125;</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;message: &quot;</span>, message); <span class="comment">// &#123; a: 1 &#125;</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> increment;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">createIncrement</span>(<span class="params">i</span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> value = &#123;</span><br><span class="line">    <span class="attr">a</span>: <span class="number">0</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">    value.<span class="property">a</span> += i;</span><br><span class="line">    <span class="keyword">const</span> message = &#123;</span><br><span class="line">      <span class="attr">a</span>: value,</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">logValue</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;value: &quot;</span>, value); <span class="comment">// &#123; a: 3 &#125;</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;message: &quot;</span>, message); <span class="comment">// &#123; a: &#123; a: 3 &#125; &#125;</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> increment;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hooks 出现的闭包陷阱，其实跟上面的问题是一样的。<br><a name="izedp"></a></p>
+<h1 id="Hooks-中的闭包陷阱"><a href="#Hooks-中的闭包陷阱" class="headerlink" title="Hooks 中的闭包陷阱"></a>Hooks 中的闭包陷阱</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(fn, [deps]);</span><br></pre></td></tr></table></figure>
+
+<p>在 react hook 中有个经典的闭包陷阱</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hooks 中的闭包陷阱</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">HookClosureTrap</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [count, setCount] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 获取到的count永远是0，这是因为闭包陷阱导致的问题</span></span><br><span class="line">    <span class="comment">// 当依赖项为空数组时，fn只会执行一次，useEffect永远引用着HookClosureTrap第一次执行时创建的作用域。第一次创建是count为0</span></span><br><span class="line">    <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>hooks 中的闭包陷阱<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>count: &#123;count&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">HookClosureTrap</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们给<code>useEffect</code>第二个参数<code>deps</code>传了个<strong>空数组</strong>，并使用<code>setInterval</code>希望隔秒<code>count+1</code>，然而实际效果是首次渲染时页面中<code>count</code>为<code>0</code>，然后过了 1 秒页面中的<code>count</code>更新为<code>1</code>，之后一直保持为<code>1</code>不变，这就是<code>useEffect</code>的引起的闭包问题。<br />因为当依赖项为空数组时，<code>fn</code>(useEffect 的第一个参数)只会执行一次，而 useEffect 永远引用着 HookClosureTrap 第一次执行时创建的作用域。第一次创建时 count 为 0。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-27/20240227104306.png"><br><a name="Q4i6F"></a></p>
+<h2 id="解决办法-1"><a href="#解决办法-1" class="headerlink" title="解决办法"></a>解决办法</h2><p><a name="SlhwL"></a></p>
+<h3 id="添加依赖项"><a href="#添加依赖项" class="headerlink" title="添加依赖项"></a>添加依赖项</h3><p>添加 count 依赖项，依赖项改变时 fn 重新执行，因为 setCount 会触发重新渲染，那么我们就能获取到 HookClosureTrap 最新的作用域，也就能获取到最新的 count</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解决办法1：添加依赖项</span></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line">&#125;, [count]);</span><br></pre></td></tr></table></figure>
+
+<p>虽然获取到了最新值，但是 count 显示结果却很混乱。<br />这是因为每次执行 useEffect 时就会创建一个定时器<code>timer</code>，下次执行时，也会执行上次创建的定时器。<br />所以我们需要在 useEffect 中返回一个回调函数，清除本次创建的定时器。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setCount</span>(count + <span class="number">1</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> timer &amp;&amp; <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">&#125;, [count]);</span><br></pre></td></tr></table></figure>
+
+<p><a name="tMcTg"></a></p>
+<h3 id="setState-函数式更新"><a href="#setState-函数式更新" class="headerlink" title="setState 函数式更新"></a>setState 函数式更新</h3><p>setState 可以接收一个函数，函数的参数是上一次计算后该状态的值，可以理解为最新值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解决办法2：使用setState函数式更新</span></span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 这里打印的count，依旧永远是0</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;count: &quot;</span>, count);</span><br><span class="line"></span><br><span class="line">    <span class="title function_">setCount</span>(<span class="function">(<span class="params">prev</span>) =&gt;</span> prev + <span class="number">1</span>);</span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> timer &amp;&amp; <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p><a name="SfV9h"></a></p>
+<h3 id="useRef"><a href="#useRef" class="headerlink" title="useRef"></a>useRef</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> refContainer = <span class="title function_">useRef</span>(initialValue);</span><br></pre></td></tr></table></figure>
+
+<p>useRef 返回一个可变的 ref 对象，其 .current 属性被初始化为传入的参数（initialValue）。返回的 ref 对象在组件的整个生命周期内持续存在。</p>
+<p>也就是说，使用 useRef， 可以保持变量的引用不变。<br />这简直跟解决闭包陷阱的办法一模一样，就是把<code>value</code>变量改为了引用类型。</p>
+<p>我们修改 ref 的值后，setState 触发更新，重新渲染时，拿到的虽然是 HookClosureTrap 第一次执行时创建的作用域，ref 引用地址不变，但是它的值已经被改变了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 解决办法3：使用useRef</span></span><br><span class="line"><span class="keyword">const</span> countRef = <span class="title function_">useRef</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"><span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> timer = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="title function_">setCount</span>(++countRef.<span class="property">current</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 还有一种不常见的写法</span></span><br><span class="line">    <span class="comment">// 对count使用前置自增运算符，也能得到正确的效果</span></span><br><span class="line">    <span class="comment">// setCount(++count)</span></span><br><span class="line">  &#125;, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="function">() =&gt;</span> timer &amp;&amp; <span class="built_in">clearInterval</span>(timer);</span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+
+<p><a name="VWs6V"></a></p>
+<h3 id="useReducer"><a href="#useReducer" class="headerlink" title="useReducer"></a>useReducer</h3><p>useReducer 同 useRef 类似，使用引用数据类型解决这个问题</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useEffect, useRef, useReducer &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">countReducer</span>(<span class="params">state, &#123; type, payload &#125;</span>) &#123;</span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">&quot;add&quot;</span>:</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        <span class="attr">count</span>: state.<span class="property">count</span> + payload,</span><br><span class="line">      &#125;;</span><br><span class="line">    <span class="attr">default</span>:</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// hooks 中的闭包陷阱</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">HookClosureTrap</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> [state, dispatch] = <span class="title function_">useReducer</span>(countReducer, &#123; <span class="attr">count</span>: <span class="number">0</span> &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 解决办法4: 使用useReducer</span></span><br><span class="line">  <span class="comment">// useReducer 同 useRef 类似，使用引用数据类型解决这个问题</span></span><br><span class="line">  <span class="title function_">useEffect</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="title function_">dispatch</span>(&#123; <span class="attr">type</span>: <span class="string">&quot;add&quot;</span>, <span class="attr">payload</span>: <span class="number">1</span> &#125;);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;, []);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>hooks 中的闭包陷阱<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">div</span>&gt;</span>state.count: &#123;state.count&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">HookClosureTrap</span>;</span><br></pre></td></tr></table></figure>
+
+<p>除了<code>useEffect</code>，像<code>useMemo</code>、<code>useCallback</code>都有 deps 参数，在这些 hook 里用到某个 state 时，如果 deps 为空数组，虽然 state 变了，但是却没有执行新传入的函数，依旧引用的之前的 state。<br><a name="dyt8r"></a></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><code>createIncrement</code>这段代码中，出现闭包陷阱的原因是，第一次执行<code>increment</code>后，该作用域被<code>log</code>变量保存（因为产生了闭包（Closure(createIncrement)）所以能被保存），作用域中的<code>Local</code>对象中<code>message = &quot;Current value is 1&quot;</code>，<code>message</code>是基础数据类型，所以后续打印<code>message</code>的值仍为第一次执行<code>increment</code>的值。如果希望<code>message</code>中的<code>value</code>为最新值，将<code>value</code>变量改为引用数据类型，并让<code>message</code>指向<code>value</code>变量即可。<br />react hooks 出现闭包陷阱的原因也是如此，采用添加依赖项、使用 setState 函数式更新、useRef、useReducer 都可以解决这个问题。</p>
+<p>参考：<br /><a target="_blank" rel="noopener" href="http://www.ferecord.com/react-hooks-closure-traps-problem.html">http://www.ferecord.com/react-hooks-closure-traps-problem.html</a><br /><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/6a512f78536a">https://www.jianshu.com/p/6a512f78536a</a><br /><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2016207">https://cloud.tencent.com/developer/article/2016207</a><br /><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844904193044512782">https://juejin.cn/post/6844904193044512782</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-27T01:21:15.000Z" title="2024/2/27 09:21:15">2024-02-27</time>发表</span><span class="level-item">6 分钟读完 (大约935个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/27/Hooks%E4%B8%8E%E9%97%AD%E5%8C%85/">Hooks与闭包</a></p><div class="content"><p><a name="IJ4Fn"></a></p>
+<h1 id="设计动机"><a href="#设计动机" class="headerlink" title="设计动机"></a>设计动机</h1><ol>
+<li>解决组件之间状态难以复用的问题</li>
+<li>让组件更容易理解</li>
+</ol>
+<p>hooks 可以理解为更底层的实现，内部会自动帮我们管理状态，不用像<code>ClassComponent</code>组件一样在生命周期里写各种逻辑。</p>
+<p><code>hooks</code>能够让函数式组件拥有内部状态的基本原理，就是利用闭包的特性「闭包对象持久存在」。这让函数组件下次执行时能够获取到上次函数执行结束时<code>state</code>的值。</p>
+<p>回顾下闭包的定义：闭包是一个特殊的对象。它由两部分组件，执行上下文 A 以及 A 中创建的函数 B。当 B 执行时，如果访问了 A 中的变量，那么闭包就产生了。<br />在 chrome 中，执行上下文 A 的函数名代指闭包。<br><a name="iQNgZ"></a></p>
+<h1 id="闭包与模块"><a href="#闭包与模块" class="headerlink" title="闭包与模块"></a>闭包与模块</h1><p>当我们定义一个 React 组件，并在其他模块在使用，这时候思考一下模块与闭包的关系：<br />在模 Counter.jsx 中定义一个 Counter 组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Counter.jsx</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后在 App 模块中使用 Counter 组件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.jsx</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Counter</span> <span class="keyword">from</span> <span class="string">&quot;./Counter&quot;</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">App</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="language-xml"><span class="tag">&lt;<span class="name">Counter</span> /&gt;</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面的代码转换成伪代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title class_">CounterModule</span> = (<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">Counter</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">&#125;)()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">AppModule</span> = (<span class="keyword">function</span> <span class="title function_">A</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">Counter</span> = <span class="title class_">CounterModule</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> funtion <span class="title class_">App</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">Counter</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>当 App 函数执行时，访问了 AppModule 中定义的变量对象 Counter，那么闭包「Closure[A]」就产生了。</p>
+<p>也就说，<strong>每一个 JS 模块都可以认为是一个独立的作用域，当代码执行时，该词法作用域创建执行上下文，如果模块内部，创建了可供外部引用访问的函数时，就为闭包的产生提供了条件，只要该函数在外部执行访问了模块内部的其他变量，闭包就会产生</strong>。</p>
+<p>函数组件本质上就是一个函数，当我们在一个函数组件 A 中导入另一个函数组件 B，并在 A 中执行时 B 时，闭包就会产生。<br><a name="l9qsr"></a></p>
+<h1 id="hooks-与闭包"><a href="#hooks-与闭包" class="headerlink" title="hooks 与闭包"></a>hooks 与闭包</h1><p>这是一个很常规的组件，我们用伪代码来分析下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; useState &#125; <span class="keyword">from</span> <span class="string">&quot;react&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">Demo</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 使用数组解构的方式，定义变量</span></span><br><span class="line">  <span class="keyword">const</span> [counter, setCounter] = <span class="title function_">useState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">onClick</span>=<span class="string">&#123;()</span> =&gt;</span> setCounter(counter + 1)&#125;&gt;hello world, &#123;counter&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先看 useState 的伪代码实现</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">SM</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">let</span> state = <span class="literal">null</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">myUseState</span>(<span class="params">value</span>) &#123;</span><br><span class="line">    state = state || value; <span class="comment">// 第一次调用没有初始值，因此使用传入的初始值赋值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">dispatch</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">      state = newValue;</span><br><span class="line">      <span class="comment">// 假设此方法能触发页面渲染</span></span><br><span class="line">      <span class="comment">// render()</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> [state, dispatch];</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Demo 模块转为伪代码，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hooks与闭包</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">HooksAndClosure</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">  <span class="comment">// 验证：myUseState执行时闭包产生了</span></span><br><span class="line">  <span class="keyword">const</span> <span class="title class_">StateModule</span> = (<span class="keyword">function</span> <span class="title function_">SM</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> state = <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">myUseState</span>(<span class="params">value</span>) &#123;</span><br><span class="line">      state = state || value; <span class="comment">// 第一次调用没有初始值，因此使用传入的初始值赋值</span></span><br><span class="line"></span><br><span class="line">      <span class="keyword">function</span> <span class="title function_">dispatch</span>(<span class="params">newValue</span>) &#123;</span><br><span class="line">        state = newValue;</span><br><span class="line">        <span class="comment">// 假设此方法能触发页面渲染</span></span><br><span class="line">        <span class="comment">// render()</span></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> [state, dispatch];</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;)();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> myUseState = <span class="title class_">StateModule</span>;</span><br><span class="line">  <span class="keyword">debugger</span>;</span><br><span class="line">  <span class="keyword">const</span> [counter, setCounter] = <span class="title function_">myUseState</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> <span class="title function_">addCounter</span> = (<span class="params"></span>) =&gt; &#123;</span><br><span class="line">    <span class="comment">// 调用setCounter时也会产生闭包</span></span><br><span class="line">    <span class="keyword">debugger</span>;</span><br><span class="line">    <span class="title function_">setCounter</span>(counter + <span class="number">1</span>);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;&gt;</span></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">h1</span>&gt;</span>状态是如何被保存的<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"></span></span><br><span class="line"><span class="language-xml">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span>=<span class="string">&#123;addCounter&#125;</span>&gt;</span>add Counter<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/&gt;</span></span></span><br><span class="line">  );</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="title class_">HooksAndClosure</span>;</span><br></pre></td></tr></table></figure>
+
+<p>StateModule 返回 内部函数 myUseState 赋值给 myUseState，myUseState<strong>执行时</strong>（第 22 行）访问了 StateModule 的 state 变量(第 8 行)，此时<strong>闭包对象「Closure(SM)」就产生了</strong>。<br /><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-18/20240227093858.png"></p>
+<p>现在我们知道了<strong>调用 useState 会产生闭包</strong>，那么调用 setState 会不会产生闭包呢？答案是会<br /><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-18/20240227093955.png"><br /><br>可以看到，调用 dispatch 时，闭包对象<code>Closure(SM)</code>产生了，这个闭包对象保存着上次的 state 结果。</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T06:28:01.000Z" title="2024/2/7 14:28:01">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约427个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/umijs-max-%E8%AE%BE%E8%AE%A1%E5%B8%88%E6%8C%87%E5%8D%97/">umijs/max 设计师指南</a></p><div class="content"><h1 id="Ant-design"><a href="#Ant-design" class="headerlink" title="Ant design"></a>Ant design</h1><p><a target="_blank" rel="noopener" href="https://ant.design/index-cn">ant design</a> 是蚂蚁集团开源的组件库，我们公司项目使用 ant design V5 。设计师在设计时尽量贴合该组件库设计风格，节省开发成本。<br>首页包括<strong>定制主题</strong>，还有<strong>与研发相结合</strong>的一些介绍，可以了解下。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325384489.png" alt="pic.1708325384489"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325394155.png" alt="pic.1708325394155"></p>
+<h1 id="定制主题"><a href="#定制主题" class="headerlink" title="定制主题"></a>定制主题</h1><p>进入<a target="_blank" rel="noopener" href="https://ant.design/theme-editor-cn#component-style">主题编辑器</a>，页面如下，解释下该页面的功能：</p>
+<ul>
+<li>左侧为可视化配置面板，右侧为预览面板</li>
+<li><strong>全局</strong>表示该配置对所有组件生效，<strong>组件</strong>则只对当前组件生效</li>
+<li><strong>颜色</strong>可修改主题色相关变量，<strong>尺寸</strong>修改文字大小、间距，<strong>风格</strong>修改圆角、阴影</li>
+<li>设计师修改配置后，导出配置文件发给前端开发人员即可<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325448524.png" alt="pic.1708325448524"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708325454691.png" alt="pic.1708325454691"></li>
+</ul>
+<h1 id="用于设计"><a href="#用于设计" class="headerlink" title="用于设计"></a>用于设计</h1><p>确定好主题变量之后，设计师可以根据主题变量的值，设置一套变量用于自己喜欢的设计平台，保持风格统一。<br><strong>在设计平台上定义的变量名与 ant design 主题变量名保持一致</strong>，具体有哪些变量，参考主题编辑器左侧配置面板。</p>
+<p>推荐设计工具： <a target="_blank" rel="noopener" href="https://kitchen.alipay.com/">kitchen</a>，<a target="_blank" rel="noopener" href="https://www.yuque.com/kitchen/doc">使用文档</a><br>大大提升设计师与工程师的协作效率：<a target="_blank" rel="noopener" href="https://www.yuque.com/kitchen/doc/custom-token">https://www.yuque.com/kitchen/doc/custom-token</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T06:27:30.000Z" title="2024/2/7 14:27:30">2024-02-07</time>发表</span><span class="level-item">2 分钟读完 (大约301个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/%E8%A7%86%E9%A2%91%E5%90%88%E6%88%90%E6%B5%81%E7%A8%8B%E5%9B%BE/">视频合成流程图</a></p><div class="content"><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334059416.png" alt="pic.1708334059416"><br /><br>CrossPage.js 是一个简单的页面间通信模块，包括 CrossPageExchangeItem 类和 CrossPageExchange 类。<br />CrossPageExchangeItem 类用于创建一个新的通信项 exchangeItem，CrossPageExchange 类拥有 createItem&#x2F;getItem&#x2F;deleteItem 静态方法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 简单的页面间通信的模块</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CrossPageExchangeItem</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">id</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">id</span> = id;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">setDataHandler</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cancelHandler</span> = <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">getId</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">id</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">onSetData</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">setDataHandler</span> = cb;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">setData</span>(<span class="params">data</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="variable language_">this</span>.<span class="property">setDataHandler</span> === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">setDataHandler</span>(data);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">onCancel</span>(<span class="params">cb</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">cancelHandler</span> = cb;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">cancel</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="variable language_">this</span>.<span class="property">cancelHandler</span> === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="title function_">cancelHandler</span>();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="title function_">remove</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">setDataHandler</span> = <span class="literal">null</span>;</span><br><span class="line">    <span class="title class_">CrossPageExchange</span>.<span class="title function_">deleteItem</span>(<span class="variable language_">this</span>.<span class="property">id</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">CrossPageExchange</span> &#123;</span><br><span class="line">  <span class="keyword">static</span> latestId = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">static</span> items = <span class="keyword">new</span> <span class="title class_">Object</span>(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">createItem</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> newItem = <span class="keyword">new</span> <span class="title class_">CrossPageExchangeItem</span>(<span class="variable language_">this</span>.<span class="property">latestId</span>);</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">items</span>[<span class="variable language_">this</span>.<span class="property">latestId</span>] = newItem;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">latestId</span>++;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> newItem;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">getItem</span>(<span class="params">id</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">items</span>[id] || <span class="literal">null</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="title function_">deleteItem</span>(<span class="params">id</span>) &#123;</span><br><span class="line">    <span class="keyword">delete</span> <span class="variable language_">this</span>.<span class="property">items</span>[id];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="title class_">CrossPageExchange</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>WaitObject 类，它通过 Promise 提供了一种等待的机制。<br />wait 方法是一个异步函数，它等待 this.p 的状态被解决（resolved）。通过 await this.p ，函数回暂停执行，直到 this.p 被解决，然后返回被解决的值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">WaitObject</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">p</span> = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">resolve</span> = resolve;</span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">reject</span> = reject;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">wait</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="property">p</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="title class_">WaitObject</span>,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><a name="WJdT0"></a></p>
+<h3 id="小程序异步模型"><a href="#小程序异步模型" class="headerlink" title="小程序异步模型"></a>小程序异步模型</h3><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334106626.png" alt="pic.1708334106626"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334112205.png" alt="pic.1708334112205"></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T06:27:05.000Z" title="2024/2/7 14:27:05">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1070个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/code-review/">code review</a></p><div class="content"><p>一直觉得我主管浩哥是个很强的技术大佬，正好他让我接手了一个小程序项目，那么就来学习一下他写的代码吧！</p>
+<h3 id="小程序"><a href="#小程序" class="headerlink" title="小程序"></a>小程序</h3><p>data 应只包括渲染相关的数据，所以这里如果只是为了保存定时器 ID，没必要使用 setData</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405990424.png" alt="pic.1708405990424"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405995750.png" alt="pic.1708405995750"></p>
+<p>建议将定时器 ID 保存在 this 上即可。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Page</span>(&#123;</span><br><span class="line">  <span class="attr">timerId</span>: <span class="literal">null</span>,</span><br><span class="line"></span><br><span class="line">  <span class="attr">onLoad</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 初始化定时器</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">timerId</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;定时器在运行&quot;</span>);</span><br><span class="line">    &#125;, <span class="number">1000</span>);</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">onUnload</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; timerId &#125; = <span class="variable language_">this</span>;</span><br><span class="line">    <span class="keyword">if</span> (timerId) &#123;</span><br><span class="line">      <span class="comment">// 清除定时器</span></span><br><span class="line">      <span class="built_in">clearInterval</span>(timerId);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 将定时器ID设置为null</span></span><br><span class="line">      <span class="variable language_">this</span>.<span class="property">timerId</span> = <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>wx.request 封装</p>
+<p>为什么执行<code>reject()</code>之后，还要执行 <code>resolve()</code>？<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406004196.png" alt="pic.1708406004196"></p>
+<p>看到这里时，我有点疑惑，为什么执行<code>reject()</code>之后，还要执行 <code>resolve()</code>？<br>执行<code>reject()</code>之后，Promise 状态已经被固定了，再执行<code>resolve()</code>也没有意义。打了个断点（**f11 **step into next function call ）看下，发现<code>resolve(res)</code>并没有执行。</p>
+<p>为了不造成混淆，建议在<code>res.data.code !== 0</code>代码块末尾加个<code>return</code>，或者在<code>reject()</code>前面加个<code>return</code><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406013027.png" alt="pic.1708406013027"></p>
+<p>错误处理：通过自定义的错误类 <strong>ErrorRequest</strong>、<strong>ErrorBiz</strong> 和 <strong>ErrorAuth</strong> 对不同类型的错误进行了分类<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406020699.png" alt="pic.1708406020699"></p>
+<p>看下控制台：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406026545.png" alt="pic.1708406026545"></p>
+<p>并没有提示错误信息输出。父类构造函数<code>Error</code>起到了什么作用？</p>
+<p>点击 Error，如图所示：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406032344.png" alt="pic.1708406032344"></p>
+<p>可以看到构造函数<code>ErrorConstructor</code>接收一个 message 参数，那我们把接口的错误消息传递进去看下，修改下代码<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406042041.png" alt="pic.1708406042041"></p>
+<p>效果如下：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406047672.png" alt="pic.1708406047672"></p>
+<p>修改过后在控制台展示了更详细的错误信息。</p>
+<p>将后端的数据复制给 this.data <code>this.data = data</code>这点挺好的，这样，在捕获到错误之后，可以通过<code>error.data</code>来获取后端给的信息。</p>
+<p>但是我没看到他是怎么使用的，所以我在错误类上加了个获取 this.data 的方法，方便在业务层面获取到：如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ErrorBiz</span> <span class="keyword">extends</span> <span class="title class_ inherited__">ErrorRequest</span> &#123;</span><br><span class="line">  <span class="comment">// 添加一个方法，用于获取业务错误信息</span></span><br><span class="line">  <span class="title function_">getBizErrorData</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">data</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>业务中使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> age = <span class="keyword">await</span> api.<span class="title function_">getPhotoCheckAge</span>(phoneUrl);</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="keyword">const</span> bizErrorData = err.<span class="title function_">getBizErrorData</span>();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="css"><a href="#css" class="headerlink" title="css"></a>css</h3><p>指向特定元素，通过附加类的预选元素的选择器，中间没有空格。如<code>.title.active</code><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406055781.png" alt="pic.1708406055781"></p>
+<p>适配刘海屏设备安全区域，保证内容不被遮挡。</p>
+<ol>
+<li><strong>padding-bottom: env(safe-area-inset-bottom);：</strong><ul>
+<li><strong>env()</strong> 函数是 CSS 中的一个环境变量函数，用于获取设备环境变量的值。</li>
+<li><strong>safe-area-inset-bottom</strong> 表示底部安全区域的大小。</li>
+<li>这行样式代码的作用是设置底部内边距为底部安全区域的大小。</li>
+</ul>
+</li>
+<li><strong>padding-bottom: constant(safe-area-inset-bottom);：</strong><ul>
+<li><strong>constant()</strong> 函数是 CSS 中的一个函数，用于获取一个常量的值。</li>
+<li><strong>safe-area-inset-bottom</strong> 同样表示底部安全区域的大小。</li>
+<li>这行样式代码的作用也是设置底部内边距为底部安全区域的大小，但使用了 <strong>constant</strong> 函数。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406115148.png" alt="pic.1708406115148"></p>
+<p>任务进度条<br>后端提供任务总时长，过了多少时间除以总时间就可以算出当前进度，<code>Math.round((Date.now() - startTime) / totalTime * 100)</code><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406070351.png" alt="pic.1708406070351"></p>
+<h3 id="Js"><a href="#Js" class="headerlink" title="Js"></a>Js</h3><p>列表滚动加载，判断是否已全部加载结束<br><code>const isLoadEnd = respList.length &lt; this.data.pageSize</code>，也就说，如果本次请求响应的条数小于本次请求的条数，就可以表示已全部加载结束<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708406077622.png" alt="pic.1708406077622"><br>不需要后端给你总页数<code>pages/total</code>，再根据<code>const isLoadEnd = current &lt; pages </code>或者 <code>const isLoadEnd = showList.length &lt; total</code>判断是否已全部加载结束</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T06:18:45.000Z" title="2024/2/7 14:18:45">2024-02-07</time>发表</span><span class="level-item">20 分钟读完 (大约3072个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/%E9%9F%B3%E6%A0%87/">音标</a></p><div class="content"><h1 id="主要音标体系"><a href="#主要音标体系" class="headerlink" title="主要音标体系"></a>主要音标体系</h1><h2 id="国际音标"><a href="#国际音标" class="headerlink" title="国际音标"></a>国际音标</h2><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334606737.png" alt="pic.1708334606737"></p>
+<h2 id="英音音标"><a href="#英音音标" class="headerlink" title="英音音标"></a>英音音标</h2><h3 id="DJ-音标：-Daniel-Jones"><a href="#DJ-音标：-Daniel-Jones" class="headerlink" title="DJ 音标： Daniel Jones"></a>DJ 音标： Daniel Jones</h3><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334613426.png" alt="pic.1708334613426"></p>
+<h3 id="新版-DJ-音标，也被叫做-Gimson-音标"><a href="#新版-DJ-音标，也被叫做-Gimson-音标" class="headerlink" title="新版 DJ 音标，也被叫做 Gimson 音标"></a>新版 DJ 音标，也被叫做 Gimson 音标</h3><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334620624.png" alt="pic.1708334620624"></p>
+<p>IPA63:1963 年版本的 DJ 音标</p>
+<p>IPA88(Gimson):1988 年版本的 DJ 音标</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334639629.png" alt="pic.1708334639629"></p>
+<h2 id="美式音标"><a href="#美式音标" class="headerlink" title="美式音标"></a>美式音标</h2><h3 id="KK-音标"><a href="#KK-音标" class="headerlink" title="KK 音标"></a>KK 音标</h3><p>在台湾地区被广泛使用，基本也只在台湾使用<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334722865.png" alt="pic.1708334722865"></p>
+<h1 id="美式英语学哪种音标？"><a href="#美式英语学哪种音标？" class="headerlink" title="美式英语学哪种音标？"></a>美式英语学哪种音标？</h1><p><strong>DJ 音标 。</strong> 虽然是用来标记英式英语的，但是用来标记美式英语也毫无压力<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334742662.png" alt="pic.1708334742662"><br>元音：</p>
+<table>
+<thead>
+<tr>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%89%E5%89%8D%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">i</a>ː</th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A1%E9%96%89%E6%AC%A1%E5%89%8D%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɪ</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8A%E9%96%89%E5%89%8D%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">e</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A1%E9%96%8B%E5%89%8D%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">æ</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%8B%E5%BE%8C%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɑ</a>ː</th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8A%E9%96%8B%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɔ</a>ː</th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%8B%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɒ</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8A%E9%96%8B%E5%BE%8C%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ʌ</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8A%E9%96%8B%E5%A4%AE%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɜ</a>ː</th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/w/index.php?title=%E4%B8%AD%E5%A4%AE%E6%AF%8D%E9%9F%B3&action=edit&redlink=1">ə</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">u</a>ː</td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A1%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ʊ</a></td>
+<td>eɪ</td>
+<td>əʊ</td>
+<td>aɪ</td>
+<td>aʊ</td>
+<td>ɔɪ</td>
+<td>ɪə</td>
+<td>eə</td>
+<td>ʊə</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>无声子音</th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%9B%99%E5%94%87%E5%A1%9E%E9%9F%B3">p</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%BD%92%E9%BD%A6%E5%A1%9E%E9%9F%B3">t</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E8%BB%9F%E9%A1%8E%E5%A1%9E%E9%9F%B3">k</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E5%94%87%E9%BD%92%E6%93%A6%E9%9F%B3">f</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%BD%92%E9%BD%A6%E6%93%A6%E9%9F%B3">s</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%BD%92%E6%93%A6%E9%9F%B3">θ</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʃ</a></th>
+<th><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">tʃ</a></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有声子音</td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%9B%99%E5%94%87%E5%A1%9E%E9%9F%B3">b</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%BD%92%E9%BD%A6%E5%A1%9E%E9%9F%B3">d</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E8%BB%9F%E9%A1%8E%E5%A1%9E%E9%9F%B3">g</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E5%94%87%E9%BD%92%E6%93%A6%E9%9F%B3">v</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%BD%92%E9%BD%A6%E6%93%A6%E9%9F%B3">z</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%BD%92%E6%93%A6%E9%9F%B3">ð</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʒ</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">dʒ</a></td>
+</tr>
+<tr>
+<td>其他子音</td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%9B%99%E5%94%87%E9%BC%BB%E9%9F%B3">m</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%BD%92%E9%BD%A6%E9%BC%BB%E9%9F%B3">n</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BB%9F%E9%A1%8E%E9%BC%BB%E9%9F%B3">ŋ</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%BD%BF%E9%BE%88%E8%BE%B9%E8%BF%91%E9%9F%B3">l</a>， <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E8%BD%AF%E9%A2%9A%E5%8C%96%E9%BD%BF%E9%BE%88%E8%BE%B9%E9%9F%B3">ɫ</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%BD%92%E9%BD%A6%E8%BF%91%E9%9F%B3">r</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E5%A3%B0%E9%97%A8%E6%93%A6%E9%9F%B3">h</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E5%9C%93%E5%94%87%E8%BB%9F%E9%A1%8E%E8%BF%91%E9%9F%B3">w</a></td>
+<td><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E7%A1%AC%E9%A1%8E%E8%BF%91%E9%9F%B3">j</a></td>
+</tr>
+</tbody></table>
+<h1 id="发音过程"><a href="#发音过程" class="headerlink" title="发音过程"></a>发音过程</h1><p>浊音：气流向上，振动声带发出的音<br>轻音：气流向上，不振动声带发出的音<br>元音：气流通过口腔时不受阻碍发出的音，也就是舌头不与任何口腔部位接触，嘴唇也不能闭拢<br>辅音：与元音相反<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334772339.png" alt="pic.1708334772339"></p>
+<h1 id="元音三要素"><a href="#元音三要素" class="headerlink" title="元音三要素"></a>元音三要素</h1><p><strong>圆唇度、舌位高低、舌位前后</strong><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334782287.png" alt="pic.1708334782287"></p>
+<p>元音图：以视觉的方式表现元音三要素。<br>能抽象地描述咱们“感知到”的元音<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334790903.png" alt="pic.1708334790903"><br>四边形之所以上大下小，是因为区分<strong>高元音和低元音舌位横向（前后）差别</strong>的大小</p>
+<h1 id="辅音"><a href="#辅音" class="headerlink" title="辅音"></a>辅音</h1><h2 id="辅音发音分为三阶段"><a href="#辅音发音分为三阶段" class="headerlink" title="辅音发音分为三阶段"></a>辅音发音分为三阶段</h2><p>成阻(catch)：气流被阻塞<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334803619.png" alt="pic.1708334803619"></p>
+<p>持阻(hold)：气流持续向外冲，但仍被阻塞<br>双唇闭拢，但仍向外吐气（从而形成气压）<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334810242.png" alt="pic.1708334810242"></p>
+<p>除阻(release)：阻塞被去除，气流冲出<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334815988.png" alt="pic.1708334815988"></p>
+<h2 id="影响辅音发音的三要素"><a href="#影响辅音发音的三要素" class="headerlink" title="影响辅音发音的三要素"></a>影响辅音发音的三要素</h2><p><strong>清浊、调音部位、调音方式</strong></p>
+<h3 id="清浊"><a href="#清浊" class="headerlink" title="清浊"></a>清浊</h3><p>清浊，也就是声带是否振动<br><em>中文没有清浊之分</em></p>
+<p>清音：发音时声带不振动的音<br>浊音：发音时声带振动的音</p>
+<h3 id="调音部位-发音部位"><a href="#调音部位-发音部位" class="headerlink" title="调音部位&#x2F;发音部位"></a>调音部位&#x2F;发音部位</h3><p>调音部位&#x2F;发音部位，也就是发辅音的时候，阻碍气流所用到的主要发音器官<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334825883.png" alt="pic.1708334825883"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334831822.png" alt="pic.1708334831822"></p>
+<h3 id="调音方式"><a href="#调音方式" class="headerlink" title="调音方式"></a>调音方式</h3><p>也可以叫做发音方式&#x2F;发音方法，可以理解为发音器官怎么阻挡气流（成阻），以及怎么释放气流（除阻）而发出辅音的</p>
+<h4 id="塞音-爆破音"><a href="#塞音-爆破音" class="headerlink" title="塞音&#x2F;爆破音"></a>塞音&#x2F;爆破音</h4><p>如&#x2F;b&#x2F; 在成阻时完全阻塞气流再释放而发出的音，一般被称作“塞音”（stop;读 se，即阻塞的“塞”），或爆破音（plosive;学术界也称“爆发音”）</p>
+<h4 id="擦音-摩擦音-fricative"><a href="#擦音-摩擦音-fricative" class="headerlink" title="擦音&#x2F;摩擦音(fricative)"></a>擦音&#x2F;摩擦音(fricative)</h4><p>如 “斯”的拼音[si]，用舌尖和牙齿形成一个缝隙，让气流通过，从而发出响声</p>
+<h4 id="鼻音-nasal"><a href="#鼻音-nasal" class="headerlink" title="鼻音(nasal)"></a>鼻音(nasal)</h4><p>如“呢”的拼音[ne]，需要我们把气流送入鼻腔才能发出，这种称为“鼻音”(nasal)</p>
+<p>还有其他音，如：颤音、闪音、近音、边近音（边音）等</p>
+<h2 id="音标"><a href="#音标" class="headerlink" title="音标"></a>音标</h2><h3 id="p-清辅音"><a href="#p-清辅音" class="headerlink" title="&#x2F;p&#x2F; 清辅音"></a>&#x2F;p&#x2F; 清辅音</h3><p>调音方式属于“塞音”<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334840624.png" alt="pic.1708334840624"><br>p 的三种常见情况（音位变体）：</p>
+<ul>
+<li>送气：单词如 peak</li>
+<li>不送气：如 speak ，p 读 ‘b’，“斯比克”</li>
+<li>无声除阻：如 trapdoor</li>
+</ul>
+<p>要想明确属于哪种情况，可以查看国际音标的严式注音，**[]**表示国际音标<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334900568.png" alt="pic.1708334900568"></p>
+<h3 id="b-浊辅音"><a href="#b-浊辅音" class="headerlink" title="&#x2F;b&#x2F; 浊辅音"></a>&#x2F;b&#x2F; 浊辅音</h3><p>调音方式属于“塞音”<br>&#x2F;b&#x2F; 声带不振动。<br>感觉声带有振动，是&#x2F;b&#x2F;后面的元音振动</p>
+<h3 id="t-清辅音"><a href="#t-清辅音" class="headerlink" title="&#x2F;t&#x2F; 清辅音"></a>&#x2F;t&#x2F; 清辅音</h3><p>调音方式属于“塞音”<br>音位变体：</p>
+<table>
+<thead>
+<tr>
+<th>送气</th>
+<th>t + 元音</th>
+<th>top &#x2F;tɑːp&#x2F;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不送气</td>
+<td>s + t</td>
+<td>stop &#x2F;stɑːp&#x2F; 和拼音”du”的声母”d”一样</td>
+</tr>
+<tr>
+<td>无声除阻</td>
+<td>t + 某些辅音</td>
+<td>setback forget me t 不发音</td>
+</tr>
+<tr>
+<td>闪音（flap）</td>
+<td>元音之间的字母 t 在非重读音节</td>
+<td>water better a lot of</td>
+</tr>
+<tr>
+<td>鼻音除阻</td>
+<td>&#x2F;t&#x2F; + &#x2F;n&#x2F;</td>
+<td>eaten button certain</td>
+</tr>
+<tr>
+<td>省略</td>
+<td>&#x2F;n&#x2F; + &#x2F;t&#x2F;</td>
+<td>t 可省略不读。winter 听上去像 winner。不省略也行</td>
+</tr>
+</tbody></table>
+<h3 id="d-浊辅音"><a href="#d-浊辅音" class="headerlink" title="&#x2F;d&#x2F; 浊辅音"></a>&#x2F;d&#x2F; 浊辅音</h3><p>调音方式属于“塞音”<br>音位变体</p>
+<table>
+<thead>
+<tr>
+<th>无声除阻</th>
+<th>landmine</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>闪音</td>
+<td>me<strong>d</strong>al</td>
+</tr>
+<tr>
+<td>鼻音除阻</td>
+<td>sudden</td>
+</tr>
+<tr>
+<td>边音除阻</td>
+<td>ba<strong>d</strong>ly</td>
+</tr>
+</tbody></table>
+<h3 id="k-清辅音"><a href="#k-清辅音" class="headerlink" title="&#x2F;k&#x2F; 清辅音"></a>&#x2F;k&#x2F; 清辅音</h3><p>调音方式属于“塞音”<br>调音部位为“软腭”<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708334984742.png" alt="pic.1708334984742"><br>音位变体</p>
+<table>
+<thead>
+<tr>
+<th>送气</th>
+<th>k + 元音</th>
+<th>kite &#x2F;kaɪt&#x2F; 和”开”的声母一样</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不送气</td>
+<td>s + k</td>
+<td>sky &#x2F;skaɪ&#x2F; 和”该”的声母一样</td>
+</tr>
+<tr>
+<td>无声除阻</td>
+<td>k + 某些辅音</td>
+<td>doctor &#x2F;‘dɑːktər&#x2F;</td>
+</tr>
+</tbody></table>
+<h3 id="g-浊辅音"><a href="#g-浊辅音" class="headerlink" title="&#x2F;g&#x2F; 浊辅音"></a>&#x2F;g&#x2F; 浊辅音</h3><p>&#x2F;k&#x2F; &#x2F;g&#x2F; 中国人最常见的错误就是在末尾加元音<br>pick &#x2F;pɪk&#x2F; <del>匹克</del><br>pig &#x2F;pɪg&#x2F; <del>逼格</del></p>
+<h3 id="m-浊辅音"><a href="#m-浊辅音" class="headerlink" title="&#x2F;m&#x2F; 浊辅音"></a>&#x2F;m&#x2F; 浊辅音</h3><p>常见错误发音:<br>很多人在&#x2F;m&#x2F;后加一个不存在的元音&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">u</a>ː&#x2F;或者&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A1%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ʊ</a>&#x2F;，如：<br>room &#x2F;r<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">u</a>ːm&#x2F; <del>乳母</del><br>home &#x2F;ho<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%AC%A1%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ʊ</a>m&#x2F; <del>后母</del><br>room &#x2F;t<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%89%E5%BE%8C%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">u</a>ːm&#x2F; <del>兔母</del></p>
+<h3 id="n-浊辅音"><a href="#n-浊辅音" class="headerlink" title="&#x2F;n&#x2F; 浊辅音"></a>&#x2F;n&#x2F; 浊辅音</h3><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335132190.png" alt="pic.1708335132190"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335140937.png" alt="pic.1708335140937"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335150867.png" alt="pic.1708335150867"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335157571.png" alt="pic.1708335157571"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335163474.png" alt="pic.1708335163474"></p>
+<h3 id="ŋ-浊辅音"><a href="#ŋ-浊辅音" class="headerlink" title="&#x2F;ŋ&#x2F; 浊辅音"></a>&#x2F;ŋ&#x2F; 浊辅音</h3><p>注意后鼻音<br>错误发音：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335179080.png" alt="pic.1708335179080"></p>
+<h3 id="f-清辅音-v-浊辅音"><a href="#f-清辅音-v-浊辅音" class="headerlink" title="&#x2F;f&#x2F; 清辅音 &#x2F;v&#x2F; 浊辅音"></a>&#x2F;f&#x2F; 清辅音 &#x2F;v&#x2F; 浊辅音</h3><h3 id="s-清辅音-z-浊辅音"><a href="#s-清辅音-z-浊辅音" class="headerlink" title="&#x2F;s&#x2F; 清辅音 &#x2F;z&#x2F; 浊辅音"></a>&#x2F;s&#x2F; 清辅音 &#x2F;z&#x2F; 浊辅音</h3><h3 id="θ-清辅音-ð-浊辅音"><a href="#θ-清辅音-ð-浊辅音" class="headerlink" title="&#x2F;θ&#x2F; 清辅音 &#x2F;ð&#x2F; 浊辅音"></a>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%BD%92%E6%93%A6%E9%9F%B3">θ</a>&#x2F; 清辅音 &#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%BD%92%E6%93%A6%E9%9F%B3">ð</a>&#x2F; 浊辅音</h3><p>发<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%BD%92%E6%93%A6%E9%9F%B3">θ</a>时，舌尖在上下齿之间（被轻轻咬住）<br>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʃ</a>&#x2F; 清辅音 &#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʒ</a>&#x2F; 浊辅音<br>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʃ</a>&#x2F; 上下齿不闭合。拼音“史”的调音部位更后一点，更接近硬腭，可以理解为更卷舌<br>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʒ</a>&#x2F; 可以理解为声带振动的 &#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E6%93%A6%E9%9F%B3">ʃ</a>&#x2F;<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335220344.png" alt="pic.1708335220344"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335225855.png" alt="pic.1708335225855"></p>
+<h3 id="tʃ-清辅音-dʒ-浊辅音"><a href="#tʃ-清辅音-dʒ-浊辅音" class="headerlink" title="&#x2F;tʃ&#x2F; 清辅音 &#x2F;dʒ&#x2F; 浊辅音"></a>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">tʃ</a>&#x2F; 清辅音 &#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">dʒ</a>&#x2F; 浊辅音</h3><p>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">tʃ</a>&#x2F; 属于“塞擦音”（阻塞+摩擦）<br>“吃”的调音部位更后一点，可以理解为更卷舌</p>
+<p>&#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%BF%81%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">dʒ</a>&#x2F; 可以理解为声带振动版的 &#x2F;<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E6%B8%85%E9%A1%8E%E9%BD%A6%E5%A1%9E%E6%93%A6%E9%9F%B3">tʃ</a>&#x2F;</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335235178.png" alt="pic.1708335235178"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335239059.png" alt="pic.1708335239059"></p>
+<p>&#x2F;h&#x2F; 清辅音<br>调音部位为声门</p>
+<h3 id="w-浊辅音"><a href="#w-浊辅音" class="headerlink" title="&#x2F;w&#x2F; 浊辅音"></a>&#x2F;w&#x2F; 浊辅音</h3><p>和普通话“我”的声母一样</p>
+<h3 id="r-浊辅音"><a href="#r-浊辅音" class="headerlink" title="&#x2F;r&#x2F; 浊辅音"></a>&#x2F;r&#x2F; 浊辅音</h3><p>音位变体：</p>
+<table>
+<thead>
+<tr>
+<th>齿龈近音</th>
+<th>r + 元音</th>
+<th>浊辅音 right &#x2F;raɪt&#x2F;</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>r 化</td>
+<td>元音 + r</td>
+<td>这也是美音最大特征之一</td>
+</tr>
+<tr>
+<td>car &#x2F;k<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E9%96%8B%E5%BE%8C%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɑ</a>ːr&#x2F; her &#x2F;h<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%8D%8A%E9%96%8B%E5%A4%AE%E4%B8%8D%E5%9C%93%E5%94%87%E5%85%83%E9%9F%B3">ɜ</a>ːr&#x2F;</td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="j-浊辅音"><a href="#j-浊辅音" class="headerlink" title="&#x2F;j&#x2F; 浊辅音"></a>&#x2F;j&#x2F; 浊辅音</h3><p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335252017.png" alt="pic.1708335252017"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335258358.png" alt="pic.1708335258358"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335261737.png" alt="pic.1708335261737"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335265971.png" alt="pic.1708335265971"></p>
+<p>&#x2F;l&#x2F;<br>3 种音位变体：<br>清晰 L：舌边音，是个浊辅音<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335279609.png" alt="pic.1708335279609"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335283717.png" alt="pic.1708335283717"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335287884.png" alt="pic.1708335287884"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335292155.png" alt="pic.1708335292155"><br>不发音 L：没规律</p>
+<p>&#x2F;ts&#x2F; 清辅音 &#x2F;dz&#x2F;<br>&#x2F;dz&#x2F;是浊辅音，可以理解为声带振动板的 &#x2F;ts&#x2F;</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335304594.png" alt="pic.1708335304594"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335308829.png" alt="pic.1708335308829"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335314157.png" alt="pic.1708335314157"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335318842.png" alt="pic.1708335318842"></p>
+<p>&#x2F;tr&#x2F; 清辅音 &#x2F;dr&#x2F; 浊辅音<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335326300.png" alt="pic.1708335326300"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335331928.png" alt="pic.1708335331928"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335339170.png" alt="pic.1708335339170"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335347923.png" alt="pic.1708335347923"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335353758.png" alt="pic.1708335353758"></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约501个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">BEM规范</a></p><div class="content"><h1 id="BEM-规范是什么"><a href="#BEM-规范是什么" class="headerlink" title="BEM 规范是什么"></a>BEM 规范是什么</h1><p>BEM 是 块(block) 、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种 css 类命名约定。</p>
+<ul>
+<li>连字符：表示某个块或块子元素的多单词之间的连接符号</li>
+</ul>
+<p>__ 双下划线：连接块和块子元素</p>
+<p>– 双连字符：作为块或块子元素的修饰符号</p>
+<p>以这段 html 为例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body-left&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body-logo&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;icon&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button button--primary&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button button--default&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__footer article__footer--primary&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="block"><a href="#block" class="headerlink" title="block"></a>block</h2><p>block 表示组件的顶级抽象，它仅仅作为一个边界，<strong>不应该在 block 上添加样式和修饰</strong>。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 正确</span></span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-tag">__body</span> &#123;</span><br><span class="line">    <span class="attribute">background</span>: red;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 错误</span></span><br><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="element"><a href="#element" class="headerlink" title="element"></a>element</h2><p>element 表示 block 下的子元素，该元素依赖于块。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-tag">__body</span> &#123;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-tag">__footer</span> &#123;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果<strong>元素下还嵌套子元素，均可用 <strong><code>**-**</code></strong> 连接</strong>，这样可以清楚的知道该元素的父级。</p>
+<p><strong>像 <strong><code>**.icon**</code><strong>、</strong><code>**.button**</code></strong> 这种可以独立存在的子元素，避免创建不必要的父级。</strong><br>假如把 <code>.button</code> 命名为 <code>.article__body-button</code> ，后续的开发人员要在** **<code>.article__footer</code> 里用 <code>.article__body-button</code> 的样式：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body-left&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body-logo&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;icon&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;article__body-button button--primary&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;article__body-button button--default&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__footer article__footer--primary&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 假设这里要用到article__body-button的样式 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;article__body-button&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看到，<code>.article__body-button</code> 在 <code>.article__footer</code> 下，这会使代码变得混乱和不一致，应该避免这种情况的出现。</p>
+<h2 id="modifier"><a href="#modifier" class="headerlink" title="modifier"></a>modifier</h2><p>修饰符，改变块或元素的样式。<br>如 <code>.button--primary</code>、<code>.article__footer--primary</code></p>
+<h1 id="BEM-规范的优点"><a href="#BEM-规范的优点" class="headerlink" title="BEM 规范的优点"></a>BEM 规范的优点</h1><ol>
+<li>当想要创建新组件时，我们可以容易的知道哪些修饰符和子组件已存在</li>
+<li>从 html 结构上，能快速知道元素的依赖关系，如，我们用连接符 <code>-</code> 表示元素下的嵌套</li>
+<li>统一的命名方式，方便团队成员的阅读</li>
+</ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>推荐用法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body-left&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__body-logo&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">&quot;icon&quot;</span> /&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button button--primary&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;button button--default&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;article__footer article__footer--primary&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.article</span> &#123;</span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-tag">__body</span> &#123;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-tag">-left</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-tag">-logo</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.icon</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="selector-class">.button</span> &#123;</span><br><span class="line">      <span class="selector-tag">&amp;</span><span class="selector-tag">--primary</span> &#123;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="selector-tag">&amp;</span><span class="selector-tag">--default</span> &#123;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="selector-tag">&amp;</span><span class="selector-tag">__footer</span> &#123;</span><br><span class="line">    <span class="selector-tag">&amp;</span><span class="selector-tag">--primary</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>block 不要添加修饰符和样式</li>
+<li>element 下，子元素均用连接符 <code>-</code> 连接</li>
+<li>element 下，没有后代的元素可用单个单词表示，方便复用</li>
+</ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">12 分钟读完 (大约1756个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">BTC-共识协议</a></p><div class="content"><h1 id="数字货币存在的问题"><a href="#数字货币存在的问题" class="headerlink" title="数字货币存在的问题"></a>数字货币存在的问题</h1><p>数字货币本身为带有签名的数据文件，可以进行复制。即：对用户来说，可以将同一货币花费两次。这就是“双花攻击”。<br>如何解决：对货币添加唯一编号（不可篡改），每次支付向货币发行单位查询真伪。该方法每次交易都依赖于第三方机构来判断货币真伪且防止双花攻击。这是一个典型的第三方中心化方案。<br>现实中，我们的交易往往依赖于一个可信的第三方机构（支付宝、微信），这个机构具有较高的可信度，有政府背书，所以可以采用这种方案。<br>但是，很多场景下，并不存在这样一个可信赖的第三方机构。基于这个背景，以去中心化思想为核心的比特币系统便吸引了人们的注意力。</p>
+<h1 id="去中心化需要解决的问题"><a href="#去中心化需要解决的问题" class="headerlink" title="去中心化需要解决的问题"></a>去中心化需要解决的问题</h1><ul>
+<li>货币由谁发行，如何发行，什么时候发行？</li>
+</ul>
+<p>在比特币系统中由挖矿来决定货币发行权的发行量</p>
+<ul>
+<li>如何验证交易是否有效？如何防止双花攻击？</li>
+</ul>
+<p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
+<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
+<p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
+<p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
+<p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
+<h1 id="比特币区块信息"><a href="#比特币区块信息" class="headerlink" title="比特币区块信息"></a>比特币区块信息</h1><p>区块信息可以分为两部分：block header 和 block body<br>block header 由以下信息：</p>
+<ul>
+<li>version（版本协议）</li>
+<li>hash of previous block header（指向前一个区块指针）</li>
+<li>merkle root hash（默克尔树根哈希值）</li>
+<li>target（挖矿难度目标阈值）</li>
+<li>nonce（随机数）</li>
+</ul>
+<p>hash of previous block header 只计算区块头部部分的哈希（merkle root hash 保证了 block body 内容不被篡改，所以只需要计算 block header 即可保证整个区块内容不会被篡改）。<br>区块链中，轻节点（只存储区块 block header 信息）只利用区块链，并不参与区块链系统的维护和构造。</p>
+<h1 id="比特币共识协议"><a href="#比特币共识协议" class="headerlink" title="比特币共识协议"></a>比特币共识协议</h1><p>投票方案：可行的投票方案前提是系统中的大多数节点时“好”的节点，在这种情况下进行共识协议设置。<br>比特币系统中，若直接投票，将某节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半，则加入区块链。存在以下问题：</p>
+<ol>
+<li>恶意节点不断打包不合法区块，导致一直无法达成共识</li>
+<li>无强迫投票收到，某些节点可以不投票（行政不作为）</li>
+<li>网络延迟未知，投票需要等待多久？</li>
+<li>最重要的问题，比特币系统中任何人都可以创建账户，且建账户及其简单，若黑客使用计算机专门生成大量公私钥对，当其产生超过系统中一半数目，就可以获得支配地位（女巫攻击）</li>
+</ol>
+<p>所以比特币系统并没采用这种简单的账户数目方案，而是<strong>依据算力进行投票</strong>。每个节点都可以自行组装一个候选区块，然后尝试各种 nonce 值，这就是<strong>挖矿。</strong>当某个节点找到符合要求的 nonce<code>h(block header)&lt;=target</code>，便获得了<strong>记账权</strong>，从而可以将区块发布到系统中。其他节点收到区块后，验证区块合法性，如果绝大多数节点验证通过，则接口该区块为最新区块并加入到区块链。</p>
+<h1 id="比特币激励机制"><a href="#比特币激励机制" class="headerlink" title="比特币激励机制"></a>比特币激励机制</h1><p>节点为什么要提供算力和电力成本去竞争记账权？<br>比特币引入奖励机制，通过设置<strong>出块奖励</strong>来解决该问题。<br>一个获得合法区块的节点，可以在去区块中加入一个特殊交易（铸币交易）。这也是唯一一种产生新比特币的途经。</p>
+<blockquote>
+<p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
+</blockquote>
+<p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">10 分钟读完 (大约1507个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">BTC密码学原理</a></p><div class="content"><p>比特币(bitcion)：基于去中心化，以区块链作为底层技术的加密货币。</p>
+<h1 id="hash-哈希"><a href="#hash-哈希" class="headerlink" title="hash(哈希)"></a>hash(哈希)</h1><p>hash，可以简单理解为对某一事物的投影操作，即<code>A--&gt;Hash(A)</code>。<br>哈希函数(cryptographic hash function)主要有三个特性：</p>
+<ul>
+<li>collision resistance（碰撞反抗）</li>
+<li>hiding（隐秘性）</li>
+<li>puzzle friendly（谜题友好）</li>
+</ul>
+<p><strong>哈希碰撞：</strong><br>给定一个哈希函数，不同的输入，得到相同的输出，则称为 hash 碰撞。<br>如：给定 x 和 y，且 x!&#x3D;y，可以得到 Hash(x)&#x3D;Hash(y)。</p>
+<h2 id="collision-resistance"><a href="#collision-resistance" class="headerlink" title="collision resistance"></a>collision resistance</h2><p>collision resistance(碰撞反抗)：表示对哈希碰撞具有<strong>抗碰撞性</strong>。<br>在实际应用中，哈希碰撞基本上难以避免，我们只要保证给定 x，很难找到一个 y，能够在 x!&#x3D;y 的前提下，使得 Hash(x)&#x3D;Hash(y)，就认为其是 collision resistance 的。</p>
+<p>用处：如果我们自己有一条信息 x，我们希望别人知道我有 x 但不想让别人知道 x 具体是什么，就可以通过告诉其 Hash(x)，由于该性质，保证了 x!&#x3D;y 时，Hash(x)和 Hash(y)是不相等的。我们只需要告诉别人 Hash(x)即可，对方可以通过 Hash(x)知道你确实知道 x 这个信息，但他无法（很难）通过 Hash(x)反推出 x。</p>
+<h2 id="hiding"><a href="#hiding" class="headerlink" title="hiding"></a>hiding</h2><p>我们认为，给定 x 和 Hash(),可以很容易得到 Hash(x),但没有办法在已知 Hash(x)和 Hash()的情况下，反推出 x 的具体取值，当然这也是一个理想的情况。</p>
+<p><strong>digital commitment(数据保证)：collision resistance + hiding</strong><br>在视频中，肖老师提到关于股市预 测的案例，某个人对某个股票进行涨停预测，我们如何保证能够知晓其预测是否准确？最简单的是提前公布， 等待实际结果出现后验证。但实际中，当提前发布预测后，可能会由于预测者本身对股市实际结果造成影响。 所以，应该将提前将其写于纸上并密封，交给第三方机构保管，等到实际结果出现后开启密封与实际对比，这 就是 digital commitment。而第三方机构需要能够使人信服，在实际生活中，有很多场景并不存在一个这样的 第三方机构，而区块链技术正为此提供了一个很好的解决方法。 我们把预测结果看作 x，提前公布 Hash(x)，等 到预测结果发生时间来临后，公布 x，如果根据 x 可以得到公布的 Hash(x)，则说明公布的 x 确实为所预先预测的 内容。从而，我们可以实际进行判断预测是否准确。实际使用中，为了 x 足够大，会对 x 进行“加盐”，对 x 拼接一 个 nonce，对其整体取 Hash## puzzle friendly<br>在比特币系统中，还需要第三个性质 Puzzle friendly。该性质要求哈希值计算事先不可预测， 仅仅根据输入很难预测出输出。例如：我们需要一个哈希值，存在于某一个范围内，只能通过不停运算查找出来。<br>该性质保证了比特币系统中，只能通过“挖矿”获得比特币。<br>:::info<br>挖矿：试图通过暴力手段不断尝试，直到得到一个符合约定规则的 hash 值。这也是为什么挖矿是一个非常消耗算力的过程。<br>:::<br>也就是说，该性质保证了工作量证明(POW)机制 可以运行下去【“挖矿难，但验证易”】。</p>
+<p><strong>SHA-256：</strong><br>在比特币系统中采用 SHA-256 哈希函数。该函数具备以上三个特性。<br>sha256 具有极强的抗碰撞性。目前为止，世界上最强的超级计算机也不具备人为制作碰撞的能力。</p>
+<h1 id="签名"><a href="#签名" class="headerlink" title="签名"></a>签名</h1><p>比特币中账户管理 在第三方中心化系统中，账户开通依赖于第三方。但去中心化的比特币系统中，很明显不能 进行“申请账户”。<br>在比特币系统中，申请账户是用户自己来处理的，即自己创建一个公钥-私钥对（来自于非对称加密体系 asymmetric encryption algorithm）。公钥和私钥的应用保证了“签名”的应用。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">对称加密体系：提前商量好一个秘钥，加密和解密采用同一个秘钥。</span><br><span class="line">存在问题：秘钥显然不能以明文的方式在网络上传输，容易被盗取。</span><br></pre></td></tr></table></figure>
+
+<p><strong>非对称加密体系：</strong><br><strong>用接收方的公钥加密，接收方的私钥解密</strong>。这就解决了对称加密体系中<strong>秘钥分发的问题</strong>。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405707415.png" alt="pic.1708405707415"></p>
+<p>当在比特币网络中进行转账时，通过 <strong>“签名”可以明确是由哪个账户转出的，从而防止不良分子对其他账户比特币的盗取</strong>。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">加密，解决的是秘钥分发的问题；签名，解决的是明确由哪个账户转出的问题</span><br></pre></td></tr></table></figure>
+
+<p>在发布交易时，<strong>通过发起方私钥签名</strong>，其他人可以<strong>根据发起方公钥进行验证</strong>，从而<strong>保证该交易由发起方发起</strong>。</p>
+<p>也就是说，只有拥有私钥，才能将该账户中的比特币转走。 【注意：比特币系统中，很难通过生成大量公私钥对来获取他人私钥】</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1068个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">BTC数据结构</a></p><div class="content"><h1 id="hash-pointer-哈希指针"><a href="#hash-pointer-哈希指针" class="headerlink" title="hash pointer(哈希指针)"></a>hash pointer(哈希指针)</h1><p>在传统链表里，通过指针将各个节点串联起来。<br><strong>指针</strong>指的是一个节点对象在内存中的首地址。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405846740.png" alt="pic.1708405846740"></p>
+<p>顾名思义，区块链也是一种链表结构，节点为区块。不过区块链并未采用指针，而是使用了<strong>哈希指针。</strong><br>如下图所示，该节点有两个指针指向这个节点（实际上为一个），其中 p 为该节点的地址，H()为该节点的哈希值，该值与节点中内容有关。当节点（区块）中内容发生变化，该哈希值也会发生改变，从而保证了区块内容不能被篡改。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405882862.png" alt="pic.1708405882862"></p>
+<p>在比特币系统中，其最基本的数据结构便是一个个区块形成的<strong>区块链</strong>。</p>
+<p>如图所示，每个区块根据自己的内容生成自己的哈希值，此外，每个区块（除创世纪块）都保存有前一个区块的哈希值。这保证了区块内容不被篡改。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405909365.png" alt="pic.1708405909365"></p>
+<p>如果我们篡改 A 的值，而 B 中保存有 A 的哈希值，所以 B 也得进行修改，同样 B 后的区块也得修改。<br>这就是区块链区别与普通链表的区别：普通链接修改节点不会影响其他节点，而区块链牵一发而动全身，后面的节点都得跟着改。</p>
+<p>所以用户只需要保存最后一个区块的哈希值，就可以检测出区块链上内容是否被篡改过。</p>
+<p>由于这个特性，那么对于个人节点而言，就不需要完整的保存链上的所有的节点内容，只需要保存常用的父级几千个节点即可。</p>
+<h1 id="merkle-tree-默克尔树"><a href="#merkle-tree-默克尔树" class="headerlink" title="merkle tree(默克尔树)"></a>merkle tree(默克尔树)</h1><p>merkle tree 是比特币系统中一个重要的数据结构。区别于 binary tree，merkle tree 用哈希指针代替了普通指针。<br>一个简单的 merkle tree：</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405931818.png" alt="pic.1708405931818"></p>
+<p>tree 中，A B C D 表是一个个交易(tx)，A 和 B 各有一个哈希值 H(1)和 H(2)，将其合并放在一个节点中，C 和 D 同理，然后针对得到的两个节点又可以得到新的哈希值，即为图中根节点。实际中，会对图中的根节点再取一次哈希，也就是 root hash。<br>该数据机构的优点在于：<strong>只需要记住 root hash，便可以检测出对树中任何部位的修改。</strong></p>
+<p><strong>区块：</strong><br>每个区块分为两部分，包括块头(block header)和块身(block body)。<br>block header 中存储的是 root hash，但是 block header 没有交易的具体内容，block body 里存储的是交易列表。</p>
+<p>merkle tree 的实际用途：可以用于提供 <strong>merkle proof。</strong></p>
+<p>区块链中的节点分为<strong>轻节点</strong>和<strong>全节点</strong>。全节点保存整个区块的内容（block header 和 block body），而轻节点仅保存区块的块头信息（block header）。<br>那么就存在一个问题，轻节点想知道某个交易是否被写入到区块链上，该怎么办？打个比方，你向我转钱，我是个轻节点，我怎么知道这个交易已经被写到区块链里呢？</p>
+<p>轻节点没有 block body，只有 root hash，那怎么证明某笔交易包含在这个 merkle tree 里呢？这就用到了 merkle proof。</p>
+<h2 id="merkle-proof"><a href="#merkle-proof" class="headerlink" title="merkle proof"></a>merkle proof</h2><p>从交易一直到根节点的路径，就属于 merkle proof。</p>
+<p>有了 merkle proof，轻节点就可以算出 merkle tree 里是否包含某笔交易。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过 merkle proof，可以验证计算得到的 root hash 是否与轻节点 block hader 里的 root hash 是否一致，如果一致说明该交易包含在 merkle tree 上。</span><br></pre></td></tr></table></figure>
+</div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">上一页</a></div><div class="pagination-next"><a href="/page/4/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/7/">7</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Weilun"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Weilun</p><p class="is-size-6 is-block">Web Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>HangZhou</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">62</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">12</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="me noopener">关注我</a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-20T03:28:26.000Z">2024-03-20</time></p><p class="title"><a href="/2024/03/20/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%87%92%E5%8A%A0%E8%BD%BD/">性能优化-懒加载</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-16T08:16:21.000Z">2024-03-16</time></p><p class="title"><a href="/2024/03/16/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%A3%E7%90%86-proxy/">开发环境代理 proxy</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-16T03:30:29.000Z">2024-03-16</time></p><p class="title"><a href="/2024/03/16/css-padding-top-%E5%AE%9E%E7%8E%B0%E5%AE%B9%E5%99%A8%E8%87%AA%E9%80%82%E5%BA%94%E5%AE%BD%E9%AB%98%E6%AF%94%E4%BE%8B/">CSS Padding-Top 实现自适应容器的宽高比例保持一致</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-02T07:20:36.000Z">2024-03-02</time></p><p class="title"><a href="/2024/03/02/javascritp-%E5%8F%8C%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/">javascritp 双精度浮点数 精度问题</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-27T09:25:37.000Z">2024-02-27</time></p><p class="title"><a href="/2024/02/27/Nginx-pm2-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/">Nginx+pm2 部署项目</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/03/"><span class="level-start"><span class="level-item">三月 2024</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">58</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/css/"><span class="tag">css</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hooks/"><span class="tag">hooks</span><span class="tag">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/html/"><span class="tag">html</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">20</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx/"><span class="tag">nginx</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/react/"><span class="tag">react</span><span class="tag">4</span></a></div><div class="control"><a class="tags has-addons" href="/tags/web3/"><span class="tag">web3</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"><span class="tag">性能优化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF/"><span class="tag">项目场景</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"><span class="tag">项目搭建</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="weilun" height="28"></a><p class="is-size-7"><span>&copy; 2024 weilun</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/weilun0510"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script data-pjax src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script data-pjax src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "此网站使用Cookie来改善您的体验。",
+          dismiss: "知道了！",
+          allow: "允许使用Cookie",
+          deny: "拒绝",
+          link: "了解更多",
+          policy: "Cookie政策",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
       });
-      $(document).on('click', '#search-close-icon', function() {
-        $('#search-input').val('');
-        $('#search-result').html('');
-      });
-    }
-
-    var getSearchFile = function() {
-        var path = "/search.xml";
-        searchFunc(path, 'search-input', 'search-result');
-    }
-  </script>
-
-
-
-
-        
-  <div class="tools-bar-item theme-icon" id="switch-color-scheme">
-    <a href="javascript: void(0)">
-      <i id="theme-icon" class="iconfont icon-moon"></i>
-    </a>
-  </div>
-
-  
-<script src="/js/colorscheme.js"></script>
-
-
-
-
-
-        
-
-      </div>
-    </div>
-  </body>
-</html>
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><div id="outdated"><h6>Your browser is out-of-date!</h6><p>Update your browser to view this website correctly.&amp;npsb;<a id="btnUpdateBrowser" target="_blank" rel="noopener" href="http://outdatedbrowser.com/">Update my browser now </a></p><p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">×</a></p></div><script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script><script>window.addEventListener("load", function () {
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'object-fit' // display on IE11 or below
+            });
+        });</script><!--!--><!--!--><!--!--><script data-pjax src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
