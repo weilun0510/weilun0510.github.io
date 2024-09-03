@@ -411,6 +411,41 @@
 <p>&#x2F;ts&#x2F; 清辅音 &#x2F;dz&#x2F;<br>&#x2F;dz&#x2F;是浊辅音，可以理解为声带振动板的 &#x2F;ts&#x2F;</p>
 <p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335304594.png" alt="pic.1708335304594"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335308829.png" alt="pic.1708335308829"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335314157.png" alt="pic.1708335314157"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335318842.png" alt="pic.1708335318842"></p>
 <p>&#x2F;tr&#x2F; 清辅音 &#x2F;dr&#x2F; 浊辅音<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335326300.png" alt="pic.1708335326300"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335331928.png" alt="pic.1708335331928"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335339170.png" alt="pic.1708335339170"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335347923.png" alt="pic.1708335347923"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335353758.png" alt="pic.1708335353758"></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">12 分钟读完 (大约1756个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">BTC-共识协议</a></p><div class="content"><h1 id="数字货币存在的问题"><a href="#数字货币存在的问题" class="headerlink" title="数字货币存在的问题"></a>数字货币存在的问题</h1><p>数字货币本身为带有签名的数据文件，可以进行复制。即：对用户来说，可以将同一货币花费两次。这就是“双花攻击”。<br>如何解决：对货币添加唯一编号（不可篡改），每次支付向货币发行单位查询真伪。该方法每次交易都依赖于第三方机构来判断货币真伪且防止双花攻击。这是一个典型的第三方中心化方案。<br>现实中，我们的交易往往依赖于一个可信的第三方机构（支付宝、微信），这个机构具有较高的可信度，有政府背书，所以可以采用这种方案。<br>但是，很多场景下，并不存在这样一个可信赖的第三方机构。基于这个背景，以去中心化思想为核心的比特币系统便吸引了人们的注意力。</p>
+<h1 id="去中心化需要解决的问题"><a href="#去中心化需要解决的问题" class="headerlink" title="去中心化需要解决的问题"></a>去中心化需要解决的问题</h1><ul>
+<li>货币由谁发行，如何发行，什么时候发行？</li>
+</ul>
+<p>在比特币系统中由挖矿来决定货币发行权的发行量</p>
+<ul>
+<li>如何验证交易是否有效？如何防止双花攻击？</li>
+</ul>
+<p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
+<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
+<p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
+<p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
+<p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
+<h1 id="比特币区块信息"><a href="#比特币区块信息" class="headerlink" title="比特币区块信息"></a>比特币区块信息</h1><p>区块信息可以分为两部分：block header 和 block body<br>block header 由以下信息：</p>
+<ul>
+<li>version（版本协议）</li>
+<li>hash of previous block header（指向前一个区块指针）</li>
+<li>merkle root hash（默克尔树根哈希值）</li>
+<li>target（挖矿难度目标阈值）</li>
+<li>nonce（随机数）</li>
+</ul>
+<p>hash of previous block header 只计算区块头部部分的哈希（merkle root hash 保证了 block body 内容不被篡改，所以只需要计算 block header 即可保证整个区块内容不会被篡改）。<br>区块链中，轻节点（只存储区块 block header 信息）只利用区块链，并不参与区块链系统的维护和构造。</p>
+<h1 id="比特币共识协议"><a href="#比特币共识协议" class="headerlink" title="比特币共识协议"></a>比特币共识协议</h1><p>投票方案：可行的投票方案前提是系统中的大多数节点时“好”的节点，在这种情况下进行共识协议设置。<br>比特币系统中，若直接投票，将某节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半，则加入区块链。存在以下问题：</p>
+<ol>
+<li>恶意节点不断打包不合法区块，导致一直无法达成共识</li>
+<li>无强迫投票收到，某些节点可以不投票（行政不作为）</li>
+<li>网络延迟未知，投票需要等待多久？</li>
+<li>最重要的问题，比特币系统中任何人都可以创建账户，且建账户及其简单，若黑客使用计算机专门生成大量公私钥对，当其产生超过系统中一半数目，就可以获得支配地位（女巫攻击）</li>
+</ol>
+<p>所以比特币系统并没采用这种简单的账户数目方案，而是<strong>依据算力进行投票</strong>。每个节点都可以自行组装一个候选区块，然后尝试各种 nonce 值，这就是<strong>挖矿。</strong>当某个节点找到符合要求的 nonce<code>h(block header)&lt;=target</code>，便获得了<strong>记账权</strong>，从而可以将区块发布到系统中。其他节点收到区块后，验证区块合法性，如果绝大多数节点验证通过，则接口该区块为最新区块并加入到区块链。</p>
+<h1 id="比特币激励机制"><a href="#比特币激励机制" class="headerlink" title="比特币激励机制"></a>比特币激励机制</h1><p>节点为什么要提供算力和电力成本去竞争记账权？<br>比特币引入奖励机制，通过设置<strong>出块奖励</strong>来解决该问题。<br>一个获得合法区块的节点，可以在去区块中加入一个特殊交易（铸币交易）。这也是唯一一种产生新比特币的途经。</p>
+<blockquote>
+<p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
+</blockquote>
+<p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约501个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">BEM规范</a></p><div class="content"><h1 id="BEM-规范是什么"><a href="#BEM-规范是什么" class="headerlink" title="BEM 规范是什么"></a>BEM 规范是什么</h1><p>BEM 是 块(block) 、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种 css 类命名约定。</p>
 <ul>
 <li>连字符：表示某个块或块子元素的多单词之间的连接符号</li>
@@ -447,41 +482,6 @@
 <li>element 下，子元素均用连接符 <code>-</code> 连接</li>
 <li>element 下，没有后代的元素可用单个单词表示，方便复用</li>
 </ul>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">12 分钟读完 (大约1756个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">BTC-共识协议</a></p><div class="content"><h1 id="数字货币存在的问题"><a href="#数字货币存在的问题" class="headerlink" title="数字货币存在的问题"></a>数字货币存在的问题</h1><p>数字货币本身为带有签名的数据文件，可以进行复制。即：对用户来说，可以将同一货币花费两次。这就是“双花攻击”。<br>如何解决：对货币添加唯一编号（不可篡改），每次支付向货币发行单位查询真伪。该方法每次交易都依赖于第三方机构来判断货币真伪且防止双花攻击。这是一个典型的第三方中心化方案。<br>现实中，我们的交易往往依赖于一个可信的第三方机构（支付宝、微信），这个机构具有较高的可信度，有政府背书，所以可以采用这种方案。<br>但是，很多场景下，并不存在这样一个可信赖的第三方机构。基于这个背景，以去中心化思想为核心的比特币系统便吸引了人们的注意力。</p>
-<h1 id="去中心化需要解决的问题"><a href="#去中心化需要解决的问题" class="headerlink" title="去中心化需要解决的问题"></a>去中心化需要解决的问题</h1><ul>
-<li>货币由谁发行，如何发行，什么时候发行？</li>
-</ul>
-<p>在比特币系统中由挖矿来决定货币发行权的发行量</p>
-<ul>
-<li>如何验证交易是否有效？如何防止双花攻击？</li>
-</ul>
-<p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
-<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
-<p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
-<p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
-<p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
-<h1 id="比特币区块信息"><a href="#比特币区块信息" class="headerlink" title="比特币区块信息"></a>比特币区块信息</h1><p>区块信息可以分为两部分：block header 和 block body<br>block header 由以下信息：</p>
-<ul>
-<li>version（版本协议）</li>
-<li>hash of previous block header（指向前一个区块指针）</li>
-<li>merkle root hash（默克尔树根哈希值）</li>
-<li>target（挖矿难度目标阈值）</li>
-<li>nonce（随机数）</li>
-</ul>
-<p>hash of previous block header 只计算区块头部部分的哈希（merkle root hash 保证了 block body 内容不被篡改，所以只需要计算 block header 即可保证整个区块内容不会被篡改）。<br>区块链中，轻节点（只存储区块 block header 信息）只利用区块链，并不参与区块链系统的维护和构造。</p>
-<h1 id="比特币共识协议"><a href="#比特币共识协议" class="headerlink" title="比特币共识协议"></a>比特币共识协议</h1><p>投票方案：可行的投票方案前提是系统中的大多数节点时“好”的节点，在这种情况下进行共识协议设置。<br>比特币系统中，若直接投票，将某节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半，则加入区块链。存在以下问题：</p>
-<ol>
-<li>恶意节点不断打包不合法区块，导致一直无法达成共识</li>
-<li>无强迫投票收到，某些节点可以不投票（行政不作为）</li>
-<li>网络延迟未知，投票需要等待多久？</li>
-<li>最重要的问题，比特币系统中任何人都可以创建账户，且建账户及其简单，若黑客使用计算机专门生成大量公私钥对，当其产生超过系统中一半数目，就可以获得支配地位（女巫攻击）</li>
-</ol>
-<p>所以比特币系统并没采用这种简单的账户数目方案，而是<strong>依据算力进行投票</strong>。每个节点都可以自行组装一个候选区块，然后尝试各种 nonce 值，这就是<strong>挖矿。</strong>当某个节点找到符合要求的 nonce<code>h(block header)&lt;=target</code>，便获得了<strong>记账权</strong>，从而可以将区块发布到系统中。其他节点收到区块后，验证区块合法性，如果绝大多数节点验证通过，则接口该区块为最新区块并加入到区块链。</p>
-<h1 id="比特币激励机制"><a href="#比特币激励机制" class="headerlink" title="比特币激励机制"></a>比特币激励机制</h1><p>节点为什么要提供算力和电力成本去竞争记账权？<br>比特币引入奖励机制，通过设置<strong>出块奖励</strong>来解决该问题。<br>一个获得合法区块的节点，可以在去区块中加入一个特殊交易（铸币交易）。这也是唯一一种产生新比特币的途经。</p>
-<blockquote>
-<p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
-</blockquote>
-<p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">10 分钟读完 (大约1507个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">BTC密码学原理</a></p><div class="content"><p>比特币(bitcion)：基于去中心化，以区块链作为底层技术的加密货币。</p>
 <h1 id="hash-哈希"><a href="#hash-哈希" class="headerlink" title="hash(哈希)"></a>hash(哈希)</h1><p>hash，可以简单理解为对某一事物的投影操作，即<code>A--&gt;Hash(A)</code>。<br>哈希函数(cryptographic hash function)主要有三个特性：</p>
 <ul>
@@ -504,13 +504,26 @@
 
 <p>在发布交易时，<strong>通过发起方私钥签名</strong>，其他人可以<strong>根据发起方公钥进行验证</strong>，从而<strong>保证该交易由发起方发起</strong>。</p>
 <p>也就是说，只有拥有私钥，才能将该账户中的比特币转走。 【注意：比特币系统中，很难通过生成大量公私钥对来获取他人私钥】</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约473个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">ETH-以太坊概述</a></p><div class="content"><p>BTC 和 ETH 是最主要的两种加密货币，BTC 称为区块链 1.0，以太坊称为区块链 2.0。<br>以太坊对比特币设计中的某些不足进行了改进，比例：出块时间、共识协议、mining puzzle(对内存要求高，反 ASIC 芯片使用) ，并且用权益证明（POS）替代工作量证明（POW）。除此之外，以太坊还增加了对<strong>智能合约（smart contract）</strong>的支持。</p>
-<h1 id="为什么要开发智能合约"><a href="#为什么要开发智能合约" class="headerlink" title="为什么要开发智能合约"></a>为什么要开发智能合约</h1><p>BTC 是一种去中心化的货币，在比特币取得成功之后，很多人开始思考：如果货币可以去中心化，还有什么可以去中心化。<br>以太坊的一个特性就是增加了对去中心化合约的支持。</p>
-<blockquote>
-<p>BTC 货币中的最小单位为“聪”，Satoshi。ETH 的最小单位为“Wei”.</p>
-</blockquote>
-<h1 id="去中心化的合约"><a href="#去中心化的合约" class="headerlink" title="去中心化的合约"></a>去中心化的合约</h1><p>去中心化货币本身由政府发行，政府公信力为其背书，<strong>BTC 通过技术手段取代了政府的职能</strong>。<br>现实生活中，我们经常提到的“契约”或“合约”，其有效性也是需要政府进行维护的，如果产生纠纷，政府合法性合同进行判决。<strong>ETH 的设计目的就是，通过技术手段取代政府对于合约的职能</strong>。</p>
-<p>去中心化的合同有什么好处：<br>若合同签署方并非一个国家，需要跨国转账，没有统一的司法管辖权（如：众筹）。如果可以编写无法修改的合约，一旦发布到区块链上，所有人（包括写智能合约的作者）只能按照制定的规则执行。</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1068个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">BTC数据结构</a></p><div class="content"><h1 id="hash-pointer-哈希指针"><a href="#hash-pointer-哈希指针" class="headerlink" title="hash pointer(哈希指针)"></a>hash pointer(哈希指针)</h1><p>在传统链表里，通过指针将各个节点串联起来。<br><strong>指针</strong>指的是一个节点对象在内存中的首地址。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405846740.png" alt="pic.1708405846740"></p>
+<p>顾名思义，区块链也是一种链表结构，节点为区块。不过区块链并未采用指针，而是使用了<strong>哈希指针。</strong><br>如下图所示，该节点有两个指针指向这个节点（实际上为一个），其中 p 为该节点的地址，H()为该节点的哈希值，该值与节点中内容有关。当节点（区块）中内容发生变化，该哈希值也会发生改变，从而保证了区块内容不能被篡改。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405882862.png" alt="pic.1708405882862"></p>
+<p>在比特币系统中，其最基本的数据结构便是一个个区块形成的<strong>区块链</strong>。</p>
+<p>如图所示，每个区块根据自己的内容生成自己的哈希值，此外，每个区块（除创世纪块）都保存有前一个区块的哈希值。这保证了区块内容不被篡改。</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405909365.png" alt="pic.1708405909365"></p>
+<p>如果我们篡改 A 的值，而 B 中保存有 A 的哈希值，所以 B 也得进行修改，同样 B 后的区块也得修改。<br>这就是区块链区别与普通链表的区别：普通链接修改节点不会影响其他节点，而区块链牵一发而动全身，后面的节点都得跟着改。</p>
+<p>所以用户只需要保存最后一个区块的哈希值，就可以检测出区块链上内容是否被篡改过。</p>
+<p>由于这个特性，那么对于个人节点而言，就不需要完整的保存链上的所有的节点内容，只需要保存常用的父级几千个节点即可。</p>
+<h1 id="merkle-tree-默克尔树"><a href="#merkle-tree-默克尔树" class="headerlink" title="merkle tree(默克尔树)"></a>merkle tree(默克尔树)</h1><p>merkle tree 是比特币系统中一个重要的数据结构。区别于 binary tree，merkle tree 用哈希指针代替了普通指针。<br>一个简单的 merkle tree：</p>
+<p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405931818.png" alt="pic.1708405931818"></p>
+<p>tree 中，A B C D 表是一个个交易(tx)，A 和 B 各有一个哈希值 H(1)和 H(2)，将其合并放在一个节点中，C 和 D 同理，然后针对得到的两个节点又可以得到新的哈希值，即为图中根节点。实际中，会对图中的根节点再取一次哈希，也就是 root hash。<br>该数据机构的优点在于：<strong>只需要记住 root hash，便可以检测出对树中任何部位的修改。</strong></p>
+<p><strong>区块：</strong><br>每个区块分为两部分，包括块头(block header)和块身(block body)。<br>block header 中存储的是 root hash，但是 block header 没有交易的具体内容，block body 里存储的是交易列表。</p>
+<p>merkle tree 的实际用途：可以用于提供 <strong>merkle proof。</strong></p>
+<p>区块链中的节点分为<strong>轻节点</strong>和<strong>全节点</strong>。全节点保存整个区块的内容（block header 和 block body），而轻节点仅保存区块的块头信息（block header）。<br>那么就存在一个问题，轻节点想知道某个交易是否被写入到区块链上，该怎么办？打个比方，你向我转钱，我是个轻节点，我怎么知道这个交易已经被写到区块链里呢？</p>
+<p>轻节点没有 block body，只有 root hash，那怎么证明某笔交易包含在这个 merkle tree 里呢？这就用到了 merkle proof。</p>
+<h2 id="merkle-proof"><a href="#merkle-proof" class="headerlink" title="merkle proof"></a>merkle proof</h2><p>从交易一直到根节点的路径，就属于 merkle proof。</p>
+<p>有了 merkle proof，轻节点就可以算出 merkle tree 里是否包含某笔交易。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过 merkle proof，可以验证计算得到的 root hash 是否与轻节点 block hader 里的 root hash 是否一致，如果一致说明该交易包含在 merkle tree 上。</span><br></pre></td></tr></table></figure>
 </div></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/2/">上一页</a></div><div class="pagination-next"><a href="/page/4/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link is-current" href="/page/3/">3</a></li><li><a class="pagination-link" href="/page/4/">4</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/7/">7</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Weilun"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Weilun</p><p class="is-size-6 is-block">Web Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>HangZhou</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">62</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">12</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/weilun0510" target="_blank" rel="me noopener">关注我</a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-20T03:28:26.000Z">2024-03-20</time></p><p class="title"><a href="/2024/03/20/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%87%92%E5%8A%A0%E8%BD%BD/">性能优化-懒加载</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-16T08:16:21.000Z">2024-03-16</time></p><p class="title"><a href="/2024/03/16/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%A3%E7%90%86-proxy/">开发环境代理 proxy</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-16T03:30:29.000Z">2024-03-16</time></p><p class="title"><a href="/2024/03/16/css-padding-top-%E5%AE%9E%E7%8E%B0%E5%AE%B9%E5%99%A8%E8%87%AA%E9%80%82%E5%BA%94%E5%AE%BD%E9%AB%98%E6%AF%94%E4%BE%8B/">CSS Padding-Top 实现自适应容器的宽高比例保持一致</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-02T07:20:36.000Z">2024-03-02</time></p><p class="title"><a href="/2024/03/02/javascritp-%E5%8F%8C%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/">javascritp 双精度浮点数 精度问题</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-27T09:25:37.000Z">2024-02-27</time></p><p class="title"><a href="/2024/02/27/Nginx-pm2-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/">Nginx+pm2 部署项目</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/03/"><span class="level-start"><span class="level-item">三月 2024</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">58</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/css/"><span class="tag">css</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hooks/"><span class="tag">hooks</span><span class="tag">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/html/"><span class="tag">html</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">20</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx/"><span class="tag">nginx</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/react/"><span class="tag">react</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/web3/"><span class="tag">web3</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"><span class="tag">性能优化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF/"><span class="tag">项目场景</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"><span class="tag">项目搭建</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="weilun" height="28"></a><p class="is-size-7"><span>&copy; 2024 weilun</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/weilun0510"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {

@@ -90,13 +90,6 @@
 
 <p>在发布交易时，<strong>通过发起方私钥签名</strong>，其他人可以<strong>根据发起方公钥进行验证</strong>，从而<strong>保证该交易由发起方发起</strong>。</p>
 <p>也就是说，只有拥有私钥，才能将该账户中的比特币转走。 【注意：比特币系统中，很难通过生成大量公私钥对来获取他人私钥】</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约473个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">ETH-以太坊概述</a></p><div class="content"><p>BTC 和 ETH 是最主要的两种加密货币，BTC 称为区块链 1.0，以太坊称为区块链 2.0。<br>以太坊对比特币设计中的某些不足进行了改进，比例：出块时间、共识协议、mining puzzle(对内存要求高，反 ASIC 芯片使用) ，并且用权益证明（POS）替代工作量证明（POW）。除此之外，以太坊还增加了对<strong>智能合约（smart contract）</strong>的支持。</p>
-<h1 id="为什么要开发智能合约"><a href="#为什么要开发智能合约" class="headerlink" title="为什么要开发智能合约"></a>为什么要开发智能合约</h1><p>BTC 是一种去中心化的货币，在比特币取得成功之后，很多人开始思考：如果货币可以去中心化，还有什么可以去中心化。<br>以太坊的一个特性就是增加了对去中心化合约的支持。</p>
-<blockquote>
-<p>BTC 货币中的最小单位为“聪”，Satoshi。ETH 的最小单位为“Wei”.</p>
-</blockquote>
-<h1 id="去中心化的合约"><a href="#去中心化的合约" class="headerlink" title="去中心化的合约"></a>去中心化的合约</h1><p>去中心化货币本身由政府发行，政府公信力为其背书，<strong>BTC 通过技术手段取代了政府的职能</strong>。<br>现实生活中，我们经常提到的“契约”或“合约”，其有效性也是需要政府进行维护的，如果产生纠纷，政府合法性合同进行判决。<strong>ETH 的设计目的就是，通过技术手段取代政府对于合约的职能</strong>。</p>
-<p>去中心化的合同有什么好处：<br>若合同签署方并非一个国家，需要跨国转账，没有统一的司法管辖权（如：众筹）。如果可以编写无法修改的合约，一旦发布到区块链上，所有人（包括写智能合约的作者）只能按照制定的规则执行。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1068个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">BTC数据结构</a></p><div class="content"><h1 id="hash-pointer-哈希指针"><a href="#hash-pointer-哈希指针" class="headerlink" title="hash pointer(哈希指针)"></a>hash pointer(哈希指针)</h1><p>在传统链表里，通过指针将各个节点串联起来。<br><strong>指针</strong>指的是一个节点对象在内存中的首地址。</p>
 <p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405846740.png" alt="pic.1708405846740"></p>
 <p>顾名思义，区块链也是一种链表结构，节点为区块。不过区块链并未采用指针，而是使用了<strong>哈希指针。</strong><br>如下图所示，该节点有两个指针指向这个节点（实际上为一个），其中 p 为该节点的地址，H()为该节点的哈希值，该值与节点中内容有关。当节点（区块）中内容发生变化，该哈希值也会发生改变，从而保证了区块内容不能被篡改。</p>
@@ -117,6 +110,13 @@
 <h2 id="merkle-proof"><a href="#merkle-proof" class="headerlink" title="merkle proof"></a>merkle proof</h2><p>从交易一直到根节点的路径，就属于 merkle proof。</p>
 <p>有了 merkle proof，轻节点就可以算出 merkle tree 里是否包含某笔交易。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">通过 merkle proof，可以验证计算得到的 root hash 是否与轻节点 block hader 里的 root hash 是否一致，如果一致说明该交易包含在 merkle tree 上。</span><br></pre></td></tr></table></figure>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约473个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/ETH-%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%A6%82%E8%BF%B0/">ETH-以太坊概述</a></p><div class="content"><p>BTC 和 ETH 是最主要的两种加密货币，BTC 称为区块链 1.0，以太坊称为区块链 2.0。<br>以太坊对比特币设计中的某些不足进行了改进，比例：出块时间、共识协议、mining puzzle(对内存要求高，反 ASIC 芯片使用) ，并且用权益证明（POS）替代工作量证明（POW）。除此之外，以太坊还增加了对<strong>智能合约（smart contract）</strong>的支持。</p>
+<h1 id="为什么要开发智能合约"><a href="#为什么要开发智能合约" class="headerlink" title="为什么要开发智能合约"></a>为什么要开发智能合约</h1><p>BTC 是一种去中心化的货币，在比特币取得成功之后，很多人开始思考：如果货币可以去中心化，还有什么可以去中心化。<br>以太坊的一个特性就是增加了对去中心化合约的支持。</p>
+<blockquote>
+<p>BTC 货币中的最小单位为“聪”，Satoshi。ETH 的最小单位为“Wei”.</p>
+</blockquote>
+<h1 id="去中心化的合约"><a href="#去中心化的合约" class="headerlink" title="去中心化的合约"></a>去中心化的合约</h1><p>去中心化货币本身由政府发行，政府公信力为其背书，<strong>BTC 通过技术手段取代了政府的职能</strong>。<br>现实生活中，我们经常提到的“契约”或“合约”，其有效性也是需要政府进行维护的，如果产生纠纷，政府合法性合同进行判决。<strong>ETH 的设计目的就是，通过技术手段取代政府对于合约的职能</strong>。</p>
+<p>去中心化的合同有什么好处：<br>若合同签署方并非一个国家，需要跨国转账，没有统一的司法管辖权（如：众筹）。如果可以编写无法修改的合约，一旦发布到区块链上，所有人（包括写智能合约的作者）只能按照制定的规则执行。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约473个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/web3%E7%BB%BC%E8%BF%B0/">web3综述</a></p><div class="content"><p>区块链：去中心化记账系统</p>
 <h1 id="比特币"><a href="#比特币" class="headerlink" title="比特币"></a>比特币</h1><p>基于区块链这一技术的一种加密货币（还有以太币、莱特币等等）</p>
 <ul>

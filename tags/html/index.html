@@ -360,38 +360,6 @@
 <li>避免滥用 z-index。现在我们知道 inline &gt; float，那么我们只需要把元素变成行内元素即可覆盖在浮动元素之上。过渡使用定位元素会使页面变复杂。</li>
 <li>定位或者 css3 属性 display: flex | inline-flex 下，z-index: auto 所在的元素是普通元素，z-index: 0 是层叠元素。</li>
 </ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1074个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">浏览器的进程与线程</a></p><div class="content"><h1 id="什么是进程"><a href="#什么是进程" class="headerlink" title="什么是进程"></a>什么是进程</h1><p>操作系统上有很多 app，app 就是应用程序，应用程序就是一个软件包，一个代码集合。而应用程序是静态的，想要运行应用程序，操作系统就会对应的启动一个进程，负责该程序的运行。</p>
-<p>把浏览器看做一个大集团，那进程就是集团下的某一个工厂。</p>
-<p>总结进程有以下特点：</p>
-<ul>
-<li>动态性：进程的实质是程序的一次执行过程</li>
-<li>并发性：集团可以有多个工厂，浏览器也可以同时运行多个进程</li>
-<li>独立性：工厂是独立的，进程是一个能独立运行的基本单位</li>
-<li>异步性：因为是独立的，因此可以按照自己逻辑不可预知的运行</li>
-<li>协同性：应用程序之间能够协作完成一些任务</li>
-</ul>
-<h1 id="浏览器进程"><a href="#浏览器进程" class="headerlink" title="浏览器进程"></a>浏览器进程</h1><p>与操作系统一样，浏览器也有一个任务管理器，每一个任务，都是独立的进程。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326642981.png" alt="pic.1708326642981"></p>
-<p>浏览器主要包括如下进程：</p>
-<h2 id="一、浏览器主进程"><a href="#一、浏览器主进程" class="headerlink" title="一、浏览器主进程"></a>一、浏览器主进程</h2><p>浏览器只会创建一个主进程，它主要负责：</p>
-<ul>
-<li>浏览器界面提供的交互，如前进、后退、标签栏、设置等</li>
-<li>各页面进程的管理，如创建、关闭等</li>
-<li>网络资源的管理，如下载内容、缓存等</li>
-</ul>
-<h2 id="二、网页进程"><a href="#二、网页进程" class="headerlink" title="二、网页进程"></a>二、网页进程</h2><p><strong>网页进程</strong>：浏览器网页的渲染和 JS 执行在一个单独的进程中执行。这个进程也称为<strong>render 进程</strong>。每启动一个页面，都会启动一个 render 进程。</p>
-<p>说到网页进程，又引入了线程的概念。</p>
-<p>如果说进程是一个工厂，那线程就是工厂中的流水线。一个工厂的正常运行，往往需要多个流水线通力合作才能完成。在网页进程中也是一样，想要网页进程能正常渲染运行，也需要多个线程参与合作。</p>
-<p>网页的渲染运行，有如下线程参</p>
-<h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><p>GUI(Graphical User Interface)表示图形用户界面的意思，render tree 的渲染。用一张图看一下渲染路径<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326653199.png" alt="pic.1708326653199"><br>HTML 会解析出 DOM（Document Object Model）树，样式文件会解析出 CSSOM(CSS Object Model)树，在 Attachment 环节，GUI 线程将 DOM 树与 CSSOM 树合并在一起，生成渲染树(render tree)，并将渲染树绘制到页面。</p>
-<h3 id="JS-引擎线程"><a href="#JS-引擎线程" class="headerlink" title="JS 引擎线程"></a>JS 引擎线程</h3><p>浏览器是不支持直接运行 JS 代码的，所以需要在浏览器中植入一个内核，来支持 JS 的解析和运行。在 chrome 中，这个内核叫 V8。</p>
-<p>一个网页只会启动一个 JS 线程来处理 JS 脚本。</p>
-<p>JS 线程是单线程。这点不难理解，如果是多线程，一个线程删除 DOM，一个线程新增 DOM，浏览器要如何处理呢？</p>
-<p>还有一点，<strong>JS 线程和 GUI 线程是互斥的</strong>。所以在渲染路径阶段，存在阻塞问题。</p>
-<h3 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h3><p>专门负责 setTimeout&#x2F;setInterval 的逻辑。应该结合事件循环中的队列来理解定时器线程的执行过程。</p>
-<h3 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h3><p>当我们鼠标点击与滑动、键盘的输入等都会触发一些事件，而这些事件的触发逻辑的处理，就是依靠事件触发线程来帮助浏览器完成。</p>
-<p>该线程也会把事件的逻辑放入队列中，等待 JS 引擎的处理。在事件循环中，事件触发为宏任务。</p>
-<h3 id="http-线程"><a href="#http-线程" class="headerlink" title="http 线程"></a>http 线程</h3><p>使用无状态短链接的 http 请求，在应用层基于 http 协议的基础之上，达到与服务端进行通信的目的。</p>
-<p>该线程的触发罗家，不是在 JS 引擎线程之中，过程是异步的。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">17 分钟读完 (大约2599个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%A6%82%E4%BD%95%E6%B8%B2%E6%9F%93%E9%A1%B5%E9%9D%A2/">浏览器如何渲染页面</a></p><div class="content"><p><strong>在地址栏输入 url 后发生了什么？</strong></p>
 <p>用一张图描述一下：<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326672310.png" alt="pic.1708326672310"></p>
 <ol>
@@ -486,6 +454,38 @@
 <h3 id="http-线程"><a href="#http-线程" class="headerlink" title="http 线程"></a>http 线程</h3><p>使用无状态短链接的 http 请求，在应用层基于 http 协议的基础之上，达到与服务端进行通信的目的。</p>
 <p>该线程的触发罗家，不是在 JS 引擎线程之中，过程是异步的。</p>
 <p>参考：<br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903667733118983">https://juejin.cn/post/6844903667733118983</a><br><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903667733118983">https://juejin.cn/post/6844903667733118983</a></p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">7 分钟读完 (大约1074个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/">浏览器的进程与线程</a></p><div class="content"><h1 id="什么是进程"><a href="#什么是进程" class="headerlink" title="什么是进程"></a>什么是进程</h1><p>操作系统上有很多 app，app 就是应用程序，应用程序就是一个软件包，一个代码集合。而应用程序是静态的，想要运行应用程序，操作系统就会对应的启动一个进程，负责该程序的运行。</p>
+<p>把浏览器看做一个大集团，那进程就是集团下的某一个工厂。</p>
+<p>总结进程有以下特点：</p>
+<ul>
+<li>动态性：进程的实质是程序的一次执行过程</li>
+<li>并发性：集团可以有多个工厂，浏览器也可以同时运行多个进程</li>
+<li>独立性：工厂是独立的，进程是一个能独立运行的基本单位</li>
+<li>异步性：因为是独立的，因此可以按照自己逻辑不可预知的运行</li>
+<li>协同性：应用程序之间能够协作完成一些任务</li>
+</ul>
+<h1 id="浏览器进程"><a href="#浏览器进程" class="headerlink" title="浏览器进程"></a>浏览器进程</h1><p>与操作系统一样，浏览器也有一个任务管理器，每一个任务，都是独立的进程。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326642981.png" alt="pic.1708326642981"></p>
+<p>浏览器主要包括如下进程：</p>
+<h2 id="一、浏览器主进程"><a href="#一、浏览器主进程" class="headerlink" title="一、浏览器主进程"></a>一、浏览器主进程</h2><p>浏览器只会创建一个主进程，它主要负责：</p>
+<ul>
+<li>浏览器界面提供的交互，如前进、后退、标签栏、设置等</li>
+<li>各页面进程的管理，如创建、关闭等</li>
+<li>网络资源的管理，如下载内容、缓存等</li>
+</ul>
+<h2 id="二、网页进程"><a href="#二、网页进程" class="headerlink" title="二、网页进程"></a>二、网页进程</h2><p><strong>网页进程</strong>：浏览器网页的渲染和 JS 执行在一个单独的进程中执行。这个进程也称为<strong>render 进程</strong>。每启动一个页面，都会启动一个 render 进程。</p>
+<p>说到网页进程，又引入了线程的概念。</p>
+<p>如果说进程是一个工厂，那线程就是工厂中的流水线。一个工厂的正常运行，往往需要多个流水线通力合作才能完成。在网页进程中也是一样，想要网页进程能正常渲染运行，也需要多个线程参与合作。</p>
+<p>网页的渲染运行，有如下线程参</p>
+<h3 id="GUI-渲染线程"><a href="#GUI-渲染线程" class="headerlink" title="GUI 渲染线程"></a>GUI 渲染线程</h3><p>GUI(Graphical User Interface)表示图形用户界面的意思，render tree 的渲染。用一张图看一下渲染路径<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708326653199.png" alt="pic.1708326653199"><br>HTML 会解析出 DOM（Document Object Model）树，样式文件会解析出 CSSOM(CSS Object Model)树，在 Attachment 环节，GUI 线程将 DOM 树与 CSSOM 树合并在一起，生成渲染树(render tree)，并将渲染树绘制到页面。</p>
+<h3 id="JS-引擎线程"><a href="#JS-引擎线程" class="headerlink" title="JS 引擎线程"></a>JS 引擎线程</h3><p>浏览器是不支持直接运行 JS 代码的，所以需要在浏览器中植入一个内核，来支持 JS 的解析和运行。在 chrome 中，这个内核叫 V8。</p>
+<p>一个网页只会启动一个 JS 线程来处理 JS 脚本。</p>
+<p>JS 线程是单线程。这点不难理解，如果是多线程，一个线程删除 DOM，一个线程新增 DOM，浏览器要如何处理呢？</p>
+<p>还有一点，<strong>JS 线程和 GUI 线程是互斥的</strong>。所以在渲染路径阶段，存在阻塞问题。</p>
+<h3 id="定时触发器线程"><a href="#定时触发器线程" class="headerlink" title="定时触发器线程"></a>定时触发器线程</h3><p>专门负责 setTimeout&#x2F;setInterval 的逻辑。应该结合事件循环中的队列来理解定时器线程的执行过程。</p>
+<h3 id="事件触发线程"><a href="#事件触发线程" class="headerlink" title="事件触发线程"></a>事件触发线程</h3><p>当我们鼠标点击与滑动、键盘的输入等都会触发一些事件，而这些事件的触发逻辑的处理，就是依靠事件触发线程来帮助浏览器完成。</p>
+<p>该线程也会把事件的逻辑放入队列中，等待 JS 引擎的处理。在事件循环中，事件触发为宏任务。</p>
+<h3 id="http-线程"><a href="#http-线程" class="headerlink" title="http 线程"></a>http 线程</h3><p>使用无状态短链接的 http 请求，在应用层基于 http 协议的基础之上，达到与服务端进行通信的目的。</p>
+<p>该线程的触发罗家，不是在 JS 引擎线程之中，过程是异步的。</p>
 </div></article></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Weilun"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Weilun</p><p class="is-size-6 is-block">Web Developer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>HangZhou</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">62</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">0</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">12</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/weilun0510" target="_blank" rel="me noopener">关注我</a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">链接</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><!--!--><div class="column-right-shadow is-hidden-widescreen"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3"><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-20T03:28:26.000Z">2024-03-20</time></p><p class="title"><a href="/2024/03/20/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96-%E6%87%92%E5%8A%A0%E8%BD%BD/">性能优化-懒加载</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-16T08:16:21.000Z">2024-03-16</time></p><p class="title"><a href="/2024/03/16/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%BB%A3%E7%90%86-proxy/">开发环境代理 proxy</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-16T03:30:29.000Z">2024-03-16</time></p><p class="title"><a href="/2024/03/16/css-padding-top-%E5%AE%9E%E7%8E%B0%E5%AE%B9%E5%99%A8%E8%87%AA%E9%80%82%E5%BA%94%E5%AE%BD%E9%AB%98%E6%AF%94%E4%BE%8B/">CSS Padding-Top 实现自适应容器的宽高比例保持一致</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-03-02T07:20:36.000Z">2024-03-02</time></p><p class="title"><a href="/2024/03/02/javascritp-%E5%8F%8C%E7%B2%BE%E5%BA%A6%E6%B5%AE%E7%82%B9%E6%95%B0-%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98/">javascritp 双精度浮点数 精度问题</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-27T09:25:37.000Z">2024-02-27</time></p><p class="title"><a href="/2024/02/27/Nginx-pm2-%E9%83%A8%E7%BD%B2%E9%A1%B9%E7%9B%AE/">Nginx+pm2 部署项目</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">归档</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2024/03/"><span class="level-start"><span class="level-item">三月 2024</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/archives/2024/02/"><span class="level-start"><span class="level-item">二月 2024</span></span><span class="level-end"><span class="level-item tag">58</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/css/"><span class="tag">css</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/hooks/"><span class="tag">hooks</span><span class="tag">11</span></a></div><div class="control"><a class="tags has-addons" href="/tags/html/"><span class="tag">html</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/javascript/"><span class="tag">javascript</span><span class="tag">20</span></a></div><div class="control"><a class="tags has-addons" href="/tags/nginx/"><span class="tag">nginx</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/react/"><span class="tag">react</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/web3/"><span class="tag">web3</span><span class="tag">5</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%B0%8F%E7%A8%8B%E5%BA%8F/"><span class="tag">小程序</span><span class="tag">2</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"><span class="tag">性能优化</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E8%8B%B1%E8%AF%AD/"><span class="tag">英语</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E5%9C%BA%E6%99%AF/"><span class="tag">项目场景</span><span class="tag">7</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/"><span class="tag">项目搭建</span><span class="tag">1</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.png" alt="weilun" height="28"></a><p class="is-size-7"><span>&copy; 2024 weilun</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/weilun0510"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
             article: {
                 highlight: {
