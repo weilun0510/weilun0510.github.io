@@ -342,22 +342,6 @@
 <li>回收&#x2F;重用非活动对象所占用的空间「清理阶段」</li>
 <li>整理内存「整理阶段」</li>
 </ol>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">5 分钟读完 (大约760个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/js%E4%B8%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5/">js中的重要概念</a></p><div class="content"><p><strong>在当前函数中，要寻找到变量的值是从哪里来的，就首先会从当前执行上下文中查找，如果没有找到，则会去作用域链中查找。这里需要注意的是，作用域链本身就是存在于函数对象中的一个属性 [[Scopes]]，因此不是一层一层的往上查找「这里经常理解有误」，该属性是在代码预解析阶段就已经确认好的。</strong></p>
-<p>作用域：作用域是规定变量与函数可访问范围的一套规则。</p>
-<p>作用域的范围信息，是在预解析阶段就已经确定的</p>
-<p>执行上下文：执行上下文包含了跟踪对应可执行代码执行进度所需要的所有状态，每个执行上下文中都有特定的实体对象用于记录这些特定状态。</p>
-<p>函数调用栈：管理所有的执行上下文</p>
-<p>运行时上下文：只能有一个，且处于栈顶。当代码执行过程中，有新的函数调用，新的执行上下文会被创建，入栈，并且成为新的运行时上下文</p>
-<p><strong>完整的作用域链：</strong></p>
-<p>都具备一个属性 [[Scopes]]，该属性中存储了当前函数可访问的所有变量对象</p>
-<ul>
-<li><strong>Global 全局对象</strong>：不会做任何优化，会包含全局对象中的所有属性与方法</li>
-<li><strong>Script 对象</strong>：在全局环境下，由 let 和 const 声明的变量对象</li>
-<li><strong>Closure 对象</strong>：我们讨论比较多的闭包对象，嵌套函数生成，仅会保存当前作用域能够访问的变量属性</li>
-<li><strong>Local 对象</strong>：以上的几种变量对象，都会存在于函数的 [[Scopes]]属性之中，因为他们都能够在函数解析时确认，而 Local 对象则不行，需要在函数的<strong>执行过程中才能确定</strong>，并且在执行过程中，该对象中的属性是随时会发生变化的，该对象除了会存储当前函数上下文中所有的变量与函数声明，还会额外记录 this 的指向。</li>
-</ul>
-<p>Local: 活动对象</p>
-<p>由 <strong>函数参数，var 声明的变量，let&#x2F;const 声明的变量，function 声明的变量，class 声明的变量，this 指向等</strong>共同组成。<br>仅仅只有处于栈顶的执行上下文，才会生成 Local 对象。并且 Local 对象的具体内容会在执行上下文的生命周期中不断变化。也就意味着，在执行上下文的创建阶段，只有函数参数、function 声明的变量、this 指向 能够明确具体的值，其他变量的初始值都为 undefined，然后在代码执行过程中逐步明确赋值。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">8 分钟读完 (大约1229个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/es6%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7/">es6常用特性</a></p><div class="content"><h1 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span> (<span class="params">width, height</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> width = width || <span class="number">50</span>;</span><br><span class="line">  <span class="keyword">var</span> height = height || <span class="number">100</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>没有默认参数之前，一切没有问题，知道遇到参数 0 时，就有问题了。0 为假值，就无法变为参数本身的值。在 es6 中，修复了这一缺陷。</p>
@@ -429,6 +413,22 @@
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">obj!.<span class="property">name</span> = <span class="string">&#x27;tom&#x27;</span>;</span><br></pre></td></tr></table></figure>
 
 <p>这是 TypeScript 中的非空断言操作符，用来告诉编译器您已经检查过属性是否为非空，并且可以放心地访问它。</p>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">5 分钟读完 (大约760个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/js%E4%B8%AD%E7%9A%84%E9%87%8D%E8%A6%81%E6%A6%82%E5%BF%B5/">js中的重要概念</a></p><div class="content"><p><strong>在当前函数中，要寻找到变量的值是从哪里来的，就首先会从当前执行上下文中查找，如果没有找到，则会去作用域链中查找。这里需要注意的是，作用域链本身就是存在于函数对象中的一个属性 [[Scopes]]，因此不是一层一层的往上查找「这里经常理解有误」，该属性是在代码预解析阶段就已经确认好的。</strong></p>
+<p>作用域：作用域是规定变量与函数可访问范围的一套规则。</p>
+<p>作用域的范围信息，是在预解析阶段就已经确定的</p>
+<p>执行上下文：执行上下文包含了跟踪对应可执行代码执行进度所需要的所有状态，每个执行上下文中都有特定的实体对象用于记录这些特定状态。</p>
+<p>函数调用栈：管理所有的执行上下文</p>
+<p>运行时上下文：只能有一个，且处于栈顶。当代码执行过程中，有新的函数调用，新的执行上下文会被创建，入栈，并且成为新的运行时上下文</p>
+<p><strong>完整的作用域链：</strong></p>
+<p>都具备一个属性 [[Scopes]]，该属性中存储了当前函数可访问的所有变量对象</p>
+<ul>
+<li><strong>Global 全局对象</strong>：不会做任何优化，会包含全局对象中的所有属性与方法</li>
+<li><strong>Script 对象</strong>：在全局环境下，由 let 和 const 声明的变量对象</li>
+<li><strong>Closure 对象</strong>：我们讨论比较多的闭包对象，嵌套函数生成，仅会保存当前作用域能够访问的变量属性</li>
+<li><strong>Local 对象</strong>：以上的几种变量对象，都会存在于函数的 [[Scopes]]属性之中，因为他们都能够在函数解析时确认，而 Local 对象则不行，需要在函数的<strong>执行过程中才能确定</strong>，并且在执行过程中，该对象中的属性是随时会发生变化的，该对象除了会存储当前函数上下文中所有的变量与函数声明，还会额外记录 this 的指向。</li>
+</ul>
+<p>Local: 活动对象</p>
+<p>由 <strong>函数参数，var 声明的变量，let&#x2F;const 声明的变量，function 声明的变量，class 声明的变量，this 指向等</strong>共同组成。<br>仅仅只有处于栈顶的执行上下文，才会生成 Local 对象。并且 Local 对象的具体内容会在执行上下文的生命周期中不断变化。也就意味着，在执行上下文的创建阶段，只有函数参数、function 声明的变量、this 指向 能够明确具体的值，其他变量的初始值都为 undefined，然后在代码执行过程中逐步明确赋值。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">37 分钟读完 (大约5556个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF%E6%9C%BA%E5%88%B6/">事件循环机制</a></p><div class="content"><h1 id="同步于异步"><a href="#同步于异步" class="headerlink" title="同步于异步"></a>同步于异步</h1><p>同步：按函数调用栈执行</p>
 <p>异步：分发器分发一个任务，被通知后执行</p>
 <h1 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h1><p>负责 JS 执行环境的代码执行顺序的问题。如果没有异步事件，函数调用栈几乎可以解决所有执行顺序问题。而事件循环机制，就是异步事件代码执行顺序的解决方案。</p>

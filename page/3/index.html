@@ -411,41 +411,6 @@
 <p>&#x2F;ts&#x2F; 清辅音 &#x2F;dz&#x2F;<br>&#x2F;dz&#x2F;是浊辅音，可以理解为声带振动板的 &#x2F;ts&#x2F;</p>
 <p><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335304594.png" alt="pic.1708335304594"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335308829.png" alt="pic.1708335308829"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335314157.png" alt="pic.1708335314157"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335318842.png" alt="pic.1708335318842"></p>
 <p>&#x2F;tr&#x2F; 清辅音 &#x2F;dr&#x2F; 浊辅音<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335326300.png" alt="pic.1708335326300"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335331928.png" alt="pic.1708335331928"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335339170.png" alt="pic.1708335339170"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335347923.png" alt="pic.1708335347923"><br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708335353758.png" alt="pic.1708335353758"></p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">12 分钟读完 (大约1756个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">BTC-共识协议</a></p><div class="content"><h1 id="数字货币存在的问题"><a href="#数字货币存在的问题" class="headerlink" title="数字货币存在的问题"></a>数字货币存在的问题</h1><p>数字货币本身为带有签名的数据文件，可以进行复制。即：对用户来说，可以将同一货币花费两次。这就是“双花攻击”。<br>如何解决：对货币添加唯一编号（不可篡改），每次支付向货币发行单位查询真伪。该方法每次交易都依赖于第三方机构来判断货币真伪且防止双花攻击。这是一个典型的第三方中心化方案。<br>现实中，我们的交易往往依赖于一个可信的第三方机构（支付宝、微信），这个机构具有较高的可信度，有政府背书，所以可以采用这种方案。<br>但是，很多场景下，并不存在这样一个可信赖的第三方机构。基于这个背景，以去中心化思想为核心的比特币系统便吸引了人们的注意力。</p>
-<h1 id="去中心化需要解决的问题"><a href="#去中心化需要解决的问题" class="headerlink" title="去中心化需要解决的问题"></a>去中心化需要解决的问题</h1><ul>
-<li>货币由谁发行，如何发行，什么时候发行？</li>
-</ul>
-<p>在比特币系统中由挖矿来决定货币发行权的发行量</p>
-<ul>
-<li>如何验证交易是否有效？如何防止双花攻击？</li>
-</ul>
-<p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
-<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
-<p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
-<p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
-<p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
-<h1 id="比特币区块信息"><a href="#比特币区块信息" class="headerlink" title="比特币区块信息"></a>比特币区块信息</h1><p>区块信息可以分为两部分：block header 和 block body<br>block header 由以下信息：</p>
-<ul>
-<li>version（版本协议）</li>
-<li>hash of previous block header（指向前一个区块指针）</li>
-<li>merkle root hash（默克尔树根哈希值）</li>
-<li>target（挖矿难度目标阈值）</li>
-<li>nonce（随机数）</li>
-</ul>
-<p>hash of previous block header 只计算区块头部部分的哈希（merkle root hash 保证了 block body 内容不被篡改，所以只需要计算 block header 即可保证整个区块内容不会被篡改）。<br>区块链中，轻节点（只存储区块 block header 信息）只利用区块链，并不参与区块链系统的维护和构造。</p>
-<h1 id="比特币共识协议"><a href="#比特币共识协议" class="headerlink" title="比特币共识协议"></a>比特币共识协议</h1><p>投票方案：可行的投票方案前提是系统中的大多数节点时“好”的节点，在这种情况下进行共识协议设置。<br>比特币系统中，若直接投票，将某节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半，则加入区块链。存在以下问题：</p>
-<ol>
-<li>恶意节点不断打包不合法区块，导致一直无法达成共识</li>
-<li>无强迫投票收到，某些节点可以不投票（行政不作为）</li>
-<li>网络延迟未知，投票需要等待多久？</li>
-<li>最重要的问题，比特币系统中任何人都可以创建账户，且建账户及其简单，若黑客使用计算机专门生成大量公私钥对，当其产生超过系统中一半数目，就可以获得支配地位（女巫攻击）</li>
-</ol>
-<p>所以比特币系统并没采用这种简单的账户数目方案，而是<strong>依据算力进行投票</strong>。每个节点都可以自行组装一个候选区块，然后尝试各种 nonce 值，这就是<strong>挖矿。</strong>当某个节点找到符合要求的 nonce<code>h(block header)&lt;=target</code>，便获得了<strong>记账权</strong>，从而可以将区块发布到系统中。其他节点收到区块后，验证区块合法性，如果绝大多数节点验证通过，则接口该区块为最新区块并加入到区块链。</p>
-<h1 id="比特币激励机制"><a href="#比特币激励机制" class="headerlink" title="比特币激励机制"></a>比特币激励机制</h1><p>节点为什么要提供算力和电力成本去竞争记账权？<br>比特币引入奖励机制，通过设置<strong>出块奖励</strong>来解决该问题。<br>一个获得合法区块的节点，可以在去区块中加入一个特殊交易（铸币交易）。这也是唯一一种产生新比特币的途经。</p>
-<blockquote>
-<p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
-</blockquote>
-<p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">3 分钟读完 (大约501个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BEM%E8%A7%84%E8%8C%83/">BEM规范</a></p><div class="content"><h1 id="BEM-规范是什么"><a href="#BEM-规范是什么" class="headerlink" title="BEM 规范是什么"></a>BEM 规范是什么</h1><p>BEM 是 块(block) 、元素（element）、修饰符（modifier）的简写，由 Yandex 团队提出的一种 css 类命名约定。</p>
 <ul>
 <li>连字符：表示某个块或块子元素的多单词之间的连接符号</li>
@@ -482,6 +447,41 @@
 <li>element 下，子元素均用连接符 <code>-</code> 连接</li>
 <li>element 下，没有后代的元素可用单个单词表示，方便复用</li>
 </ul>
+</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">12 分钟读完 (大约1756个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC-%E5%85%B1%E8%AF%86%E5%8D%8F%E8%AE%AE/">BTC-共识协议</a></p><div class="content"><h1 id="数字货币存在的问题"><a href="#数字货币存在的问题" class="headerlink" title="数字货币存在的问题"></a>数字货币存在的问题</h1><p>数字货币本身为带有签名的数据文件，可以进行复制。即：对用户来说，可以将同一货币花费两次。这就是“双花攻击”。<br>如何解决：对货币添加唯一编号（不可篡改），每次支付向货币发行单位查询真伪。该方法每次交易都依赖于第三方机构来判断货币真伪且防止双花攻击。这是一个典型的第三方中心化方案。<br>现实中，我们的交易往往依赖于一个可信的第三方机构（支付宝、微信），这个机构具有较高的可信度，有政府背书，所以可以采用这种方案。<br>但是，很多场景下，并不存在这样一个可信赖的第三方机构。基于这个背景，以去中心化思想为核心的比特币系统便吸引了人们的注意力。</p>
+<h1 id="去中心化需要解决的问题"><a href="#去中心化需要解决的问题" class="headerlink" title="去中心化需要解决的问题"></a>去中心化需要解决的问题</h1><ul>
+<li>货币由谁发行，如何发行，什么时候发行？</li>
+</ul>
+<p>在比特币系统中由挖矿来决定货币发行权的发行量</p>
+<ul>
+<li>如何验证交易是否有效？如何防止双花攻击？</li>
+</ul>
+<p>该问题的解决，依赖于系统中维护的一个数据结构，记录货币的使用情况（是否被花过，被谁花过？）。该数据结构由系统中全体用户共同维护，保证了交易的有效性。该数据结构，便是区块链。<br>该数据结构中，有两种哈希指针，一种指向前面的区块，使得形成区块链，第二种(<strong>红色部分</strong>)则是为了说明比特币的来源。说明比特币的来源非凭空捏造，可以防止双花攻击。</p>
+<p>如下，假如 A 获得<strong>铸币权</strong>，并发布了 10 个比特币（该交易称为铸币交易）。<br><img src="https://raw.githubusercontent.com/weilun0510/blog-images/master/2024-02-07/pic.1708405674927.png" alt="pic.1708405674927"></p>
+<p>在进行交易时，A 给 B 转账，需要付款人的签名和收款人的地址（公钥的哈希）。收款方需要知道付款方的公钥（为了<strong>验证签名是否有效</strong>。实际上其他节点都需要知道付款方的公钥，<strong>验证交易合法性</strong>）。</p>
+<p>这里存在一个问题：<br>:::info<br>假设 B 的同伙 B’，B’ 伪造一笔 A 到 B 的转账交易，用自己的公钥说是 A 的公钥，然后用假造的私钥签个名，别的节点收到这笔交易后，要假造的公钥去验证这个签名。验证结果肯定是对的，这让别的节点以为这个交易是合法的，这就出问题了。相当于把 A 账上的钱偷走了。<br>:::</p>
+<p>解决这个问题的关键，就是第二种哈希指针。虽然 B’伪造了 A 到 B 的交易，但是实际中 A 转账的时候提供的公钥需要和铸币交易中的公钥对的上，如果对不上，说明该交易不合法。</p>
+<h1 id="比特币区块信息"><a href="#比特币区块信息" class="headerlink" title="比特币区块信息"></a>比特币区块信息</h1><p>区块信息可以分为两部分：block header 和 block body<br>block header 由以下信息：</p>
+<ul>
+<li>version（版本协议）</li>
+<li>hash of previous block header（指向前一个区块指针）</li>
+<li>merkle root hash（默克尔树根哈希值）</li>
+<li>target（挖矿难度目标阈值）</li>
+<li>nonce（随机数）</li>
+</ul>
+<p>hash of previous block header 只计算区块头部部分的哈希（merkle root hash 保证了 block body 内容不被篡改，所以只需要计算 block header 即可保证整个区块内容不会被篡改）。<br>区块链中，轻节点（只存储区块 block header 信息）只利用区块链，并不参与区块链系统的维护和构造。</p>
+<h1 id="比特币共识协议"><a href="#比特币共识协议" class="headerlink" title="比特币共识协议"></a>比特币共识协议</h1><p>投票方案：可行的投票方案前提是系统中的大多数节点时“好”的节点，在这种情况下进行共识协议设置。<br>比特币系统中，若直接投票，将某节点打包交易到区块，将其发给其他节点，其他节点检查该候选区块，检查若正确投赞成票，若票数过半，则加入区块链。存在以下问题：</p>
+<ol>
+<li>恶意节点不断打包不合法区块，导致一直无法达成共识</li>
+<li>无强迫投票收到，某些节点可以不投票（行政不作为）</li>
+<li>网络延迟未知，投票需要等待多久？</li>
+<li>最重要的问题，比特币系统中任何人都可以创建账户，且建账户及其简单，若黑客使用计算机专门生成大量公私钥对，当其产生超过系统中一半数目，就可以获得支配地位（女巫攻击）</li>
+</ol>
+<p>所以比特币系统并没采用这种简单的账户数目方案，而是<strong>依据算力进行投票</strong>。每个节点都可以自行组装一个候选区块，然后尝试各种 nonce 值，这就是<strong>挖矿。</strong>当某个节点找到符合要求的 nonce<code>h(block header)&lt;=target</code>，便获得了<strong>记账权</strong>，从而可以将区块发布到系统中。其他节点收到区块后，验证区块合法性，如果绝大多数节点验证通过，则接口该区块为最新区块并加入到区块链。</p>
+<h1 id="比特币激励机制"><a href="#比特币激励机制" class="headerlink" title="比特币激励机制"></a>比特币激励机制</h1><p>节点为什么要提供算力和电力成本去竞争记账权？<br>比特币引入奖励机制，通过设置<strong>出块奖励</strong>来解决该问题。<br>一个获得合法区块的节点，可以在去区块中加入一个特殊交易（铸币交易）。这也是唯一一种产生新比特币的途经。</p>
+<blockquote>
+<p>比特币系统规定，起初每个区块可以获得 50 个比特币，但之后每隔 21 万个区块，奖励减半</p>
+</blockquote>
+<p>区块中保存交易记录，如果仅仅设置出块奖励，那么，会不会存在节点只想发布区块获得出块奖励而不想打包交易？<br>比特币系统设计了 Tranction fee（交易费），对于获得记账权节点来说，除了出块奖励之外，还可以得到打包交易的交易费。但目前来说，交易费远远小于出块奖励。等到未来出块奖励变少，可能区块链的维护便主要依赖于交易费了。</p>
 </div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2024-02-07T02:34:09.000Z" title="2024/2/7 10:34:09">2024-02-07</time>发表</span><span class="level-item">10 分钟读完 (大约1507个字)</span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/2024/02/07/BTC%E5%AF%86%E7%A0%81%E5%AD%A6%E5%8E%9F%E7%90%86/">BTC密码学原理</a></p><div class="content"><p>比特币(bitcion)：基于去中心化，以区块链作为底层技术的加密货币。</p>
 <h1 id="hash-哈希"><a href="#hash-哈希" class="headerlink" title="hash(哈希)"></a>hash(哈希)</h1><p>hash，可以简单理解为对某一事物的投影操作，即<code>A--&gt;Hash(A)</code>。<br>哈希函数(cryptographic hash function)主要有三个特性：</p>
 <ul>
